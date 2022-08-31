@@ -1,4 +1,4 @@
-export interface responsePopularMovie{
+export interface IResponsePopularMovie{
     page: number;
     results: [{
         adult: boolean;
@@ -18,10 +18,9 @@ export interface responsePopularMovie{
     }];
     total_pages: number;
     total_results: number;
-
 }
 
-export interface responseDetailMovie{
+export interface IResponseDetailMovie{
     adult: boolean;
     backdrop_path: string;
     belongs_to_collection: {
@@ -69,7 +68,7 @@ export interface responseDetailMovie{
     vote_count: number;
 }
 
-export interface responseTopRated{
+export interface IResponseTopRated{
     page: number;
     results: [{
         adult: boolean;
@@ -89,6 +88,71 @@ export interface responseTopRated{
     }];
     total_pages: number;
     total_results: number;
+}
+interface ICountryInfo
+{
+    display_priority : number
+    logo_path : string
+    provider_id : number
+    provider_name : string
+}
+interface IResponseCountry
+{
+    link : string;
+    flatrate? : Array<ICountryInfo>
+    rent? : Array<ICountryInfo>
+    buy? : Array<ICountryInfo>
+
+}
+interface IResponseProviderResult
+{
+AR? : IResponseCountry
+AU? : IResponseCountry
+BR? : IResponseCountry
+CA? : IResponseCountry
+CH? : IResponseCountry
+CL? : IResponseCountry
+CO? : IResponseCountry
+CZ? : IResponseCountry
+DE? : IResponseCountry
+DK? : IResponseCountry
+EC? : IResponseCountry
+EE? : IResponseCountry
+ES? : IResponseCountry
+FI? : IResponseCountry
+FR? : IResponseCountry
+GB? : IResponseCountry
+GR? : IResponseCountry
+ID? : IResponseCountry
+IN? : IResponseCountry
+IT? : IResponseCountry
+JP? : IResponseCountry
+KR? : IResponseCountry
+LT? : IResponseCountry
+LV? : IResponseCountry
+MX? : IResponseCountry
+MY? : IResponseCountry
+NL? : IResponseCountry
+NO? : IResponseCountry
+NZ? : IResponseCountry
+PE? : IResponseCountry
+PH? : IResponseCountry
+PL? : IResponseCountry
+PT? : IResponseCountry
+RO? : IResponseCountry
+RU? : IResponseCountry
+SE? : IResponseCountry
+SG? : IResponseCountry
+TH? : IResponseCountry
+TR? : IResponseCountry
+US? : IResponseCountry
+VE? : IResponseCountry
+ZA? : IResponseCountry
+}
+export interface IResponseProvidersMovie
+{
+    id : number;
+    results : IResponseProviderResult
 }
 
 

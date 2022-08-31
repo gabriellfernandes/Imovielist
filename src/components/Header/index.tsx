@@ -18,7 +18,7 @@ export default function Header (){
                 <div>
                     <div>
                     <AiFillHome className="icon"  size={26}/>
-                    <span>home</span>
+                    <span className="home">home</span>
                     </div>
 
                     <div>
@@ -36,7 +36,7 @@ export default function Header (){
 
 
 
-=
+
         </HeaderDiv>
     )
 }

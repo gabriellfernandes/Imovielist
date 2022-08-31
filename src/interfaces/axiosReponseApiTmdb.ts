@@ -1,5 +1,3 @@
-import { array } from "yup";
-
 export interface IResponsePopularMovie{
     page: number;
     results: [{

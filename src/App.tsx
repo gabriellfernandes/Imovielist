@@ -1,6 +1,7 @@
+import { AxiosPromise, AxiosResponse } from 'axios';
 import { useEffect, useState, SetStateAction } from 'react';
 import './App.css';
-import { responseTrailer } from './interfaces/axiosReponseApiImdb';
+import {IResponseProvidersMovie} from './interfaces/axiosReponseApiTmdb';
 import { apiIMDB, apiTMDb, api_keyIMDb, api_keyTMDb, base_Image } from './services/api';
 
 function App() {

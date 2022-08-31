@@ -1,4 +1,4 @@
-export interface responseTrailer{
+export interface IresponseTrailer{
     errorMessage?: string;
     expression: string
     results: [{

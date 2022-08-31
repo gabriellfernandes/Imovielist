@@ -1,4 +1,4 @@
-export interface responsePopularMovie{
+export interface IResponsePopularMovie{
     page: number;
     results: [{
         adult: boolean;
@@ -18,10 +18,9 @@ export interface responsePopularMovie{
     }];
     total_pages: number;
     total_results: number;
-
 }
 
-export interface responseDetailMovie{
+export interface IResponseDetailMovie{
     adult: boolean;
     backdrop_path: string;
     belongs_to_collection: {
@@ -69,7 +68,7 @@ export interface responseDetailMovie{
     vote_count: number;
 }
 
-export interface responseTopRated{
+export interface IResponseTopRated{
     page: number;
     results: [{
         adult: boolean;
@@ -89,6 +88,10 @@ export interface responseTopRated{
     }];
     total_pages: number;
     total_results: number;
+}
+export interface IResponseWatchProviders
+{
+
 }
 
 

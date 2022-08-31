@@ -12,3 +12,7 @@ export const base_Image = "https://image.tmdb.org/t/p/w500"
 export const apiIMDB = axios.create({
     baseURL: 'https://imdb-api.com'
 })
+
+export const apiFake = axios.create({
+    baseURL: 'https://imovielist.herokuapp.com'
+})

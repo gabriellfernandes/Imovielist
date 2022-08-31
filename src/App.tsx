@@ -1,13 +1,12 @@
-
 import { LoginForm } from "./pages/login";
 import { AxiosPromise, AxiosResponse } from 'axios';
 import { useEffect, useState, SetStateAction } from 'react';
 import './App.css';
 import {IResponseProvidersMovie} from './interfaces/axiosReponseApiTmdb';
 import { apiIMDB, apiTMDb, api_keyIMDb, api_keyTMDb, base_Image } from './services/api';
+
 import Home from "./pages/Home";
 import RoutesMain from "./routes/routes";
-
 
 
 

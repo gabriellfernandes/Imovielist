@@ -6,6 +6,7 @@ import './App.css';
 import {IResponseProvidersMovie} from './interfaces/axiosReponseApiTmdb';
 import { apiIMDB, apiTMDb, api_keyIMDb, api_keyTMDb, base_Image } from './services/api';
 import Home from "./pages/Home";
+import RoutesMain from "./routes/routes";
 
 
 
@@ -17,7 +18,7 @@ function App() {
   //apiIMDB.get(`https://imdb-api.com/API/Search/${api_keyIMDb}/lost 2004`).then(res => setfilme(res.data))
   return (
   <div>
-    <Home/>
+    <RoutesMain/>
   </div>
   );
 }

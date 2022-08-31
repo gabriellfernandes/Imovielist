@@ -1,6 +1,5 @@
 import Header from "../../components/Header";
-import {BiMovie} from 'react-icons/bi'
-import { HeaderDiv } from "../../components/Header/style";
+
 
 
 
@@ -17,9 +16,10 @@ export default function Home(){
 
 
     return (
+        <>
         <Header/>
-
-
+        <h1> aqui é a home</h1>
+        </>
 
     )
 }

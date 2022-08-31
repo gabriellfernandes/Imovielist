@@ -1,7 +1,4 @@
-import { useEffect, useState, SetStateAction } from 'react';
-import './App.css';
-import { responseTrailer } from './interfaces/axiosReponseApiImdb';
-import { apiIMDB, apiTMDb, api_keyIMDb, api_keyTMDb, base_Image } from './services/api';
+import { LoginForm } from "./pages/login";
 
 function App() {
   //const [filme, setfilme] = useState<responseTrailer>({} as responseTrailer)
@@ -10,6 +7,7 @@ function App() {
   //apiIMDB.get(`https://imdb-api.com/API/Search/${api_keyIMDb}/lost 2004`).then(res => setfilme(res.data))
   return (
   <div>
+    <LoginForm />
   </div>
   );
 }

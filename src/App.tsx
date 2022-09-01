@@ -16,7 +16,7 @@ function App() {
   //apiTMDb.get(`/movie/top_rated${api_keyTMDb}`).then(res => console.log(res.data))
   //apiIMDB.get(`https://imdb-api.com/API/Search/${api_keyIMDb}/lost 2004`).then(res => setfilme(res.data))
   return (
-  <div>
+  <div className="App">
     <RoutesMain/>
   </div>
   );

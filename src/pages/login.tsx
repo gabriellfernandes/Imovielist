@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ContextValues } from "../context/authContext";
+import { FormContainer } from "../style/FormContainer";
 
 
 export function LoginForm() {
@@ -20,9 +21,8 @@ export function LoginForm() {
   } = useForm({ resolver: yupResolver(formSchema) });
 
   return (
-    <div>
+    <FormContainer>
       <form onSubmit={handleSubmit(login)}>
-        <label htmlFor="email">Email</label>
         <input
           type="text"
           {...register("email")}
@@ -32,7 +32,6 @@ export function LoginForm() {
         <span>
           <>{errors.email?.message}</>
         </span>
-        <label htmlFor="password">Senha</label>
         <input
           type="password"
           {...register("password")}
@@ -45,6 +44,6 @@ export function LoginForm() {
 
         <button type="submit">Logar-se</button>
       </form>
-    </div>
+    </FormContainer>
   );
 }

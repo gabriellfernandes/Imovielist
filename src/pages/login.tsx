@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ContextValues } from "../context/authContext";
+import { AuthContext } from "../context/authContext";
 
 
 export function LoginForm() {
@@ -11,7 +11,7 @@ export function LoginForm() {
     password: yup.string().required("Senha obrigatório"),
   });
 
-  const { login } = useContext(ContextValues)
+  const { login } = useContext(AuthContext)
 
   const {
     register,

@@ -1,23 +1,62 @@
-import { LoginForm } from "./pages/login";
-import { AxiosPromise, AxiosResponse } from 'axios';
-import { useEffect, useState, SetStateAction } from 'react';
+import { ReactElement,useContext, useEffect} from 'react';
 import './App.css';
-import {IResponseProvidersMovie} from './interfaces/axiosReponseApiTmdb';
-import { apiIMDB, apiTMDb, api_keyIMDb, api_keyTMDb, base_Image } from './services/api';
-
-import Home from "./pages/Home";
-import RoutesMain from "./routes/routes";
+import {PopularMovies} from './services/apiTMDB';
+import {popularMovieContext} from "./context/popularMovieContext"
+import {base_ImageUrl} from "./services/api"
 
 
 
-function App() {
-  //const [filme, setfilme] = useState<responseTrailer>({} as responseTrailer)
-
-  //apiTMDb.get(`/movie/top_rated${api_keyTMDb}`).then(res => console.log(res.data))
-  //apiIMDB.get(`https://imdb-api.com/API/Search/${api_keyIMDb}/lost 2004`).then(res => setfilme(res.data))
+function App() : ReactElement {
+  
+  const {popularPerPage,SetPopularPerPage,popularMovies,setPopularMovies} = useContext(popularMovieContext)
+  useEffect(()=>
+  {
+    async function getPopularMovies() : Promise<void>
+    {
+      const popularMovie = await PopularMovies(popularPerPage)
+      setPopularMovies((oldresults)=> 
+      {
+        if(oldresults.length > 0)
+        {
+          const newResult = oldresults.filter((results)=>
+          {
+            if(results.page != popularMovie.page)
+            {
+              return results
+            }
+          })
+          return newResult.concat(popularMovie)
+        }
+        else
+        {
+          return oldresults.concat(popularMovie)
+        }
+      })
+    }
+    getPopularMovies()
+  },[popularPerPage])
+  console.log(popularMovies)
   return (
   <div>
-    <RoutesMain/>
+    <div>
+      <button onClick={()=> SetPopularPerPage((oldPage)=> oldPage + 1)}>Go to Olimpus!</button>
+      <ul>
+        <>
+          {popularMovies && popularMovies.map(({results})=>
+          {
+            return results.map((movies)=>
+            {
+              const {poster_path} = movies
+
+              return <li key={movies.id}>
+              <p style={{fontSize : "5rem"}}>{movies.title}</p>
+              <img width={400} height = {400} src = {`${base_ImageUrl}${poster_path}`}></img>
+              </li>
+            })
+          })}
+        </>
+      </ul>
+    </div>
   </div>
   );
 }

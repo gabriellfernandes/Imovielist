@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Context } from './context/authContext';
+import { Provider } from './context/context';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Reset } from './style/globalstyles';
@@ -14,11 +14,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Context>
       <ToastContainer/>
-      <App /> 
+      <Provider>
+        <App />
+      </Provider>
       <Reset/>
-    </Context>
     </BrowserRouter>
   </React.StrictMode>
 );

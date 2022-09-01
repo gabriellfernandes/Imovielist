@@ -8,9 +8,12 @@ export const HeaderDiv = styled.header`
     height: 70px;
     color: white;
     display: flex;
-    padding-left: 8rem;
-    padding-right: 8rem;
-    justify-content: space-between;
+    justify-content: space-evenly;
+
+    .home{
+        text-decoration: underline;
+    }
+
     .icon{
         cursor: pointer;
                 color: #9A9DA5;
@@ -19,16 +22,24 @@ export const HeaderDiv = styled.header`
                 }
             }
     div{
+
         display: flex;
         align-items: center;
         gap: 20px;
 
         div{
+            
             display: flex;
             align-items: center;
             gap: 5px;
             cursor: pointer;
-           
+            
+            &:hover{
+                svg{
+                    color: white;
+                }
+
+            }
 
             span{
                 color: white;

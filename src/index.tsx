@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from './context/context';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-
+import { Reset } from './style/globalstyles';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,6 +18,7 @@ root.render(
       <Provider>
         <App />
       </Provider>
+      <Reset/>
     </BrowserRouter>
   </React.StrictMode>
 );

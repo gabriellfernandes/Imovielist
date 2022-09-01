@@ -12,11 +12,11 @@ interface IButtonProps {
 }
 
 export const GlobalButton = styled.button`
-    width: ${(props: IButtonProps) => props.width};
-    max-width: 209px;
-    height: 19%;
-    max-height: 52px;
+    width: ${(props: IButtonProps) => props.width? props.width: 'auto'};
+    max-width: ${(props: IButtonProps) => props.maxWidth? props.maxWidth: 'auto'};
+    height: ${(props: IButtonProps) => props.height? props.height: 'auto'};
+    max-height: ${(props: IButtonProps) => props.maxHeight? props.maxHeight: 'auto'};
 
-    color: white;
+    color: ${(props: IButtonProps) => props.color? props.color: 'white'};
     background-color: ${(props: IButtonProps) => props.backGroundColor? props.backGroundColor : '#e89005'};
 `

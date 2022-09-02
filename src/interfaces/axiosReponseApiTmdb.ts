@@ -1,3 +1,28 @@
+export interface IRated
+{
+    page: number;
+    results: Array<IResults>;
+    total_pages: number;
+    total_results: number;
+}
+export interface IComing
+{
+    img : string
+    adult: boolean;
+    backdrop_path: string;
+    genre_ids: [number];
+    id: number;
+    original_language: string;
+    original_title: string;
+    overview: string;
+    popularity: number;
+    poster_path: string;
+    release_date: string;
+    title: string;
+    video: boolean;
+    vote_average: number;
+    vote_count: number
+}
 export interface IResults
 {
     img : string
@@ -16,6 +41,7 @@ export interface IResults
     vote_average: number;
     vote_count: number
 }
+
 export interface IResponsePopularMovie{
     page: number;
     results: Array<IResults>;
@@ -24,51 +50,61 @@ export interface IResponsePopularMovie{
 }
 
 export interface IResponseDetailMovie{
-    adult: boolean;
-    backdrop_path: string;
-    belongs_to_collection: {
+    data: {
+        adult: boolean;
         backdrop_path: string;
-        id: number;
-        name: string;
+        belongs_to_collection: {
+          backdrop_path: string;
+          id: number;
+          name: string;
+          poster_path: string;
+        };
+        budget: number;
+        genres: [
+          {
+            id: number;
+            name: string;
+          }
+        ];
+        homepage: string;
+        id: string;
+        imdb_id: string;
+        original_language: string;
+        original_title: string;
+        overview: string;
+        popularity: number;
         poster_path: string;
-    };
-    budget: number;
-    genres: [{
-        id: number;
-        name: string;
-    }];
-    homepage: string;
-    id: number;
-    imdb_id: string;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    production_companies: [{
-        id: number;
-        logo_path: string;
-        name: string;
-        origin_country: string
-    }];
-    production_countries: [{
-        iso_3166_1: string;
-        name: string
-    }];
-    release_date: string;
-    revenue: number;
-    runtime: number;
-    spoken_languages: [{
-        english_name: string;
-        iso_639_1: string;
-        name:string;
-    }];
-    status: string;
-    tagline: string;
-    title: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
+        production_companies: [
+          {
+            id: number;
+            logo_path: string;
+            name: string;
+            origin_country: string;
+          }
+        ];
+        production_countries: [
+          {
+            iso_3166_1?: string;
+            name: string;
+          }
+        ];
+        release_date: string;
+        revenue: number;
+        runtime: number;
+        spoken_languages: [
+          {
+            english_name: string;
+            iso_639_1: string;
+            name: string;
+          }
+        ];
+        status: string;
+        tagline: string;
+        title: string;
+        video: boolean;
+        vote_average: number;
+        vote_count: number;
+      };
 }
 
 export interface IResponseTopRated{
@@ -99,6 +135,7 @@ interface ICountryInfo
     provider_id : number
     provider_name : string
 }
+
 interface IResponseCountry
 {
     link : string;
@@ -107,6 +144,7 @@ interface IResponseCountry
     buy? : Array<ICountryInfo>
 
 }
+
 interface IResponseProviderResult
 {
 AR? : IResponseCountry
@@ -152,10 +190,46 @@ US? : IResponseCountry
 VE? : IResponseCountry
 ZA? : IResponseCountry
 }
+
 export interface IResponseProvidersMovie
 {
     id : number;
     results : IResponseProviderResult
+}
+
+export interface IReponseCredits {
+  data:
+  {
+    id: number
+    cast: [{
+      adult: boolean;
+      cast_id: number;
+      character: string;
+      credit_id: string;
+      gender: number;
+      id: number;
+      known_for_department: string;
+      name: string;
+      order: number;
+      original_name: string;
+      popularity: number;
+      profile_path?: string | null
+    }];
+    crew: [{
+      adult: boolean;
+      credit_id: string;
+      department: string;
+      gender: number;
+      id: number;
+      job: string;
+      known_for_department: string;
+      name: string;
+      original_name: string;
+      popularity: number;
+      profile_path?: string | null
+    }]
+  }
+  
 }
 
 

@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthContext } from "../../context/authContext";
+
 import { FormContainer } from "../../style/FormStyles/FormContainer";
 import { GlobalButton } from "../../style/global/GlobalButton";
 import { LoginInputContainer } from "../../style/FormStyles/LoginInput";
@@ -16,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 export function RegisterForm() {
 
   const navigate = useNavigate()
-  
+
   const formSchema = yup.object().shape({
     name: yup.string().required("Mandatory name"),
     email: yup.string().required("Mandatory email").email("Invalid email"),
@@ -116,7 +117,6 @@ export function RegisterForm() {
         <span>
           <>{errors.avatar?.message}</>
         </span>
-
         <GlobalButton 
           width={'53%'} 
           maxWidth={'209px'} 

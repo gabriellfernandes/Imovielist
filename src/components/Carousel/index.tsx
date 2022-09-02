@@ -1,49 +1,44 @@
-import React, { Component } from "react";
-import Slider from 'react-slick';
-import { DivCarousel } from "./style";
-import Comming from '../../assets/images/Comming.png'
-export default class SimpleSlider extends Component {
-  render() {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
+
+import React, { useContext,useEffect } from "react";
+import { DivCarousel,SpanEdited } from "./style";
+import {ComingSoonContext} from "../../context/comingSoonContext"
+import {GetComingSoonMovies} from "../../services/apiTMDB"
+import { base_ImageUrl } from "../../services/api";
+import "swiper/css";
+import "swiper/css/navigation";
+import {Swiper,SwiperSlide} from "swiper/react";
+import {Navigation} from "swiper"
+import img from "../../assets/images/movies-removebg-preview.png"
+function SimpleSlider()
+{
+    const {coming,setComing,setComingPerPage,comingPerPage} = useContext(ComingSoonContext)
+
+    useEffect(()=>
+    {
+        async function Get()
+        {
+            const comingMovies = await GetComingSoonMovies(comingPerPage).then(res=> res.results)
+            const fiveMovies = comingMovies.filter((results,index)=> index < 5 )
+            setComing(fiveMovies)
+        }
+        Get()
+    })
     return (
       <DivCarousel>
-
-        <Slider className="slider"{...settings}>
-          <div>
-            <span>Dr Estranho </span>
-            <img className="zi" src={Comming} alt='comming'/>
-            <img src="https://disneyplusbrasil.com.br/wp-content/uploads/2022/06/Doutor-Estranho-no-Multiverso-da-Loucura-Disney-Plus.jpg" alt="" />
-            
-
-          </div>
-
-          <div>
-          <img className="zi" src={Comming} alt='comming'/>
-            <img src="https://disneyplusbrasil.com.br/wp-content/uploads/2022/06/Doutor-Estranho-no-Multiverso-da-Loucura-Disney-Plus.jpg" alt="" />
-            <span>Dr Estranho </span>
-          </div>
-          <div>
-          <img className="zi" src={Comming} alt='comming'/>
-            <img src="https://disneyplusbrasil.com.br/wp-content/uploads/2022/06/Doutor-Estranho-no-Multiverso-da-Loucura-Disney-Plus.jpg" alt="" />
-            <span>Dr Estranho </span>
-          </div>
-          <div>
-          <img className="zi" src={Comming} alt='comming'/>
-            <img src="https://disneyplusbrasil.com.br/wp-content/uploads/2022/06/Doutor-Estranho-no-Multiverso-da-Loucura-Disney-Plus.jpg" alt="" />
-            <span>Dr Estranho </span>
-          </div>
-
-
-        </Slider>
+        <Swiper navigation={true} modules={[Navigation]}>
+          {coming.map((movie)=>       
+          {
+            return (
+            <SwiperSlide key={movie.id}>
+              <SpanEdited>{movie.original_title}</SpanEdited>
+              <img src={`${base_ImageUrl}${movie.backdrop_path}`} alt="" />
+              <img className="coming" src={`${img}`} alt='coming soon'></img>
+              <p className="date">{movie.release_date}</p>
+            </SwiperSlide>
+            )
+          })}
+      </Swiper>
       </DivCarousel>
     );
   }
-}
+export {SimpleSlider}

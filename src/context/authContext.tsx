@@ -57,6 +57,7 @@ export function AuthProvider({ children }: IContext) {
     apiFake
       .post("/login", data)
       .then((res: IReponseLogin) => {
+        console.log(res)
         localStorage.setItem("@token", res.data.accessToken);
         localStorage.setItem("@idUser", res.data.user.id);
         toast.success("Successfully logged in");
@@ -66,7 +67,9 @@ export function AuthProvider({ children }: IContext) {
       });
   };
 
+
   const registerUser = (data: FieldValue<IReponseRegister>) => {
+
     apiFake
       .post("/register", data)
       .then((res: IReponseRegister) => {

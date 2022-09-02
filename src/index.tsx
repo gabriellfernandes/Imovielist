@@ -7,6 +7,7 @@ import { Provider } from './context/context';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Reset } from './style/global/globalstyles';
+import { MovieContextProvider } from './context/moviePageContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -16,7 +17,9 @@ root.render(
     <BrowserRouter>
       <ToastContainer/>
       <Provider>
-        <App />
+        <MovieContextProvider>
+          <App />
+        </MovieContextProvider>
       </Provider>
       <Reset/>
     </BrowserRouter>

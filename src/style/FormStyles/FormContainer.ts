@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface IFormContainer {
+    formHeight: string,
+}
+
 export const FormContainer = styled.main`
     width: 100%;
     height: 100%;
@@ -11,8 +15,13 @@ export const FormContainer = styled.main`
 
     color: white;
 
+    img {
+        box-sizing: border-box;
+        margin-top: 30px;
+    }
+
     form {
-        height: 250px;
+        height: ${(p: IFormContainer) => p.formHeight};
         width: 80%;
         max-width: 322px;
 
@@ -20,25 +29,18 @@ export const FormContainer = styled.main`
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
-    }
-
-    form input {
-        height: 19%;
-        width: 100%;
-
-        border-radius: 16px;
-        border-style: none;
-        border: 2px solid white;
-
-        background-color: transparent;
 
         box-sizing: border-box;
-        margin: none;
-        padding-left: 15px;
+        margin-bottom: 10vh;
+        margin-top: 7vh;
     }
 
-    form input::placeholder {
-        color: white;
-        font-size: 14px;
+    p{
+        box-sizing: border-box;
+        border-top: 1px solid white;
+        padding: 5px 25px;
+        max-width: 80vw;
+        font-family: inherit;
+        margin-bottom: 20px;
     }
 `

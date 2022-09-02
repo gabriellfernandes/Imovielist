@@ -1,24 +1,17 @@
-import { LoginForm } from "./pages/login";
-import { AxiosPromise, AxiosResponse } from 'axios';
-import { useEffect, useState, SetStateAction } from 'react';
+import { ReactElement,useContext, useEffect} from 'react';
 import './App.css';
-import {IResponseProvidersMovie} from './interfaces/axiosReponseApiTmdb';
-import { apiIMDB, apiTMDb, api_keyIMDb, api_keyTMDb, base_Image } from './services/api';
-
-import Home from "./pages/Home";
-import RoutesMain from "./routes/routes";
-
+import {PopularMovies} from './services/apiTMDB';
+import {popularMovieContext} from "./context/popularMovieContext"
+import RoutesMain from './routes/routes'
+import {base_ImageUrl} from "./services/api"
 
 
-function App() {
-  //const [filme, setfilme] = useState<responseTrailer>({} as responseTrailer)
 
-  //apiTMDb.get(`/movie/top_rated${api_keyTMDb}`).then(res => console.log(res.data))
-  //apiIMDB.get(`https://imdb-api.com/API/Search/${api_keyIMDb}/lost 2004`).then(res => setfilme(res.data))
+function App() : ReactElement {
   return (
   <div className="App">
-    <RoutesMain/>
-  </div>
+      <RoutesMain/>
+    </div>
   );
 }
 

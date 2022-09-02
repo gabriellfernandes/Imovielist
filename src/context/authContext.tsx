@@ -6,7 +6,7 @@ import { apiFake } from "../services/api";
 
 interface IContextValues {
   login: (data: FieldValue<ILoginData>) => void;
-  register: (data: FieldValue<ILoginData>) => void;
+  registerUser: (data: FieldValue<ILoginData>) => void;
 }
 
 interface IContext {
@@ -42,17 +42,17 @@ interface IReponseRegister{
     };
 }
 
-interface IIReponseError {
+interface IReponseError {
   response: {
     data: string;
   };
 }
 
-export const ContextValues = createContext<IContextValues>(
+export const AuthContext = createContext<IContextValues>(
   {} as IContextValues
 );
 
-export function Context({ children }: IContext) {
+export function AuthProvider({ children }: IContext) {
   const login = (data: FieldValue<ILoginData>) => {
     apiFake
       .post("/login", data)
@@ -61,12 +61,12 @@ export function Context({ children }: IContext) {
         localStorage.setItem("@idUser", res.data.user.id);
         toast.success("Successfully logged in");
       })
-      .catch((err: IIReponseError) => {
+      .catch((err: IReponseError) => {
         toast.error(err.response.data);
       });
   };
 
-  const register = (data: FieldValue<IReponseRegister>) => {
+  const registerUser = (data: FieldValue<IReponseRegister>) => {
     apiFake
       .post("/register", data)
       .then((res: IReponseRegister) => {
@@ -74,14 +74,14 @@ export function Context({ children }: IContext) {
         localStorage.setItem("@idUser", res.data.user.id);
         toast.success("Successfully registered");
       })
-      .catch((err: IIReponseError) => {
+      .catch((err: IReponseError) => {
         toast.error(err.response.data);
       });
   };
 
   return (
-    <ContextValues.Provider value={{ login, register }}>
+    <AuthContext.Provider value={{ login, registerUser }}>
       {children}
-    </ContextValues.Provider>
+    </AuthContext.Provider>
   );
 }

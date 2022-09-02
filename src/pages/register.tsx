@@ -2,10 +2,21 @@ import { useContext } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ContextValues } from "../context/authContext";
+import { AuthContext } from "../context/authContext";
+import { FormContainer } from "../style/FormStyles/FormContainer";
+import { GlobalButton } from "../style/global/GlobalButton";
+import { LoginInputContainer } from "../style/FormStyles/LoginInput";
+import registerSVG from '../style/images/registerSVG.svg'
+import { AiOutlinePicture } from 'react-icons/ai'
+import { BiEnvelope, BiKey } from 'react-icons/bi'
+import { CgProfile } from 'react-icons/cg'
+import { useNavigate } from "react-router-dom";
 
 
 export function RegisterForm() {
+
+  const navigate = useNavigate()
+  
   const formSchema = yup.object().shape({
     name: yup.string().required("Mandatory name"),
     email: yup.string().required("Mandatory email").email("Invalid email"),
@@ -23,7 +34,7 @@ export function RegisterForm() {
     avatar: yup.string(),
   });
 
-  const { login } = useContext(ContextValues)
+  const { registerUser } = useContext(AuthContext)
 
   const {
     register,
@@ -32,61 +43,96 @@ export function RegisterForm() {
   } = useForm({ resolver: yupResolver(formSchema) });
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(login)}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          {...register("name")}
-          placeholder="name"
-          id="name"
-        />
+    <FormContainer formHeight="470px">
+      <img src={registerSVG} alt="" />
+      <form onSubmit={handleSubmit(registerUser)}>
+
+        <LoginInputContainer>
+          <CgProfile/>
+          <input
+            type="text"
+            {...register("name")}
+            placeholder="name"
+            id="name"
+          />
+        </LoginInputContainer>
+
         <span>
           <>{errors.name?.message}</>
         </span>
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          {...register("email")}
-          placeholder="Email"
-          id="email"
-        />
+
+        <LoginInputContainer>
+        <BiEnvelope/>
+          <input
+            type="text"
+            {...register("email")}
+            placeholder="Email"
+            id="email"
+          />
+        </LoginInputContainer>
+
         <span>
           <>{errors.email?.message}</>
         </span>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          {...register("password")}
-          placeholder="Password"
-          id="password"
-        />
+
+        <LoginInputContainer>
+        <BiKey/>
+          <input
+            type="password"
+            {...register("password")}
+            placeholder="Password"
+            id="password"
+          />
+        </LoginInputContainer>
+
         <span>
           <>{errors.password?.message}</>
         </span>
-        <label htmlFor="confirm_password">Confirm password</label>
-        <input
-          type="password"
-          {...register("confirm_password")}
-          placeholder="Confirm password"
-          id="confirm_password"
-        />
+
+        <LoginInputContainer>
+        <BiKey/>
+          <input
+            type="password"
+            {...register("confirm_password")}
+            placeholder="Confirm password"
+            id="confirm_password"
+          />
+        </LoginInputContainer>
+
         <span>
           <>{errors.confirm_password?.message}</>
         </span>
-        <label htmlFor="avatar">Profile picture</label>
-        <input
-          type="text"
-          {...register("avatar")}
-          placeholder="Profile picture"
-          id="avatar"
-        />
+
+        <LoginInputContainer>
+        <AiOutlinePicture/>
+          <input
+            type="text"
+            {...register("avatar")}
+            placeholder="Profile picture"
+            id="avatar"
+          />
+        </LoginInputContainer>
+        
         <span>
           <>{errors.avatar?.message}</>
         </span>
 
-        <button type="submit">Sign up</button>
+        <GlobalButton 
+          width={'53%'} 
+          maxWidth={'209px'} 
+          type="submit"
+          height="18%"
+          maxHeight="52px"
+        >
+          Sign up
+        </GlobalButton>
       </form>
-    </div>
+
+      <p>
+        Already have an account?
+        <GlobalButton width='fit-content' backGroundColor='transparent' color="#E89005" onClick={() => navigate('/login')}>Login</GlobalButton>
+      </p>
+
+    </FormContainer>
   );
 }

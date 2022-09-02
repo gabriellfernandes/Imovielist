@@ -3,7 +3,7 @@ import ProtectedRoutes from "../components/ProtectedRoutes";
 import Home from "../pages/Home";
 import LadingPage from "../pages/LadingPage";
 import { LoginForm } from "../pages/LoginPage/login";
-import { RegisterForm } from "../pages/register";
+import { RegisterForm } from "../pages/registerPage/register";
 
 export default function RoutesMain(){
     return(

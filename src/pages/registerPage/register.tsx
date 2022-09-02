@@ -2,11 +2,11 @@ import { useContext } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { AuthContext } from "../context/authContext";
-import { FormContainer } from "../style/FormStyles/FormContainer";
-import { GlobalButton } from "../style/global/GlobalButton";
-import { LoginInputContainer } from "../style/FormStyles/LoginInput";
-import registerSVG from '../style/images/registerSVG.svg'
+import { AuthContext } from "../../context/authContext";
+import { FormContainer } from "../../style/FormStyles/FormContainer";
+import { GlobalButton } from "../../style/global/GlobalButton";
+import { LoginInputContainer } from "../../style/FormStyles/LoginInput";
+import registerSVG from '../../style/images/registerSVG.svg'
 import { AiOutlinePicture } from 'react-icons/ai'
 import { BiEnvelope, BiKey } from 'react-icons/bi'
 import { CgProfile } from 'react-icons/cg'

@@ -108,17 +108,19 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
     if (data.userId === undefined) {
       return;
     }
-
-    apiFake
+    toast.promise(apiFake
       .post("/comments", data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("@token")}`,
         },
       })
-      .then((res) => {
+      .then(() => {
         setAtt((oldIn) => [...oldIn, 1]);
-        toast.success("Postado com sucesso");
-      });
+      }), {
+        pending: "Waiting...",
+        success: "Create post",
+        error: "Error"
+      })
   };
 
   const userAvatar = async (id: number) => {
@@ -148,14 +150,17 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
     if (data.userId === undefined) {
       return;
     }
-
+    toast.promise(
     apiFake
       .post("/rating", data, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("@token")}`,
         },
+      }),{
+        pending: "Waiting...",
+        success: "Avaliead",
+        error: "Error"
       })
-      .then((res) => console.log(res.data));
   };
 
   const handleSubmitRating = (data: number) => {

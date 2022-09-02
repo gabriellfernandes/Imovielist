@@ -6,7 +6,7 @@ import { apiFake } from "../services/api";
 
 interface IContextValues {
   login: (data: FieldValue<ILoginData>) => void;
-  registerForm: (data: FieldValue<ILoginData>) => void;
+  registerUser: (data: FieldValue<ILoginData>) => void;
 }
 
 interface IContext {
@@ -67,7 +67,9 @@ export function AuthProvider({ children }: IContext) {
       });
   };
 
-  const registerForm = (data: FieldValue<IReponseRegister>) => {
+
+  const registerUser = (data: FieldValue<IReponseRegister>) => {
+
     apiFake
       .post("/register", data)
       .then((res: IReponseRegister) => {
@@ -81,7 +83,7 @@ export function AuthProvider({ children }: IContext) {
   };
 
   return (
-    <AuthContext.Provider value={{ login, registerForm }}>
+    <AuthContext.Provider value={{ login, registerUser }}>
       {children}
     </AuthContext.Provider>
   );

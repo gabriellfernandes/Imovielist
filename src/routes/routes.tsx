@@ -1,9 +1,9 @@
-import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoutes from "../components/ProtectedRoutes";
 import Home from "../pages/Home";
 import LadingPage from "../pages/LadingPage";
-import { LoginForm } from "../pages/loginPage/login";
+
+import { LoginForm } from "../pages/LoginPage/login";
 import { MoviePage } from "../pages/MoviePage";
 import { RegisterForm } from "../pages/registerPage/register";
 

@@ -1,4 +1,7 @@
+
 import { createGlobalStyle } from "styled-components"
+
+export const GobalStyle = 10
 
 export const Reset = createGlobalStyle`
 
@@ -24,6 +27,9 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 	vertical-align: baseline;
     box-sizing: border-box;
 }
@@ -51,16 +57,3 @@ table {
 	border-spacing: 0;
 }
 `
-
-
-
-
-
-
-
-
-
-
-
-
-

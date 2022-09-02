@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from './context/context';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { Reset } from './style/globalstyles';
+import { Reset } from './style/global/globalstyles';
 import { MovieContextProvider } from './context/moviePageContext';
 
 const root = ReactDOM.createRoot(

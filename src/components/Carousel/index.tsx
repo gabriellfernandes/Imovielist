@@ -1,3 +1,4 @@
+
 import React, { useContext,useEffect } from "react";
 import { DivCarousel,SpanEdited } from "./style";
 import {ComingSoonContext} from "../../context/comingSoonContext"
@@ -31,7 +32,7 @@ function SimpleSlider()
             <SwiperSlide key={movie.id}>
               <SpanEdited>{movie.original_title}</SpanEdited>
               <img src={`${base_ImageUrl}${movie.backdrop_path}`} alt="" />
-              <img className = "coming" src={`${img}`}></img>
+              <img className="coming" src={`${img}`} alt='coming soon'></img>
               <p className="date">{movie.release_date}</p>
             </SwiperSlide>
             )

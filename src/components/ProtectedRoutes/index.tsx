@@ -9,7 +9,6 @@ export default function ProtectedRoutes() {
         <Outlet />
     ) :
     (
-
        <Navigate to="/login" replace state={{ from: location}} /> 
     )
 

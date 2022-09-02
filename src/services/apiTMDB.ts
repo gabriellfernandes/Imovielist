@@ -1,16 +1,44 @@
 import {apiTMDb} from "./api"
-import {IResponsePopularMovie} from "../interfaces/axiosReponseApiTmdb"
+import {IRated, IResponsePopularMovie} from "../interfaces/axiosReponseApiTmdb"
 
-async function PopularMovies(page : number)
+async function GetPopularMovies(page : number)
 {
 
     const popularMovies = await apiTMDb.get<IResponsePopularMovie>("/movie/popular",
     {
         params : 
         {
+            language : "pt-br",
+            region : "BR",
             page : page
         }
     })
     return popularMovies.data
 }
-export {PopularMovies}
+async function GetComingSoonMovies(page : number)
+{
+    const comingSoonMovies = await apiTMDb.get<IResponsePopularMovie>("/movie/upcoming",
+    {
+        params : 
+        {
+            language : "pt-br",
+            region : "BR",
+            page : page
+        }
+    })
+    return comingSoonMovies.data
+}
+async function GetRatedMovie( page : number)
+{
+    const ratedMovies = await apiTMDb.get<IRated>("/movie/top_rated",
+    {
+        params : 
+        {
+            language : "pt-br",
+            region : "BR",
+            page : page
+        }
+    })
+    return ratedMovies.data
+}
+export {GetPopularMovies,GetComingSoonMovies,GetRatedMovie}

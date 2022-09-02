@@ -1,6 +1,8 @@
 import { ReactElement } from "react";
 import {PopularMovieProvider} from "./popularMovieContext"
 import {AuthProvider} from "./authContext"
+import {ComingSoonProvider} from "./comingSoonContext"
+import {RatedProvider} from "./ratedContext"
 
 interface IContextProps
 {
@@ -12,7 +14,9 @@ function Provider({children} : IContextProps) : ReactElement
     return(
         <AuthProvider>
             <PopularMovieProvider>
-                {children}
+                <ComingSoonProvider>
+                    <RatedProvider>{children}</RatedProvider>
+                </ComingSoonProvider>
             </PopularMovieProvider>
         </AuthProvider>
     )

@@ -10,9 +10,10 @@ export default function Header (){
         
         <HeaderDiv>
             
+            <div className="header__container">   
                 <div>
-               <BiMovie className="icon" color="#9A9DA5" size={26}/>
-               <span>MyMovieList</span>
+                    <BiMovie className="icon" color="#9A9DA5" size={26}/>
+                    <span>MyMovieList</span>
                 </div>
 
                 <div>
@@ -33,10 +34,7 @@ export default function Header (){
                     <AiFillBell className="icon"  size={26}/>
                     <FaUser className="icon"  size={24}/>
                 </div>
-
-
-
-
+            </div>
         </HeaderDiv>
     )
 }

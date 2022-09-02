@@ -1,48 +1,117 @@
-import styled from "styled-components";
-
-export const DivCarousel = styled.div`
-
-max-width: 100%;
-
-
-.slider{
-    height: max-content;
-
-    div{
-        width: 100%;
-        height: 100%;
-        position: relative;
-
-    
-        .zi{
-            width: max-content;
-            right: 0;
-            top: 0;
-            transform: scale(0.6);
-            position: absolute;
-            z-index: 4;
-        }
-       
-
-    img{
-        position: relative;
-        width: 100%;
-    }
-
-    span{
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        margin: auto auto;
-        width: max-content;
-        height: max-content;
-        position: absolute;
-        color: white;
-        font-size: 50px;
-        z-index: 3;
-        
-    }
-    }
+import {keyframes} from "styled-components";
+import styled from "styled-components"
+interface ISpanProps
+{
+  children : string
 }
+export const DivCarousel = styled.div`
+position: relative;
+width:auto;
+height: auto;
+
+.swiper {
+  position: relative;
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+  border-radius: 4px;
+  width: 800px;
+  height:600px;
+    @media screen and (min-width: 0px) {
+            margin : 0 1rem;
+            width: 330px;
+            height:200px;
+        }
+        @media screen and (min-width: 400px) {
+            width: 400px;
+            height:260px;
+        }
+        @media screen and (min-width: 600px) {
+          width: 600px;
+          height:400px;
+        }
+        @media screen and (min-width: 800px) {
+            width: 800px;
+            height:400px;
+        }
+        @media screen and (min-width : 1280px) {
+            margin :0 200px;
+        }
+        .swiper-button-prev
+        {
+          color: #fff;
+        }
+        .swiper-button-next
+        {
+          color: #fff;
+        }
+}
+
+.swiper-slide {
+  position: relative;
+  text-align: center;
+  background: #fff;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  .coming
+        {
+          width: 60px;
+          height: 60px;
+          right: 0;
+          top: 0;
+          opacity: 0.5;
+          position: absolute;
+          z-index: 1;
+          @media screen and (min-width : 600px) {
+            width: 100px;
+            height: 100px;
+          }
+        }
+        .date
+        {
+          color: #fff;
+          text-shadow: 2px 2px black;
+          padding: 1rem;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto auto;
+          width: auto;
+          height: auto;
+        }
+  img
+  {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+`
+export const SpanEdited = styled.span`
+  position: absolute;
+  left: 50%;
+  bottom : 50px;
+  transform: translate(-50%, -0%);
+  display: block;
+  color: #D9D9D9;
+  text-shadow: 2px 2px black;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0px;
+  cursor: pointer;
+  @media screen  and (min-width : 600px){
+    font-size: 2rem;
+    letter-spacing: 5px
+
+  }
 `

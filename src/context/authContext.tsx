@@ -6,7 +6,7 @@ import { apiFake } from "../services/api";
 
 interface IContextValues {
   login: (data: FieldValue<ILoginData>) => void;
-  register: (data: FieldValue<ILoginData>) => void;
+  registerForm: (data: FieldValue<ILoginData>) => void;
 }
 
 interface IContext {
@@ -57,6 +57,7 @@ export function AuthProvider({ children }: IContext) {
     apiFake
       .post("/login", data)
       .then((res: IReponseLogin) => {
+        console.log(res)
         localStorage.setItem("@token", res.data.accessToken);
         localStorage.setItem("@idUser", res.data.user.id);
         toast.success("Successfully logged in");
@@ -66,7 +67,7 @@ export function AuthProvider({ children }: IContext) {
       });
   };
 
-  const register = (data: FieldValue<IReponseRegister>) => {
+  const registerForm = (data: FieldValue<IReponseRegister>) => {
     apiFake
       .post("/register", data)
       .then((res: IReponseRegister) => {
@@ -80,7 +81,7 @@ export function AuthProvider({ children }: IContext) {
   };
 
   return (
-    <AuthContext.Provider value={{ login, register }}>
+    <AuthContext.Provider value={{ login, registerForm }}>
       {children}
     </AuthContext.Provider>
   );

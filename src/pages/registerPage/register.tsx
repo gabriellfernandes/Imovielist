@@ -2,7 +2,7 @@ import { useContext } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../../context/authContext";
 
 
 export function RegisterForm() {
@@ -23,7 +23,7 @@ export function RegisterForm() {
     avatar: yup.string(),
   });
 
-  const { login } = useContext(AuthContext)
+  const { registerForm } = useContext(AuthContext)
 
   const {
     register,
@@ -33,7 +33,7 @@ export function RegisterForm() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(login)}>
+      <form onSubmit={handleSubmit(registerForm)}>
         <label htmlFor="name">Name</label>
         <input
           type="text"

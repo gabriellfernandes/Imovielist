@@ -17,9 +17,7 @@ root.render(
     <BrowserRouter>
       <ToastContainer/>
       <Provider>
-        <MovieContextProvider>
           <App />
-        </MovieContextProvider>
       </Provider>
       <Reset/>
     </BrowserRouter>

@@ -33,7 +33,7 @@ export default function Header (){
                     <span>Top-Rated</span>
                     </div>
                     <AiFillBell className="icon"  size={26}/>
-                    <FaUser className="icon"  size={24}/>
+                    <FaUser className="icon" onClick={() => navigate("/userProfile")} size={24}/>
                 </div>
             </div>
         </HeaderDiv>

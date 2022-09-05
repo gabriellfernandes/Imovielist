@@ -131,7 +131,7 @@ function CardItem({movies} : ICardItemProps ) : ReactElement
                                     </CardMedia>
                                     <Box className = "box_imdb" padding = {"1rem 1rem 0 1rem"} marginRight={"5px"} display = "flex" gap = {"4px"} flexDirection = "column" justifyContent= "center" alignItems= "center" top = {"0"} left={0} position={"absolute"} zIndex = {20}>       
                                         <ImdbSVG className = "imdb"></ImdbSVG>
-                                        <Typography sx = {{textShadow : "1px 1px black"}} fontWeight={800} variant="body1" color = {"primary"}>{movies.vote_average}</Typography>
+                                        <Typography sx = {{textShadow : "1px 1px black"}} fontWeight={800} variant="body1" color = {"primary"}>{movies.vote_average.toFixed(2)}</Typography>
                                     </Box>
                                 </div>                                                                      
                                 )

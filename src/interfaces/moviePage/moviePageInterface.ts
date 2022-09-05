@@ -19,6 +19,9 @@ export interface IMovieContext {
   postLive: Array<IDataComenter>;
   movie_id: number;
   loadingMovie: boolean;
+  ratingValue: number;
+  setRatingValue: Dispatch<SetStateAction<number>>;
+  video: string;
 }
 
 export interface IDataComenter {
@@ -35,6 +38,14 @@ export interface IDataRating {
   userId: number;
   rating: number;
   avatar?: string;
+}
+
+export interface IDataRatingAll {
+    id?: number;
+    id_Movie: number;
+    userId: number;
+    rating: number;
+    avatar?: string;
 }
 
 

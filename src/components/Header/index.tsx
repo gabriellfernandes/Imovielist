@@ -2,9 +2,10 @@ import { HeaderDiv } from "./style";
 import {BiMovie} from 'react-icons/bi'
 import {AiFillHome, AiFillCompass, AiFillStar, AiFillBell} from 'react-icons/ai'
 import {FaUser} from 'react-icons/fa'
+import { useNavigate } from "react-router-dom";
 export default function Header (){
 
-
+    const navigate = useNavigate()
 
     return (
         
@@ -19,7 +20,7 @@ export default function Header (){
                 <div>
                     <div>
                     <AiFillHome className="icon"  size={26}/>
-                    <span className="home">home</span>
+                    <span className="home" onClick={() => navigate("/home")}>home</span>
                     </div>
 
                     <div>

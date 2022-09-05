@@ -1,8 +1,22 @@
-import { ReactElement, SetStateAction, useContext, useEffect, useState } from "react";
-import {Stack,Slider,CardContent,CardActions,CardMedia,ThemeProvider,Typography,useMediaQuery, Button,Box,Tooltip, IconButton} from "@mui/material";
-import { SettingsApplications, Visibility,} from "@mui/icons-material";
+import { AuthContext } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { SettingsApplications} from "@mui/icons-material";
+import { ReactElement, useContext } from "react";
+import {
+  CardContent,
+  CardActions,
+  CardMedia,
+  ThemeProvider,
+  Typography,
+  useMediaQuery,
+  Button,
+  Box,
+  Tooltip,
+} from "@mui/material";
+import { Visibility } from "@mui/icons-material";
 import { IResults } from "../../interfaces/axiosReponseApiTmdb";
-import {CardItemStyled,theme} from "./style"
+import { CardItemStyled, theme } from "./style";
 import { base_ImageUrl } from "../../services/api";
 import { ImdbSVG } from "../ImdbSVG";
 import ReactPlayer from "react-player/youtube"
@@ -13,10 +27,15 @@ import { useMemo } from "react";
 interface ICardItemProps
 {
     movies : IResults,
-}
+  }
 function CardItem({movies} : ICardItemProps ) : ReactElement
-{
-    const {play,setPlay} = useContext<IPlayContext>(PlayContext)
+  {
+    const navigate = useNavigate();
+    function movieNavigate() {
+      navigate("/movie");
+    }
+  const { setMovie_Id } = useContext(AuthContext);
+  const {play,setPlay} = useContext<IPlayContext>(PlayContext)
     let timeout: ReturnType<typeof setTimeout>;
     const hover = useRef<typeof timeout>(setTimeout(()=> null))
     const settingHover = useMemo(()=> settingPlay,[play,setPlay])
@@ -128,7 +147,10 @@ function CardItem({movies} : ICardItemProps ) : ReactElement
                             </CardContent>
                         <CardActions>
                             <Box  width = {"100%"} display={"flex"} justifyContent = {"space-between"}>
-                                <Button size="small" sx = {{fontWeight : 600,}} color = "primary" variant="text">more</Button>
+                                <Button  onClick={() => {
+                                        setMovie_Id(movies.id);
+                                        window.scrollTo(0, 0);
+                                        movieNavigate();}} size="small" sx = {{fontWeight : 600,}} color = "primary" variant="text">more</Button>
                                 {movies.overview ?          
                                 <Tooltip title = {movies.overview}>
                                     <Button>

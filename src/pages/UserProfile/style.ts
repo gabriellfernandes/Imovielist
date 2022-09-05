@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const DivGeral = styled.div`
+export const DivGeneral = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #080808;
@@ -48,7 +48,7 @@ export const DivGeral = styled.div`
   }
 
   .input-search {
-    width: 60%;
+    width: 70%;
     height: 30px;
     border: none;
     border-radius: 20px;
@@ -57,22 +57,22 @@ export const DivGeral = styled.div`
 
   .div-container-genres {
     width: 100%;
-    height: 100px;
+    height: 120px;
     overflow: auto;
   }
 
   .div-genres {
+    width: 200%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
 
   button {
-    width: 115px;
+    width: 130px;
     height: 32px;
     border: none;
     border-radius: 20px;
-    background-color: #141414;
     color: #ffffff;
     margin: 5px;
     cursor: pointer;
@@ -99,20 +99,20 @@ export const DivGeral = styled.div`
   .div-container-favorites {
     width: 90%;
     height: 250px;
-    border-radius: 50px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     border: 1px solid yellow;
   }
 
   .movie-star {
     width: 14%;
     height: 15px;
-    background-color: #080808;
+    background-color: #141414;
     color: #ffffff;
     border-radius: 20px;
     font-size: 12px;
+    margin: 5px 0 0 5px;
   }
 
   .favorite-bottom {
@@ -133,12 +133,14 @@ export const DivGeral = styled.div`
     justify-content: space-around;
     align-items: center;
     font-weight: bold;
+    margin-left: 5px;
   }
 
   .button-add-movie {
     width: 10%;
     height: 32px;
     border: none;
+    background-color: #141414;
     color: #ffffff;
     cursor: pointer;
     border-radius: 100px;

@@ -3,7 +3,7 @@ import ProtectedRoutes from "../components/ProtectedRoutes";
 import { MovieContextProvider } from "../context/moviePageContext";
 import Home from "../pages/Home";
 import LadingPage from "../pages/LadingPage";
-import { LoginForm } from "../pages/loginPage/login";
+import { LoginForm } from "../pages/LoginPage/login";
 import { MoviePage } from "../pages/MoviePage";
 import { RegisterForm } from "../pages/registerPage/register";
 import { UserProfile } from "../pages/UserProfile/userProfile";

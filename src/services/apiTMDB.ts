@@ -8,9 +8,9 @@ async function GetPopularMovies(page : number)
     {
         params : 
         {
-            language : "pt-br",
+            language : "en",
             region : "BR",
-            page : page
+            page : page,
         }
     })
     return popularMovies.data
@@ -21,7 +21,7 @@ async function GetComingSoonMovies(page : number)
     {
         params : 
         {
-            language : "pt-br",
+            language : "en",
             region : "BR",
             page : page
         }
@@ -34,7 +34,7 @@ async function GetRatedMovie( page : number)
     {
         params : 
         {
-            language : "pt-br",
+            language : "en",
             region : "BR",
             page : page
         }

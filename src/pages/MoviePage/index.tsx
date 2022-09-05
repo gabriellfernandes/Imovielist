@@ -5,7 +5,7 @@ import { MovieContext } from "../../context/moviePageContext";
 import { base_ImageUrl } from "../../services/api";
 import ReactStars from "react-stars";
 import Footer from "../../components/Footer";
-import { CardItem } from "../../components/CardItem";
+import CardItem  from "../../components/CardItem";
 
 export function MoviePage() {
   const navigate = useNavigate();

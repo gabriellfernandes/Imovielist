@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const HeaderDiv = styled.header`
 
     width: 100%;
-    height: 100%;
+    height: auto;
     background-color: #1A171E;
    .header__container
     {

@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProtectedRoutes from "../components/ProtectedRoutes";
+import ExtendList from "../pages/ExtendList";
+
 import Home from "../pages/Home";
 import LadingPage from "../pages/LadingPage";
 import { LoginForm } from "../pages/loginPage/login";
@@ -17,7 +19,7 @@ export default function RoutesMain() {
       <Route element={<ProtectedRoutes />}>
         <Route path="/Home" element={<Home />} />
       </Route>
-
+      <Route path="/extend/:group" element={<ExtendList />} />
       <Route path="*" element={<Navigate to="/" replace={true} />} />
     </Routes>
   );

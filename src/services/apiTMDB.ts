@@ -10,12 +10,14 @@ async function GetPopularMovies(page : number)
         {
             language : "pt-br",
             region : "BR",
-            page : page
+            page : page,           
         }
     })
+    console.log(popularMovies.data)
     return popularMovies.data
 }
-async function GetComingSoonMovies(page : number)
+
+async  function GetComingSoonMovies(page : number)
 {
     const comingSoonMovies = await apiTMDb.get<IResponsePopularMovie>("/movie/upcoming",
     {
@@ -39,6 +41,7 @@ async function GetRatedMovie( page : number)
             page : page
         }
     })
+    
     return ratedMovies.data
 }
 export {GetPopularMovies,GetComingSoonMovies,GetRatedMovie}

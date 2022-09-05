@@ -8,10 +8,13 @@ import {GetRatedMovie,GetPopularMovies} from "../../services/apiTMDB";
 import {RatedContext} from "../../context/ratedContext"
 import {useMediaQuery} from "@mui/material";
 import { CardItem } from "../../components/CardItem";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 export default function Home(){
 
-
+    
+    const navigate = useNavigate();
+    const {group} = useParams();
     const {popularPerPage,SetPopularPerPage,popularMovies,setPopularMovies} = useContext(popularMovieContext)
     const {ratedPages,ratedPerPage,setRatedPages,setRatedPerPage} = useContext(RatedContext)
 
@@ -29,7 +32,7 @@ export default function Home(){
               {
                 const newResult = oldresults.filter((results)=>
                 {
-                  if(results.page != movie.page)
+                  if(results.page !== movie.page)
                   {
                     return results
                   }
@@ -45,6 +48,12 @@ export default function Home(){
         getPopular()
     },[])
 
+
+    function navigateToExpand(group : string){
+        const toNavigate = `/extend/${group}`
+            navigate(toNavigate, { replace: true });
+    }
+
     return (
         <>
         <Header/>
@@ -58,7 +67,7 @@ export default function Home(){
                     <MovieListBox>
                         <div className="BoxHeader">
                             <span>Trending</span>
-                            <button>{'see all >'}</button>
+                            <button onClick={(event)=> navigateToExpand('trending')}>{'see all >'}</button>
                         </div>
                         <div className="BoxMain">
                                 {popularMovies.map(({results})=>

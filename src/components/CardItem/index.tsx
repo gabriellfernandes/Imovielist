@@ -43,7 +43,9 @@ function CardItem({movies} : ICardItemProps ) : ReactElement
     {
         async function getUrl()
         {
-            const link = await movies.url        
+            const videos = await getVideo(movies.id)
+            movies.url = videos 
+            console.log(videos)    
             setPlay((oldValue)=> 
             {
                 const newArray : Array<IPlay> = oldValue.filter((value,index)=>
@@ -53,7 +55,7 @@ function CardItem({movies} : ICardItemProps ) : ReactElement
                         return {id : value.id,play : false,url : `${value.url}`}
                     }
                 })
-                return [...newArray,{id : movies.id,play : false,url : `${link}`}]
+                return [...newArray,{id : movies.id,play : false,url : `${videos}`}]
             })
         }
         getUrl()
@@ -121,7 +123,7 @@ function CardItem({movies} : ICardItemProps ) : ReactElement
                             
                                 if(value.play && movies.id == value.id)
                                 {
-                                    return  <ReactPlayer autoPlay = {true}  playing = {true} volume={0.347} key = {movies.id} width={"100%"} height={"60%"} url={`${value.url}?SameSite=Lax`}></ReactPlayer>
+                                    return  <ReactPlayer  autoPlay = {true}  playing = {true} volume={0.347} key = {movies.id} width={"100%"} height={"60%"} url={`${value.url}`}></ReactPlayer>
                                 }
                             if(!value.play && movies.id == value.id)
                             {
@@ -138,8 +140,10 @@ function CardItem({movies} : ICardItemProps ) : ReactElement
                             }
                         })}                
                                 <CardContent> 
-                                <Typography noWrap fontWeight={700} color={theme.palette.grey[400]} variant = "body1">{movies.title}</Typography>
-                                <Typography variant = "body2" color = "GrayText">Popularity</Typography>
+                                    <Box gap = "5px" alignItems={"start"}  display = {"flex"} flexDirection = "column" justifyContent = "start">
+                                        <Typography noWrap fontWeight={700} color={theme.palette.grey[400]} variant = "body1">{movies.title}</Typography>
+                                        <Typography variant = "body2" color = "GrayText">Popularity</Typography>
+                                    </Box>
                                 <Box position={"relative"} display = {"flex"}>
                                     <Typography variant = "body2" color = "GrayText">{movies.popularity}</Typography>      
                                     <Visibility sx={{width : "10px",height : "10px",position : "absolute", right : "0"}} color="primary"></Visibility>                                              

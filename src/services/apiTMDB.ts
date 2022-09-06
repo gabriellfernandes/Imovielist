@@ -1,5 +1,5 @@
 import {apiTMDb} from "./api"
-import {IRated, IResponsePopularMovie} from "../interfaces/axiosReponseApiTmdb"
+import {IGenres, IGenresRes, IRated, IResponsePopularMovie} from "../interfaces/axiosReponseApiTmdb"
 
 async function GetPopularMovies(page : number)
 {
@@ -22,7 +22,6 @@ async function GetComingSoonMovies(page : number)
         params : 
         {
             language : "en",
-            region : "BR",
             page : page
         }
     })
@@ -41,4 +40,15 @@ async function GetRatedMovie( page : number)
     })
     return ratedMovies.data
 }
-export {GetPopularMovies,GetComingSoonMovies,GetRatedMovie}
+async function GetGenresOfMovies()
+{
+    const genresOfMovies = await apiTMDb.get<IGenresRes>("/genre/movie/list",
+    {
+        params : 
+        {
+            language : "en",
+        }
+    })
+    return genresOfMovies.data.genres
+}
+export {GetPopularMovies,GetComingSoonMovies,GetRatedMovie,GetGenresOfMovies}

@@ -6,7 +6,56 @@ import { ReactElement } from 'react';
 import { BiLeftArrow } from 'react-icons/bi';
 import { IconType } from 'react-icons';
 
-const themeDefault = createTheme()
+export const themeDefault = createTheme(
+    {
+        components : 
+        {
+            MuiSkeleton : 
+            {
+                styleOverrides : 
+                {
+                    root : 
+                    {
+                        visibility: "visible",
+                    }
+                }
+            },
+            MuiTypography : 
+            {
+                styleOverrides : 
+                {
+                    root : 
+                    {
+                        visibility: "visible"
+                    }
+                }
+            },
+            MuiCardMedia : 
+            {
+                styleOverrides : 
+                {
+                    root : 
+                    {
+                        visibility: "visible"
+                    }
+                }
+            },
+            MuiCard : 
+            {
+                styleOverrides : 
+                {
+                    root : 
+                    {
+                        margin: "auto",
+                        padding: "1rem",
+                        borderRadius: "1em",
+                        border: "1px solid transparentize(white, 0.5)",
+                    }
+                }
+            }
+            
+        }
+    })
 export const theme = createTheme(
     {
         palette : {
@@ -16,7 +65,11 @@ export const theme = createTheme(
             },
             secondary : {
                 main : themeDefault.palette.grey[800]
+            },
+            info : {
+                main : themeDefault.palette.grey[900]
             }
+            
         },
         typography : 
         {
@@ -68,7 +121,7 @@ export const theme = createTheme(
 
                     }
                 }
-            }
+            },
         }
     })
 
@@ -197,5 +250,20 @@ export const MovieListBox = styled.div`
         {
             padding : 1rem;
         }
+        .card
+        {
+            transition: 1s;
+        }
+        .card:hover
+        {
+            cursor: pointer;
+            scale: 1.1;
+        }
+       .media {
+        height: 150px;
+        background-size :contain ;
+        background-position: center center;
+        }
+
     }
 `

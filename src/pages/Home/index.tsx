@@ -7,7 +7,12 @@ import { popularMovieContext } from "../../context/popularMovieContext";
 import { useContext, useEffect} from "react";
 import {GetRatedMovie,GetPopularMovies, GetGenresOfMovies} from "../../services/apiTMDB";
 import {RatedContext} from "../../context/ratedContext"
+
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import {Button, IconButton, useMediaQuery,ThemeProvider, Typography, Box} from "@mui/material";
+
 import {Button,Skeleton,CardMedia, IconButton, useMediaQuery,ThemeProvider,Grid, Typography, Box, Card} from "@mui/material";
+
 import CardItem  from "../../components/CardItem";
 import {Swiper,SwiperSlide} from "swiper/react"
 import {Navigation,Pagination} from "swiper"
@@ -27,8 +32,14 @@ import hbo from "../../assets/images/plataformas/HBO-Max-Logo 1.png"
 import globo from "../../assets/images/plataformas/globo 1.png"
 import primevideo from "../../assets/images/plataformas/primevideo1.png"
 
+
+
+
+
+
 export default function Home(){
 
+    const navigate = useNavigate();
     const {popularPerPage,SetPopularPerPage,popularMovies,setPopularMovies} = useContext(popularMovieContext)
     const {ratedPages,setRatedPages,ratedPerPage,setRatedPerPage} = useContext(RatedContext)
     const {genresOfMovies,setGenresOfMovies} = useContext(GenresOfMoviesContext)
@@ -47,7 +58,7 @@ export default function Home(){
               {
                 const newResult = oldresults.filter((results)=>
                 {
-                  if(results.page != movie.page)
+                  if(results.page !== movie.page)
                   {
                     return results
                   }
@@ -95,6 +106,12 @@ export default function Home(){
         getGenres()
     },[])
 
+
+    function navigateToExpand(group : string){
+        const toNavigate = `/extend/${group}`
+            navigate(toNavigate, { replace: true });
+    }
+
     return (
         <>
         <Header/>
@@ -108,11 +125,13 @@ export default function Home(){
                     <MovieListBox>
 
                         <div className="BoxHeader">
+                
+
                         <Box gap={"5px"} alignItems = {'center'} display = "flex" flexDirection={"row"}>
                             <Typography className = "title">Trending</Typography>
                             <LocalFireDepartmentIcon fontSize="small" color="primary"></LocalFireDepartmentIcon>
                         </Box>
-                       <Button size="small" color = "secondary" variant="contained" endIcon = {<LocalMoviesIcon></LocalMoviesIcon>}><Typography>See All</Typography></Button>
+                       <Button  onClick={()=> navigateToExpand('trending')} size="small" color = "secondary" variant="contained" endIcon = {<LocalMoviesIcon></LocalMoviesIcon>}><Typography>See All</Typography></Button>
                         </div>
                         <div className="BoxMain">
                             <Swiper navigation = {
@@ -181,7 +200,7 @@ export default function Home(){
                             <Typography className = "title">Top Rated</Typography>
                             <StarsIcon fontSize="small" sx = {{paddingBottom : "3px",marginBottom : "3px"}} color = "primary"></StarsIcon>
                         </Box>
-                        <Button size="small" color = "secondary" variant="contained" endIcon = {<LocalMoviesIcon></LocalMoviesIcon>}><Typography>See All</Typography></Button>
+                        <Button onClick={()=> navigateToExpand('top')} size="small" color = "secondary" variant="contained" endIcon = {<LocalMoviesIcon></LocalMoviesIcon>}><Typography>See All</Typography></Button>
                         
                         </div>
                         <div className="BoxMain">

@@ -46,18 +46,21 @@ export const HeaderDiv = styled.header`
             gap: 1rem;
             cursor: pointer;
             
-            &:hover{
-                svg{
-                    color: white;
-                }
-
-            }
+        
 
             span{
                 color: white;
             }
 
           
+        }
+        .contIcon{
+            &:hover{
+                svg{
+                    color: white;
+                }
+
+            }
         }
     }
 `

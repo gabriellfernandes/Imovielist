@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import { apiTMDb } from "../../services/api";
+import Lottie  from "react-lottie";
+import noMovies from "./noMovies.json";
 import { IGenres } from "./interfaces";
 import { DivGeneral } from "./style";
 
 export const UserProfile = () => {
 
+  const nameUser = localStorage.getItem("@nameUser");
+  const emailUser = localStorage.getItem("@emailUser");
+  const avatarUser = localStorage.getItem("@avatarlUser") as string;
+
   const [genres, setGenres] = useState<IGenres[]>([]);
+  const [watchedMovies, setWatchedMovies] = useState<any[]>([]);
   const [buttonStatus, setButtonStatus] = useState(true);
   const [buttonColor, setButtonColor] = useState(true);
 
@@ -20,14 +27,20 @@ export const UserProfile = () => {
     setButtonStatus(!buttonStatus);
   }
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: noMovies,
+  };
+
   return (
     <DivGeneral>
       <div className="div-user">
         <div className="div-container-infos-user">
-        <div className="div-avatar"></div>
+        <img className="div-avatar"src={avatarUser} alt="avatar" />
         <div className="div-infos-user">
-            <p>Kenzinho Teste</p>
-            <p>kenzinho@email.com</p>
+            <p>{nameUser}</p>
+            <p>{emailUser}</p>
         </div>
         <div className="arrow">{'>'}</div>
         </div>
@@ -62,7 +75,26 @@ export const UserProfile = () => {
           </div>
         </div>
       </div>
-      <div className="div-movies"></div>
+      <div className="div-movies">
+        <>
+        {
+          watchedMovies.length <= 0 ?
+          <div className="div-empty">
+            <Lottie
+              options={defaultOptions}
+              isPaused={false}
+              isStopped={false}
+              direction={1}
+              height={480}
+              width={480}
+              isClickToPauseDisabled={true}
+            />
+          </div>
+          :
+          <div>Renderizar algo</div>
+        }
+        </>
+      </div>
     </DivGeneral>
   )
 }

@@ -23,8 +23,8 @@ export const theme = createTheme(
                 xs : 0,
                 sm : 600,
                 md :900, 
-                lg :420 ,
-                xl :500,
+                lg :450 ,
+                xl :600,
             }
         },
         components : 
@@ -58,11 +58,24 @@ export const CardItemStyled = styledMUI(Card)(
         maxWidth: "100%",
         minWidth: "50px",
         height: "300px",
+        position :"relative",
+        transition: "1s",
         [theme.breakpoints.up("sm")] : 
         {
             width : "300px",
            height: "300px",
-        }
-        
+        },
+        ".imdb" : 
+        {
+            margin : "0",
+            padding : "0",
+            width: "30px",
+            height : "30px"
+        },
+        ":hover" : 
+        {
+            cursor : "pointer",
+            scale: "1.1",
+        },
     })
 

@@ -1,3 +1,20 @@
+export interface IVideos
+{
+  id : number;
+  results :
+  [{
+    iso_639_1 : string
+    iso_3166_1 : string
+    name : string;
+    key : string;
+    site : string;
+    size : number;
+    type : string;
+    official : boolean;
+    published_at : string;
+    id : string;
+  }]
+}
 export interface IRated
 {
     page: number;
@@ -40,6 +57,7 @@ export interface IResults
     video: boolean;
     vote_average: number;
     vote_count: number
+    url : string | Promise<string>
 }
 
 export interface IResponsePopularMovie{
@@ -232,4 +250,26 @@ export interface IReponseCredits {
   
 }
 
-
+export interface IReponseSimilarMovie{
+  page: number;
+  results: [{
+    img: string
+    adult: boolean;
+    backdrop_path: string;
+    genre_ids: [number];
+    id: number;
+    original_language: string;
+    original_title: string;
+    overview: string;
+    popularity: number;
+    poster_path: string;
+    release_date: string;
+    title: string;
+    video: boolean;
+    vote_average: number;
+    vote_count: number
+    url : string | Promise<string>
+  }];
+  total_pages: number;
+  total_results: number
+}

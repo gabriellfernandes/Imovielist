@@ -1,87 +1,52 @@
-import { createContext, ReactNode } from "react";
+import { createContext, useState } from "react";
 import { FieldValue } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { IContext, IContextValues, ILoginData, IReponseLogin, IReponseRegister } from "../interfaces/Auth/AuthContextInterface";
 import { apiFake } from "../services/api";
-
-interface IContextValues {
-  login: (data: FieldValue<ILoginData>) => void;
-  registerForm: (data: FieldValue<ILoginData>) => void;
-}
-
-interface IContext {
-  children: ReactNode;
-}
-
-interface ILoginData {
-  email: string;
-  password: string;
-}
-
-interface IReponseLogin {
-  data: {
-    accessToken: string;
-    user: {
-      name: string;
-      email: string;
-      avatar?: string;
-      id: string;
-    };
-  };
-}
-
-interface IReponseRegister{
-    data: {
-        accessToken: string;
-        user: {
-          name: string;
-          email: string;
-          avatar?: string;
-          id: string;
-        };
-    };
-}
-
-interface IReponseError {
-  response: {
-    data: string;
-  };
-}
 
 export const AuthContext = createContext<IContextValues>(
   {} as IContextValues
 );
 
 export function AuthProvider({ children }: IContext) {
+  const [movie_id, setMovie_Id] = useState(90);
+  const navigate = useNavigate()
   const login = (data: FieldValue<ILoginData>) => {
-    apiFake
+    toast.promise(apiFake
       .post("/login", data)
       .then((res: IReponseLogin) => {
         console.log(res)
         localStorage.setItem("@token", res.data.accessToken);
         localStorage.setItem("@idUser", res.data.user.id);
-        toast.success("Successfully logged in");
-      })
-      .catch((err: IReponseError) => {
-        toast.error(err.response.data);
+        navigate("/home")
+      }),{
+        pending: "Waiting...",
+        success: "Successfully logged in",
+        error: "Account does not exist"
       });
   };
 
-  const registerForm = (data: FieldValue<IReponseRegister>) => {
-    apiFake
+  const registerUser = (data: FieldValue<IReponseRegister>) => {
+    toast.promise(apiFake
       .post("/register", data)
       .then((res: IReponseRegister) => {
         localStorage.setItem("@token", res.data.accessToken);
         localStorage.setItem("@idUser", res.data.user.id);
-        toast.success("Successfully registered");
+        navigate("/home")
       })
-      .catch((err: IReponseError) => {
+      .catch((err) => {
         toast.error(err.response.data);
+      }), {
+        pending: "Waiting...",
+        success: "Account created successfully",
+        error: "Email already exists"
       });
   };
 
   return (
-    <AuthContext.Provider value={{ login, registerForm }}>
+    <AuthContext.Provider value={{ login, registerUser, movie_id, setMovie_Id }}>
       {children}
     </AuthContext.Provider>
   );

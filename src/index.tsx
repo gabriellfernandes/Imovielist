@@ -6,24 +6,20 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from './context/context';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { Reset } from './style/globalstyles';
+import { Reset } from './style/global/globalstyles';
 import { MovieContextProvider } from './context/moviePageContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
     <BrowserRouter>
       <ToastContainer/>
       <Provider>
-        <MovieContextProvider>
           <App />
-        </MovieContextProvider>
       </Provider>
       <Reset/>
     </BrowserRouter>
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

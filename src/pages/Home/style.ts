@@ -1,7 +1,10 @@
-import styled from 'styled-components';
+import styled, { ThemedStyledProps } from 'styled-components';
 import styledMUI from '@mui/styled-engine';
 import { Card } from '@mui/material';
 import { createTheme } from '@mui/material';
+import { ReactElement } from 'react';
+import { BiLeftArrow } from 'react-icons/bi';
+import { IconType } from 'react-icons';
 
 const themeDefault = createTheme()
 export const theme = createTheme(
@@ -10,6 +13,9 @@ export const theme = createTheme(
             primary : 
             {
                 main : themeDefault.palette.grey[400]
+            },
+            secondary : {
+                main : themeDefault.palette.grey[800]
             }
         },
         typography : 
@@ -22,10 +28,10 @@ export const theme = createTheme(
             values : 
             {
                 xs : 0,
-                sm : 600,
-                md :900, 
-                lg :450 ,
-                xl :500,
+                sm : 320,
+                md :500, 
+                lg :600,
+                xl :800,
             }
         },
         components : 
@@ -46,6 +52,20 @@ export const theme = createTheme(
                         },
                         backgroundPosition : "center center",
                         backgroundSize : "100%"
+                    }
+                }
+            },
+            MuiSvgIcon : 
+            {
+                styleOverrides : 
+                {
+                    root : 
+                    {  
+                        
+                            fontSize : "2rem",
+                            backgroundColor : "rgba(0,0,0,0.5)",
+                            borderRadius : "100%"
+
                     }
                 }
             }
@@ -81,11 +101,9 @@ export const ContentBox = styled.div`
         gap: 1rem;
     }
 `
-
 export const MovieListBox = styled.div`
     
     width: 100%;
-    
     height: max-content;
 
     .BoxHeader{
@@ -95,12 +113,42 @@ export const MovieListBox = styled.div`
         @media screen and (min-width : 1280px) {
             margin : 0 200px;
         }
-        padding: 1rem;
+        padding: 0 1rem;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: auto;
-        height: 50px;
-        background-color: lightgreen;
+        height: 60px;
+        background-color: ${theme.palette.grey[900]};
+
+        .MuiTypography-root
+        {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-shadow: 1px 1px ${theme.palette.grey[600]}; ;
+            color  : ${theme.palette.grey[100]};
+        }
+        .MuiSvgIcon-root
+        {
+            font-size: 1.4rem;
+        }
+        .MuiButton-root
+        {
+            display: flex;
+            align-items:center;
+
+                .MuiTypography-root
+            {
+                font-size: 0.8rem;
+                font-weight: 700;
+                text-shadow: 1px 1px ${theme.palette.grey[900]}; ;
+                color  : ${theme.palette.grey[100]};
+            }
+                .MuiSvgIcon-root
+            {
+               margin : 0px 0 3px 0 ;
+            }
+        }
     }
 
     .BoxMain{
@@ -111,12 +159,43 @@ export const MovieListBox = styled.div`
             margin : 0 200px;
         }
         display: flex;
-        padding: 1rem;
         align-items: center;
         justify-content: space-around;
         gap: 1rem;
         width: auto;
         height: auto;
-        background-color: darkgreen;
+        background-color: ${theme.palette.grey[800]};
+        position: relative;
+
+        .next
+        {
+            right: 0;
+            top : 40%;
+            position : absolute;
+            z-index: 20;
+            width: max-content;
+        }
+        
+        .prev
+        {
+            left: 0;
+            top : 40%;
+            z-index: 20;
+            position: absolute;
+            
+        }
+        .swiper-button-disabled
+        {
+            opacity: 0.2;
+            cursor: no-drop;
+            button
+            {
+                cursor: no-drop;
+            }
+        }
+        .swiper
+        {
+            padding : 1rem;
+        }
     }
 `

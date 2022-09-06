@@ -1,55 +1,28 @@
 import {
   createContext,
-  ReactElement,
+  useContext,
   useEffect,
   useState,
-  Dispatch,
-  SetStateAction,
 } from "react";
 import {
   IReponseCredits,
+  IReponseSimilarMovie,
   IResponseDetailMovie,
 } from "../interfaces/axiosReponseApiTmdb";
 import { apiTMDb } from "../services/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { apiFake } from "../services/api";
+import { IDataComenter, IDataRating, IMovieContext, IMovieContextProps } from "../interfaces/moviePage/moviePageInterface";
+import { AuthContext } from "./authContext";
 
-interface IMovieContextProps {
-  children: ReactElement;
-}
 
-interface IMovieContext {
-  movie: IResponseDetailMovie;
-  movieCredits: IReponseCredits;
-  setMovie_Id: Dispatch<SetStateAction<number>>;
-  handleSubmit: (evt: React.FormEvent<HTMLFormElement>, data: string) => void;
-  handleSubmitRating: (data: number) => void;
-  postLive: Array<IDataComenter>;
-  movie_id: number;
-  loadingMovie: boolean;
-}
-
-interface IDataComenter {
-  id?: number;
-  id_Movie: number;
-  userId: number;
-  comments: string;
-  avatar?: string;
-}
-
-interface IDataRating {
-  id?: number;
-  id_Movie: number;
-  userId: number;
-  rating: number;
-  avatar?: string;
-}
 
 export const MovieContext = createContext<IMovieContext>({} as IMovieContext);
 
 export function MovieContextProvider({ children }: IMovieContextProps) {
-  const [movie_id, setMovie_Id] = useState(90);
+
+  const {movie_id, setMovie_Id} = useContext(AuthContext)
   const [att, setAtt] = useState<Array<number>>([]);
   const [movie, setMovie] = useState<IResponseDetailMovie>(
     {} as IResponseDetailMovie
@@ -57,6 +30,7 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
   const [movieCredits, setMovieCredits] = useState<IReponseCredits>(
     {} as IReponseCredits
   );
+  const [movieSimilar, setMovieSimilar] = useState<IReponseSimilarMovie>({} as IReponseSimilarMovie)
   const [loadingMovie, setLoadingMovie] = useState(true);
   const [post, setPost] = useState<IDataComenter>({} as IDataComenter);
   const [postLive, setPostLive] = useState<Array<IDataComenter>>(
@@ -72,6 +46,8 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
         setMovieCredits(res) 
       })
 
+    apiTMDb.get(`/movie/${movie_id}/similar`).then(res => setMovieSimilar(res.data))
+    movieCredits && 
     apiTMDb
       .get(`/movie/${movie_id}`)
       .then((res: IResponseDetailMovie) => {
@@ -79,8 +55,6 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
       })
       .catch((err) => console.log(err))
       .finally(() => setLoadingMovie(false));
-
-    
   }, [movie_id]);
 
   useEffect(() => {
@@ -95,6 +69,23 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
         setAvatar(await userAvatar(Number(localStorage.getItem("@idUser"))));
       });
   }, [att]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => { 
+      apiFake
+      .get(`640/comments`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("@token")}`,
+        },
+      })
+      .then(async (res) => {
+        setPostLive(res.data);
+        setAvatar(await userAvatar(Number(localStorage.getItem("@idUser"))));
+      })
+    }, 2500)
+  
+    return () => clearInterval(intervalId);
+  }, [useState])
 
   useEffect(() => {
     postComments(post);
@@ -183,6 +174,7 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
         handleSubmitRating,
         movie_id,
         loadingMovie,
+        movieSimilar
       }}
     >
       {children}

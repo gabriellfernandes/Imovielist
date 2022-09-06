@@ -1,12 +1,12 @@
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { CardItem } from "../../components/CardItem";
+import  CardItem  from "../../components/CardItem";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { popularMovieContext } from "../../context/popularMovieContext";
 import { RatedContext } from "../../context/ratedContext";
 import {ComingSoonContext} from "../../context/comingSoonContext";
-import { GetComingSoonMovies, GetPopularMovies } from "../../services/apiTMDB";
+import { GetComingSoonMovies, GetPopularMovies, GetRatedMovie } from "../../services/apiTMDB";
 import { ContentDiv, MainDiv, MoviesDiv, TitleDiv } from "./style";
 
 export default function ExtendList(){
@@ -19,7 +19,7 @@ export default function ExtendList(){
     {
         async function getPopular()
         {
-            const movie = await GetPopularMovies(ratedPerPage)
+            const movie = await GetPopularMovies(popularPerPage)
             setPopularMovies((oldresults)=> 
             {
               if(oldresults.length > 0)
@@ -39,7 +39,30 @@ export default function ExtendList(){
               }
             })
         }
+        async function getRated()
+        {
+            const movie = await GetRatedMovie(ratedPerPage)
+            setRatedPages((oldresults)=> 
+            {
+              if(oldresults.length > 0)
+              {
+                const newResult = oldresults.filter((results)=>
+                {
+                  if(results.page != movie.page)
+                  {
+                    return results
+                  }
+                })
+                return newResult.concat(movie)
+              }
+              else
+              {
+                return oldresults.concat(movie)
+              }
+            })
+        }
         getPopular()
+        getRated()
     },[])
 
 
@@ -54,6 +77,14 @@ export default function ExtendList(){
                           <>
                             <h1>Em Alta</h1>
                             <h3>Filmes que estão bombando!</h3>
+                          </>
+                        )
+                        }
+
+                        { group ===  'top' && (
+                          <>
+                            <h1>Top-Rated</h1>
+                            <h3>Os melhores avaliados</h3>
                           </>
                         )
                         }
@@ -128,10 +159,10 @@ export default function ExtendList(){
                         }
 
 
-                      { group ===  'upcoming' && (
+                      { group ===  'top' && (
 
                         <MoviesDiv>
-                        {popularMovies.map(({results})=>
+                        {ratedPages.map(({results})=>
                                     {
                                         return results.map((movies,index)=>
                                         {

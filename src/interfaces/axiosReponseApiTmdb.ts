@@ -1,3 +1,12 @@
+export interface IGenres
+{
+  id : number;
+  name : string;
+}
+export interface IGenresRes
+{
+  genres : Array<IGenres>
+}
 export interface IVideos
 {
   id : number;

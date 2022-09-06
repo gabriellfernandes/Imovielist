@@ -29,7 +29,7 @@ export async function getVideo(id : number)
         }
     })
     const key = videosFiltered[0]?.key
-    const value = `https://www.youtube.com/watch/${key}`
+    const value = `http://www.youtube.com/embed/${key}&enablejsapi=1`
     return value
 }
 interface IPlayProps

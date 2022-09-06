@@ -18,7 +18,7 @@ export default function Header (){
                 </div>
 
                 <div>
-                    <div>
+                    <div className="IconDiv">
                     <AiFillHome className="icon"  size={26}/>
                     <span className="home" onClick={() => navigate("/home")}>home</span>
                     </div>

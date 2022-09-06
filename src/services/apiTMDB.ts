@@ -1,6 +1,7 @@
 import {apiTMDb} from "./api"
-import {IGenres, IGenresRes, IRated, IResponsePopularMovie} from "../interfaces/axiosReponseApiTmdb"
-
+import {IGenres, IGenresRes, IOnlyGenre, IRated, IResponsePopularMovie} from "../interfaces/axiosReponseApiTmdb"
+import {ActionContext} from "../context/Genres/Documentary"
+import { useContext } from "react"
 async function GetPopularMovies(page : number)
 {
 
@@ -51,4 +52,200 @@ async function GetGenresOfMovies()
     })
     return genresOfMovies.data.genres
 }
-export {GetPopularMovies,GetComingSoonMovies,GetRatedMovie,GetGenresOfMovies}
+async function GetOnlyGenres(name : string,count : number)
+{
+    switch(name)
+    {
+        case "Action" :
+        const Action = await apiTMDb.get<IOnlyGenre>("discover/movie",
+        {
+            params : 
+            {
+                with_genres : "28",
+                page : count
+            }
+        })
+        return Action
+        case "Adventure":
+            const Adventure = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "12",
+                    page : count
+                }
+            })
+            return Adventure
+        case "Animation" :
+            const Animation = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "16",
+                    page : count
+                }
+            })
+            return Animation
+        case "Comedy" :
+            const Comedy = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "35",
+                    page : count
+                }
+            })
+            return Comedy
+            case "Crime" :
+                const Crime = await apiTMDb.get<IOnlyGenre>("discover/movie",
+                {
+                    params : 
+                    {
+                        with_genres : "80",
+                        page : count
+                    }
+                })
+                return Crime
+        case "Documentary" :
+            const Documentary = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "99",
+                    page : count
+                }
+            })
+            return Documentary
+        case "Drama" :
+            const Drama = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "18",
+                    page : count
+                }
+            })
+            return Drama
+        case "Family" :
+            const Family = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "10751",
+                    page : count
+                }
+            })
+            return Family
+        case "Fantasy" :
+            const Fantasy = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "14",
+                    page : count
+                }
+            })
+            return Fantasy
+        case "History" :
+            const History = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "36",
+                    page : count
+                }
+            })
+            return History
+        case "Horror" :
+            const Horror = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "27",
+                    page : count
+                }
+            })
+            return Horror
+        case "Music" :
+            const Music = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "10402",
+                    page : count
+                }
+            })
+            return Music
+        case "Mystery" :
+            const Mystery = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "9648",
+                    page : count
+                }
+            })
+            return Mystery
+        case "Romance" : 
+        const Romance = await apiTMDb.get<IOnlyGenre>("discover/movie",
+        {
+            params : 
+            {
+                with_genres : "10749",
+                page : count
+            }
+        })
+        return Romance
+        case "Science Fiction" :
+            const Science = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "878",
+                    page : count
+                }
+            })
+            return Science
+        case "TV Movie" :
+            const Tv_Movie = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "10770",
+                    page : count
+                }
+            })
+            return Tv_Movie
+        case "Thriller" :
+            const Thriller = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "53",
+                    page : count
+                }
+            })
+            return Thriller
+        case "War" :
+            const War = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "10752",
+                    page : count
+                }
+            })
+            return War
+        case "Western" :
+            const Western = await apiTMDb.get<IOnlyGenre>("discover/movie",
+            {
+                params : 
+                {
+                    with_genres : "37",
+                    page : count
+                }
+            })
+            return Western
+    }
+}
+export {GetPopularMovies,GetComingSoonMovies,GetRatedMovie,GetGenresOfMovies,GetOnlyGenres}

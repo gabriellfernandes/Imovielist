@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import {SimpleSlider} from "../../components/Carousel";
 import { popularMovieContext } from "../../context/popularMovieContext";
 import { useContext, useEffect} from "react";
-import {GetRatedMovie,GetPopularMovies, GetGenresOfMovies} from "../../services/apiTMDB";
+import {GetRatedMovie,GetPopularMovies, GetGenresOfMovies,} from "../../services/apiTMDB";
 import {RatedContext} from "../../context/ratedContext"
 import {Button,Skeleton,CardMedia, IconButton, useMediaQuery,ThemeProvider,Grid, Typography, Box, Card} from "@mui/material";
 import CardItem  from "../../components/CardItem";
@@ -14,7 +14,7 @@ import {Navigation,Pagination} from "swiper"
 import "swiper/css"
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { getVideo, PlayContext } from "../../context/playContext";
+import { getVideo} from "../../context/playContext";
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import StarsIcon from '@mui/icons-material/Stars';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';

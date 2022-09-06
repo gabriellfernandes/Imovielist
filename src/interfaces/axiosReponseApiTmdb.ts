@@ -253,7 +253,7 @@ export interface IReponseCredits {
       name: string;
       original_name: string;
       popularity: number;
-      profile_path?: string | null
+      profile_path?: string | null;
     }]
   }
   

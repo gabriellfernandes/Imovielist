@@ -5,7 +5,11 @@ import { MovieContext } from "../../context/moviePageContext";
 import { base_ImageUrl } from "../../services/api";
 import ReactStars from "react-stars";
 import Footer from "../../components/Footer";
-import CardItem  from "../../components/CardItem";
+import CardItem from "../../components/CardItem";
+import { Skeleton } from "@mui/material";
+import { getVideo } from "../../context/playContext";
+import ReactPlayer from "react-player/youtube"
+
 
 export function MoviePage() {
   const navigate = useNavigate();
@@ -25,22 +29,24 @@ export function MoviePage() {
     movie_id,
     loadingMovie,
     movieCredits,
-    movieSimilar
+    movieSimilar,
+    ratingValue,
+    setRatingValue,
+    video
   } = useContext(MovieContext);
   const [input, setInput] = useState("");
   const [pageMax, setPageMax] = useState(10);
   const [pageCastMax, setPageCastMax] = useState(5);
-  const [rating, setRating] = useState(0);
 
   const ratingChanged = (newRating: number) => {
-    setRating(newRating);
+    setRatingValue(newRating);
     handleSubmitRating(newRating);
   };
 
   return (
     <>
-    <Header />
-      {!loadingMovie && (
+      <Header />
+      {!loadingMovie ? (
         <>
           <div>
             <div>
@@ -48,10 +54,20 @@ export function MoviePage() {
                 <div>
                   <h2>{movie.data.title}</h2>
                   <h4>
-                    Neil GailMan
-                    {
-                      // nome do diretor
-                    }
+                    {movieCredits.data.crew.map((elem) => {
+                      return (
+                        elem.job.includes("Director") && 
+                        elem.profile_path != null &&(
+                          <div key={elem.id}>
+                            <img
+                              src={`${base_ImageUrl}${elem.profile_path}`}
+                              alt="Cast"
+                            />
+                            <p>{elem.name}</p>
+                          </div>
+                        )
+                      );
+                    })}
                   </h4>
                   <span>{movie.data.vote_average.toFixed(2)} Rating</span>
                 </div>
@@ -73,9 +89,7 @@ export function MoviePage() {
             <div>
               <div>
                 <h4>Trailer</h4>
-                {
-                  //Colocar o trailer
-                }
+                <ReactPlayer url={video}></ReactPlayer>
               </div>
               <div>
                 <div>
@@ -158,7 +172,7 @@ export function MoviePage() {
                   <ReactStars
                     count={5}
                     onChange={ratingChanged}
-                    value={rating}
+                    value={ratingValue}
                     size={24}
                     color2={"#ffc800"}
                   />
@@ -166,17 +180,14 @@ export function MoviePage() {
               </div>
             </div>
             <div>
-              {
-                movieSimilar.results.map((elem) => {
-                  return(
-                    <CardItem key={elem.id} movies={elem}></CardItem>
-                  )
-                })
-              }
+              {movieSimilar.results.map((elem) => {
+                return <CardItem key={elem.id} movies={elem}></CardItem>;
+              })}
             </div>
           </div>
-          
         </>
+      ) : (
+        <Skeleton></Skeleton>
       )}
       <Footer />
     </>

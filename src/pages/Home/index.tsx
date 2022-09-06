@@ -7,12 +7,8 @@ import { popularMovieContext } from "../../context/popularMovieContext";
 import { useContext, useEffect} from "react";
 import {GetRatedMovie,GetPopularMovies, GetGenresOfMovies} from "../../services/apiTMDB";
 import {RatedContext} from "../../context/ratedContext"
-
 import { Navigate, useNavigate, useParams } from "react-router-dom";
-import {Button, IconButton, useMediaQuery,ThemeProvider, Typography, Box} from "@mui/material";
-
-import {Button,Skeleton,CardMedia, IconButton, useMediaQuery,ThemeProvider,Grid, Typography, Box, Card} from "@mui/material";
-
+import {Button, Skeleton, CardMedia, IconButton, useMediaQuery,ThemeProvider,Grid, Typography, Box, Card} from "@mui/material";
 import CardItem  from "../../components/CardItem";
 import {Swiper,SwiperSlide} from "swiper/react"
 import {Navigation,Pagination} from "swiper"

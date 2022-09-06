@@ -1,23 +1,23 @@
 import { createContext, Dispatch, ReactElement, SetStateAction, useState } from "react"
 import { IResultsGenre } from "../../interfaces/axiosReponseApiTmdb"
-interface IActionContext
+interface IDramaContext
 {
-    actionGenre : Array<IResultsGenre>
-    setActionGenre : Dispatch<SetStateAction<Array<IResultsGenre>>>
-    actionPerPage : number;
-    setActionPerPage : Dispatch<SetStateAction<number>>
+    dramaGenre : Array<IResultsGenre>
+    setDramaGenre : Dispatch<SetStateAction<Array<IResultsGenre>>>
+    dramaPerPage : number;
+    setDramaPerPage : Dispatch<SetStateAction<number>>
 }
-interface IActionProps
+interface IDramaProps
 {
     children : ReactElement
 }
-const ActionContext = createContext<IActionContext>({} as IActionContext)
-function ActionProvider({children} : IActionProps)
+const DramaContext = createContext<IDramaContext>({} as IDramaContext)
+function DramaProvider({children} : IDramaProps)
 {
-    const [actionGenre,setActionGenre] = useState<Array<IResultsGenre>>([])
-    const [actionPerPage,setActionPerPage] = useState<number>(1)
+    const [dramaGenre,setDramaGenre] = useState<Array<IResultsGenre>>([])
+    const [dramaPerPage,setDramaPerPage] = useState<number>(1)
     return(
-        <ActionContext.Provider value = {{actionGenre,actionPerPage,setActionGenre,setActionPerPage}}>{children}</ActionContext.Provider>
+        <DramaContext.Provider value = {{dramaGenre,dramaPerPage,setDramaGenre,setDramaPerPage}}>{children}</DramaContext.Provider>
     )
 }
-export {ActionContext,ActionProvider}
+export {DramaContext,DramaProvider}

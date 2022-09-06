@@ -4,6 +4,7 @@ export const DivGeneral = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #080808;
+  display: flex;
 
   .div-user {
     width: 30%;
@@ -12,19 +13,20 @@ export const DivGeneral = styled.div`
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    justify-content: space-evenly;   //depois ajustar isso aqui
+    justify-content: space-evenly;
   }
 
   .div-container-infos-user {
     width: 100%;
+    height: 80px;
     display: flex;
     justify-content: space-around;
     align-items: center;
   }
 
   .div-avatar {
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
     background-color: #141414;
     border-radius: 100%;
     margin-top: 5px;
@@ -53,12 +55,28 @@ export const DivGeneral = styled.div`
     border: none;
     border-radius: 20px;
     background-color: #141414;
+    color: #ffffff;
   }
 
   .div-container-genres {
     width: 100%;
-    height: 120px;
-    overflow: auto;
+    height: 180px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+
+  .div-container-genres::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .div-container-genres::-webkit-scrollbar-track {
+    background-color: #080808;
+  }
+
+  .div-container-genres::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 7px solid #080808;
   }
 
   .div-genres {
@@ -98,7 +116,7 @@ export const DivGeneral = styled.div`
 
   .div-container-favorites {
     width: 90%;
-    height: 250px;
+    height: 210px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -145,5 +163,13 @@ export const DivGeneral = styled.div`
     cursor: pointer;
     border-radius: 100px;
     font-size: 20px;
+    margin-right: -28px;
+  }
+
+  .div-movies {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `

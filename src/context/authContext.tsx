@@ -20,6 +20,9 @@ export function AuthProvider({ children }: IContext) {
         console.log(res)
         localStorage.setItem("@token", res.data.accessToken);
         localStorage.setItem("@idUser", res.data.user.id);
+        localStorage.setItem("@nameUser", res.data.user.name);
+        localStorage.setItem("@emailUser", res.data.user.email);
+        localStorage.setItem("@avatarlUser", res.data.user.avatar!);
         navigate("/home")
       }),{
         pending: "Waiting...",

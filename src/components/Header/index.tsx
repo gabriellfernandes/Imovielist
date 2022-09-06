@@ -18,7 +18,11 @@ export default function Header (){
                 </div>
 
                 <div>
+
                     <div className="contIcon">
+
+                    <div className="IconDiv">
+
                     <AiFillHome className="icon"  size={26}/>
                     <span className="home" onClick={() => navigate("/home")}>home</span>
                     </div>
@@ -32,8 +36,12 @@ export default function Header (){
                     <AiFillStar className="icon"  size={26}/>
                     <span>Top-Rated</span>
                     </div>
+
                     <AiFillBell className="icon contIcon"  size={26}/>
                     <FaUser className="icon contIcon"  size={24}/>
+
+                    <AiFillBell className="icon"  size={26}/>
+                    <FaUser className="icon" onClick={() => navigate("/userProfile")} size={24}/>
                 </div>
             </div>
         </HeaderDiv>

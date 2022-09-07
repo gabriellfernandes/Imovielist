@@ -26,7 +26,7 @@ function Provider({children} : IContextProps) : ReactElement
                                     </StremerComponent>
                                 </GenresOfMoviesProvider>
                             </PlayProvider>
-                        </RatedProvider>
+                    </RatedProvider>
                 </ComingSoonProvider>
             </PopularMovieProvider>
         </AuthProvider>

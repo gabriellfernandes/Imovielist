@@ -17,7 +17,7 @@ export default function ExtendList(){
     const {popularPerPage,SetPopularPerPage,popularMovies,setPopularMovies} = useContext(popularMovieContext)
     const {ratedPages,ratedPerPage,setRatedPages,setRatedPerPage} = useContext(RatedContext)
     const {coming} = useContext(ComingSoonContext)
-    const { filmes } = useContext(stremerContext)
+    const { filmes, setPage } = useContext(stremerContext)
 
     useEffect(()=>
     {
@@ -257,6 +257,9 @@ export default function ExtendList(){
                         </MoviesDiv>
                       )}
                 </ContentDiv>
+                {
+                  //<button onClick={() => {setPage(odlnumber => odlnumber + 1)}}>more</button>
+                }
             </MainDiv>
             <Footer/>
         </>

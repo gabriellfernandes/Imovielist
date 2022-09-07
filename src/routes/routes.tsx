@@ -8,6 +8,7 @@ import { LoginForm } from "../pages/LoginPage/login";
 import { MoviePage } from "../pages/MoviePage";
 import { RegisterForm } from "../pages/registerPage/register";
 import { UserProfile } from "../pages/UserProfile/userProfile";
+import { StremerComponent } from "../context/stremerPlataform";
 
 
 export default function RoutesMain() {

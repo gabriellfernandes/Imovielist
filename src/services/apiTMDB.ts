@@ -15,7 +15,7 @@ async function GetPopularMovies(page : number)
 
         }
     })
-    console.log(popularMovies.data)
+
     return popularMovies.data
 }
 

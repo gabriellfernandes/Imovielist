@@ -19,11 +19,12 @@ export function StremerComponent({ children }: IStremerContext) {
     [] as filmesPlataform[]
   );
   const [plataform, setPlataforma] = useState(0);
-  const [loading, setLoading] = useState(true)
+
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    setLoading(true)
+    if(plataform === 0)return
+
     apiTMDb
       .get(
         `https://api.themoviedb.org/3/discover/movie?api_key=5c3399653ec5331dea8245d00cfda8d4&with_watch_providers=${plataform}&watch_region=BR`,
@@ -39,7 +40,7 @@ export function StremerComponent({ children }: IStremerContext) {
             return elemFilme.id == elem.id;
           }) && setFilmes((oldFilme) => [...oldFilme, elem]);
         });
-      }).finally(() => setLoading(false));
+      });
   }, [page, plataform]);
 
 
@@ -49,7 +50,7 @@ export function StremerComponent({ children }: IStremerContext) {
         filmes,
         setPage,
         setPlataforma,
-        setFilmes, plataform, page, loading
+        setFilmes, plataform, page
       }}
     >
       {children}

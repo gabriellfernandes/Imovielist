@@ -17,7 +17,7 @@ export default function ExtendList(){
     const {popularPerPage,SetPopularPerPage,popularMovies,setPopularMovies} = useContext(popularMovieContext)
     const {ratedPages,ratedPerPage,setRatedPages,setRatedPerPage} = useContext(RatedContext)
     const {coming} = useContext(ComingSoonContext)
-    const { filmes, loading } = useContext(stremerContext)
+    const { filmes } = useContext(stremerContext)
 
     useEffect(()=>
     {

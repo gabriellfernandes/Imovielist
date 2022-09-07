@@ -26,5 +26,4 @@ export interface IcontextPlataforma {
   page: number;
   setFilmes: Dispatch<SetStateAction<filmesPlataform[]>>;
   filmes: filmesPlataform[];
-  loading: boolean;
 }

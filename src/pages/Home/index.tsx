@@ -42,6 +42,10 @@ export default function Home(){
     const {genresOfMovies,setGenresOfMovies} = useContext(GenresOfMoviesContext)
     const { setPlataforma,setFilmes  } = useContext(stremerContext)
     const [showgenre,setShowgenre] = useState<boolean>(false)
+    if(window.localStorage.getItem("@Token") === undefined || window.localStorage.getItem("@Token") === null){
+        navigate("/home")
+    }
+
     useEffect(()=>
     {
         async function getPopular()

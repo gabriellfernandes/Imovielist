@@ -47,6 +47,7 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
     {} as IDataRatingAll
   );
   const [video, setVideo] = useState('')
+  const name = localStorage.getItem("@nameUser") as string
 
   useEffect(() => {
     apiTMDb.get(`/movie/${movie_id}/credits`).then((res: IReponseCredits) => {
@@ -179,6 +180,7 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
       comments: data,
       userId: Number(localStorage.getItem("@idUser")),
       avatar: avatar,
+      name: name
     });
   };
 

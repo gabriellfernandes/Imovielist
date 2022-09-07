@@ -30,6 +30,7 @@ export interface IDataComenter {
   userId: number;
   comments: string;
   avatar?: string;
+  name?: string
 }
 
 export interface IDataRating {

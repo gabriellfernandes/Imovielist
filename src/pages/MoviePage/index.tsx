@@ -148,7 +148,10 @@ export function MoviePage() {
                       elem.id_Movie == movie_id &&
                       i >= postLive.length - pageMax && (
                         <div key={elem.id}>
-                          <img src={`${elem.avatar}`} alt="" />
+                          <div>
+                            <img src={`${elem.avatar}`} alt="" />
+                            <h5>{elem.name}</h5>
+                          </div>
                           <p>{elem.comments}</p>
                         </div>
                       )

@@ -240,6 +240,7 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
       rating: Number(data),
       userId: Number(localStorage.getItem("@idUser")),
       avatar: avatar,
+      name: name
     });
   };
 

@@ -39,6 +39,7 @@ export interface IDataRating {
   userId: number;
   rating: number;
   avatar?: string;
+  name?: string
 }
 
 export interface IDataRatingAll {
@@ -47,6 +48,7 @@ export interface IDataRatingAll {
     userId: number;
     rating: number;
     avatar?: string;
+    name?: string
 }
 
 

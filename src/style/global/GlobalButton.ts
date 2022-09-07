@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from 'react'
 import styled from 'styled-components'
 
-interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
+export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
     width: string,
     maxWidth?: string,
     height?: string,

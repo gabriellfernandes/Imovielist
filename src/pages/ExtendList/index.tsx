@@ -8,13 +8,17 @@ import { RatedContext } from "../../context/ratedContext";
 import {ComingSoonContext} from "../../context/comingSoonContext";
 import { GetComingSoonMovies, GetPopularMovies, GetRatedMovie } from "../../services/apiTMDB";
 import { ContentDiv, MainDiv, MoviesDiv, TitleDiv } from "./style";
+import { stremerContext } from "../../context/stremerPlataform";
+import { apiTMDb } from "../../services/api";
+import { IReponsePlataformStremer } from "../../interfaces/axiosReponseApiTmdb";
 
 export default function ExtendList(){
   const { group } = useParams();
     const {popularPerPage,SetPopularPerPage,popularMovies,setPopularMovies} = useContext(popularMovieContext)
     const {ratedPages,ratedPerPage,setRatedPages,setRatedPerPage} = useContext(RatedContext)
     const {coming} = useContext(ComingSoonContext)
-    console.log(group)
+    const { filmes } = useContext(stremerContext)
+
     useEffect(()=>
     {
         async function getPopular()
@@ -176,7 +180,82 @@ export default function ExtendList(){
                         </MoviesDiv>
                         ) 
                         }
-      
+                      { group == 'netflix' && (
+                          <MoviesDiv>
+                            {
+                              filmes.map((results) =>
+                              {
+                                console.log(filmes)
+                                console.log(results)
+                                return(
+                                        <CardItem key={results.id} movies={results}></CardItem>
+                                )
+                                      
+                              }
+                            )}
+                          </MoviesDiv>
+                      
+                      )}
+                      { group == 'prime' && (
+                        <MoviesDiv>
+                          {
+                            filmes.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                      { group == 'hbom' && (
+                        <MoviesDiv>
+                          {
+                            filmes.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                      { group == 'disney' && (
+                        <MoviesDiv>
+                          {
+                            filmes.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                      { group == 'globo' && (
+                        <MoviesDiv>
+                          {
+                            filmes.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
                 </ContentDiv>
             </MainDiv>
             <Footer/>

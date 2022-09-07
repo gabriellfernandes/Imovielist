@@ -27,6 +27,7 @@ import disney from "../../assets/images/plataformas/disney-plus-logo 1.png"
 import hbo from "../../assets/images/plataformas/HBO-Max-Logo 1.png"
 import globo from "../../assets/images/plataformas/globo 1.png"
 import primevideo from "../../assets/images/plataformas/primevideo1.png"
+import { stremerContext } from "../../context/stremerPlataform";
 
 
 
@@ -39,10 +40,12 @@ export default function Home(){
     const {popularPerPage,SetPopularPerPage,popularMovies,setPopularMovies} = useContext(popularMovieContext)
     const {ratedPages,setRatedPages,ratedPerPage,setRatedPerPage} = useContext(RatedContext)
     const {genresOfMovies,setGenresOfMovies} = useContext(GenresOfMoviesContext)
+    const { setPlataforma,setFilmes  } = useContext(stremerContext)
     const [showgenre,setShowgenre] = useState<boolean>(false)
     const smallMedia = useMediaQuery(themeDefault.breakpoints.between("xs","sm"))
     const mediumMedia = useMediaQuery(themeDefault.breakpoints.between("sm","md"))
     const LargeMedia = useMediaQuery(themeDefault.breakpoints.up("md"))
+
     useEffect(()=>
     {
         async function getPopular()
@@ -396,35 +399,55 @@ export default function Home(){
                                 }} modules={[Navigation,Pagination]} className="box_media">
                                 <SwiperSlide>         
                                         <Card className = {"card"} sx = {{justifyContent : "center",display : "flex",flexFlow : "column",height : "200px",backgroundImage : "linear-gradient(to left, #e80914, #d0060f, #b80409, #a00205, #8a0000)"}}>
-                                            <CardMedia className = {"media"} component={"div"}sx = {{backgroundImage : `url(${netFlix})`}} >
+                                            <CardMedia className = {"media"} component={"div"}sx = {{backgroundImage : `url(${netFlix})`}} onClick={() => {
+                                                setFilmes([])
+                                                setPlataforma(8)
+                                                navigateToExpand("netflix")
+                                                }}>
 
                                             </CardMedia>
                                         </Card>
                                 </SwiperSlide>
                                 <SwiperSlide >
                                          <Card className = {"card"} sx = {{justifyContent : "center",display : "flex",flexFlow : "column",height : "200px",backgroundImage : "linear-gradient(to right, #01a3da, #2983b1, #2f6589, #2b4963, #222f3e)"}}>
-                                            <CardMedia className = {"media"} component={"div"}sx = {{backgroundImage : `url(${primevideo})`}}>
+                                            <CardMedia className = {"media"} component={"div"}sx = {{backgroundImage : `url(${primevideo})`}} onClick={() => {
+                                                setFilmes([])
+                                                setPlataforma(119)
+                                                navigateToExpand("prime")
+                                                }}>
                                                 
                                             </CardMedia>
                                         </Card>
                                 </SwiperSlide>
                                 <SwiperSlide>
                                         <Card className = {"card"}sx = {{justifyContent : "center",display : "flex",flexFlow : "column",height : "200px",backgroundImage : "linear-gradient(to right, #090013, #201535, #36225c, #4d3084, #673daf, #6d4cc6, #725cdd, #756cf5, #667df9, #5d8bf9, #5b98f7, #62a4f3)"}}>
-                                            <CardMedia className = {"media"} component={"div"}sx = {{backgroundImage : `url(${hbo})`}}>
+                                            <CardMedia className = {"media"} component={"div"}sx = {{backgroundImage : `url(${hbo})`}} onClick={() => {
+                                                setFilmes([])
+                                                setPlataforma(384)
+                                                navigateToExpand("hbom")
+                                                }}>
                                                 
                                             </CardMedia>
                                         </Card>
                                 </SwiperSlide>
                                 <SwiperSlide>
                                         <Card className = {"card"}sx = {{justifyContent : "center",display : "flex",flexFlow : "column",height : "200px",backgroundImage : "linear-gradient(to right, #ddf8fd, #c8f0fb, #b5e7fc, #a3defd, #94d4fe, #77c5ff, #5cb4ff, #46a3ff, #0088fe, #006cf9, #004cef, #1320df)"}}>
-                                            <CardMedia className = {"media"} component={"div"}sx = {{backgroundImage : `url(${disney})`}}>
+                                            <CardMedia className = {"media"} component={"div"}sx = {{backgroundImage : `url(${disney})`}} onClick={() => {
+                                                setFilmes([])
+                                                setPlataforma(337)
+                                                navigateToExpand("disney")
+                                                }}>
                                                 
                                             </CardMedia>
                                         </Card>
                                 </SwiperSlide>
                                 <SwiperSlide>
                                         <Card className = {"card"}sx = {{justifyContent : "center",display : "flex",flexFlow : "column",height : "200px",backgroundImage : "linear-gradient(to left, #fe0134, #fb1135, #f81b36, #f52238, #f22839, #f23237, #f33a34, #f34232, #f6502b, #f95d23, #fa691a, #fb750e)"}}>
-                                            <CardMedia className = {"media"} component={"div"}sx = {{backgroundImage : `url(${globo})`}}>
+                                            <CardMedia className = {"media"} component={"div"}sx = {{backgroundImage : `url(${globo})`}} onClick={() => {
+                                                setFilmes([])
+                                                setPlataforma(307)
+                                                navigateToExpand("globo")
+                                                }}>
                                                 
                                             </CardMedia>
                                         </Card>

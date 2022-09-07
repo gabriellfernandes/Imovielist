@@ -44,8 +44,7 @@ function CardItem({movies} : ICardItemProps ) : ReactElement
         async function getUrl()
         {
             const videos = await getVideo(movies.id)
-            movies.url = videos 
-            console.log(videos)    
+            movies.url = videos    
             setPlay((oldValue)=> 
             {
                 const newArray : Array<IPlay> = oldValue.filter((value,index)=>

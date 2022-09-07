@@ -153,7 +153,7 @@ export default function Home(){
                                                     {
                                                         return(
                                                             <SwiperSlide key={movies.id}>
-                                                                <CardItem key={index} movies={movies}></CardItem>
+                                                                <CardItem movies={movies}></CardItem>
                                                             </SwiperSlide>
                                                         )
                                                     }
@@ -263,7 +263,7 @@ export default function Home(){
                                         if(showgenre)
                                         {
                                             return(
-                                            <Grid item xs = {1} sm = {1} md = {1} lg = {1}>
+                                            <Grid key ={genres.id} display = "flex" justifyContent={"center"} item xs = {1} sm = {1} md = {1} lg = {1}>
                                                     <Button sx = {{width : "120px",height: "80px"}} variant = "contained" color = "info">{genres.name}</Button>
                                             </Grid>
                                             )
@@ -271,13 +271,11 @@ export default function Home(){
                                         if(!showgenre && index < 6)
                                         {                 
                                             return(
-                                                <>
-                                                <Grid position={"relative"} item xs = {1} sm = {1} md = {1}>
+                                                <Grid key ={genres.id} display = "flex" justifyContent={"center"} position={"relative"} item xs = {1} sm = {1} md = {1}>
                                                     <ThemeProvider theme = {theme}>
                                                         <Button sx = {{width : "120px",height: "80px"}} variant = "contained" color = "info">{genres.name}</Button>
                                                     </ThemeProvider>
                                                 </Grid>
-                                                </>
                                             )
                                         }
                                     })}

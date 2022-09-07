@@ -13,6 +13,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import {Box,ThemeProvider,Modal,Toolbar,Grid,MenuList, Divider,Typography,IconButton,Button,Tooltip,Menu,MenuItem, useMediaQuery, SwipeableDrawer, Input, InputAdornment, InputLabel} from "@mui/material"
 import { GenresOfMoviesContext } from "../../context/GenresOfMoviesContext";
+import { SearchMovies } from "../../services/apiTMDB";
+import { SearchContext } from "../../context/SearchContext";
 export default function Header (){
 
     const navigate = useNavigate()
@@ -20,8 +22,11 @@ export default function Header (){
     const open = Boolean(elOrigin)
     const [mobileMenu,setMobileMenu] = useState<boolean>(false)
     const [openModal,setOpenModal] = useState<boolean>(false)
+    const [count,setCount] = useState<number | string>("")
     const {genresOfMovies,setGenresOfMovies} = useContext(GenresOfMoviesContext)
     const menuResponsive = useMediaQuery(theme.breakpoints.down("sm"))
+    const [input,setInput] = useState<string>("")
+    const {search,setSearch} = useContext(SearchContext)
     return (
         <ThemeProvider theme = {theme}>
             <>
@@ -139,17 +144,50 @@ export default function Header (){
                     </Toolbar>
                 </Box>
             </HeaderDiv>
-        <Modal sx = {{mt : "0",display : "flex",justifyContent : "center",alignItems : "center"}} open = {openModal} onClose = {()=> setOpenModal(oldValue=> !oldValue)}>
+        <Modal sx = {{mt : "0",display : "flex",justifyContent : "center",alignItems : "center"}} open = {openModal} onClose = {()=> {
+            setCount("")
+            setOpenModal(oldValue=> !oldValue)}
+            }>
             <Box width = "auto" height = "auto">
                 <Box height = "auto" overflow={"auto"} display = "flex" flexDirection={"column"} alignItems = "center" justifyContent= "center"  borderRadius={"5px"} padding={"1rem"} sx = {{backgroundColor : theme.palette.grey[900]}}>
-                    <Box gap = "5px" display = "flex" justifyContent= "center" alignItems={"center"}>
-                        <InputLabel htmlFor="search"><Button variant="outlined"><Typography fontSize = "0.7rem" color = "secondary">Search</Typography></Button></InputLabel>
-                        <Input id = "search" startAdornment = {<InputAdornment position = "start"><SearchIcon color = "secondary"></SearchIcon></InputAdornment>}></Input>
+    
+                    <Box sx = {{display : "flex",justifyContent : "center",alignItems : "center",gap : "5px"}}>
+                            <InputLabel htmlFor="search">
+                                <Button onClick={async(eve)=>
+                                {
+                                    try
+                                    {
+                                        const searchInput = await SearchMovies(input)
+                                        const {total_pages,total_results,page,results} = searchInput
+                                        setCount(total_results)
+                                        if(results?.length == 0)
+                                        {
+                                            setCount("Your search not exists") 
+                                        }
+                                        else
+                                        {
+                                            setSearch(oldValue => [...oldValue,searchInput])
+                                        }
+                                    }catch(err)
+                                    {
+                                        setCount("Your search not exists")
+                                    }
+                                }}
+                                variant="outlined">
+                                    <Typography fontSize = "0.7rem" color = "secondary">Search</Typography>
+                                </Button>
+                            </InputLabel>
+                            <Input onChange={(eve)=> {
+                                console.log(eve.target.value)
+                                setInput(eve.target.value)}
+                                } id = "search" startAdornment = {<InputAdornment position = "start"><SearchIcon color = "secondary"></SearchIcon></InputAdornment>}></Input>
                     </Box>
-                    <Box margin = {"2rem 0 2rem 0"} position = "relative" display = "flex" justifyContent={"center"} alignItems = "center" width = "100%" height = "50px">
-                        <Typography sx = {{display  :"flex",gap :"4px"}} color = {theme.palette.grey[400]} fontWeight={400}>You have<Typography fontWeight={900}>2</Typography>results</Typography>
-                        <Button sx = {{position : "absolute", bottom : 0, right : 0}}>Show</Button>
-                    </Box>
+                        <Box margin = {"2rem 0 2rem 0"} position = "relative" display = "flex" justifyContent={"center"} alignItems = "center" width = "100%" height = "50px">
+                           {typeof count == "number" && count && <Typography sx = {{display  :"flex",gap :"4px"}} color = {theme.palette.grey[400]} fontWeight={400}>You have {count} results</Typography>} 
+                           {typeof count == "string" && count && <Typography sx = {{display  :"flex",gap :"4px"}} color = {theme.palette.grey[400]} fontWeight={400}>{count}</Typography>}
+                           {typeof count == "string" && !count && <Typography sx = {{display  :"flex",gap :"4px"}} color = {theme.palette.grey[400]} fontWeight={400}>Search something...</Typography>}
+                            <Button sx = {{position : "absolute", bottom : 0, right : 0}}>Show</Button>
+                        </Box>
                     <hr style ={{width : "100%"}}></hr>
                     <Box display = "flex" justifyContent={"start"} gap = "5px" mt = "0.5rem" width = "auto" height = "auto">
                         <Button variant="outlined"><Typography textTransform={"none"} variant = "body2">Genres</Typography></Button>
@@ -159,7 +197,7 @@ export default function Header (){
                     height = {100}>
                         {genresOfMovies.map((genre)=>
                         {
-                            return <Grid item xs = {1} display={"flex"} justifyContent = "center">
+                            return <Grid key = {genre.id} item xs = {1} display={"flex"} justifyContent = "center">
                                         <Button sx = {{width : "120px",height: "50px"}} variant = "contained" color = "secondary"><Typography variant = "body2">{genre.name}</Typography></Button>
                                    </Grid> 
                         })}

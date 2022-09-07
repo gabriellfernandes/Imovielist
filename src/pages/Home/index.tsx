@@ -1,13 +1,13 @@
 import Header from "../../components/Header";
 import {ContentBox, MainDiv, MovieListBox,theme} from "./style";
-import Footer from "../../components/Footer";
-import {SimpleSlider} from "../../components/Carousel";
+import Footer from "../../components/Footer/index";
+import {SimpleSlider} from "../../components/Carousel/index";
 import { popularMovieContext } from "../../context/popularMovieContext";
 import { useContext, useEffect } from "react";
 import {GetRatedMovie,GetPopularMovies} from "../../services/apiTMDB";
 import {RatedContext} from "../../context/ratedContext"
 import {useMediaQuery} from "@mui/material";
-import { CardItem } from "../../components/CardItem";
+import { CardItem } from "../../components/CardItem/index";
 
 export default function Home(){
 

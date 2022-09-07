@@ -11,28 +11,28 @@ export default function Header (){
         <HeaderDiv>
             
             <div className="header__container">   
-                <div>
+                <div className="headerTitle">
                     <BiMovie className="icon" color="#9A9DA5" size={26}/>
                     <span>MyMovieList</span>
                 </div>
 
-                <div>
+                <div className="navBar">
                     <div>
-                    <AiFillHome className="icon"  size={26}/>
+                    <AiFillHome id="homeIcon"  size={26}/>
                     <span className="home">home</span>
                     </div>
 
                     <div>
-                    <AiFillCompass className="icon"   size={26}/>
+                    <AiFillCompass id="discoverIcon"   size={26}/>
                     <span>Discover</span>
                     </div>
 
                     <div>
-                    <AiFillStar className="icon"  size={26}/>
+                    <AiFillStar id="topRatedIcon"  size={26}/>
                     <span>Top-Rated</span>
                     </div>
-                    <AiFillBell className="icon"  size={26}/>
-                    <FaUser className="icon"  size={24}/>
+                    <AiFillBell id="bellIcon"  size={26}/>
+                    <FaUser id="userIcon"  size={24}/>
                 </div>
             </div>
         </HeaderDiv>

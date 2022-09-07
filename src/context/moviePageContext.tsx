@@ -130,7 +130,7 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
           Authorization: `Bearer ${localStorage.getItem("@token")}`,
         },
       })
-      .then((res) => res.data.avatar);
+      .then((res) => res.data.avatar); 
   };
 
   const handleSubmit = (

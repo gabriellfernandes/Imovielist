@@ -5,7 +5,6 @@ import {ComingSoonProvider} from "./comingSoonContext"
 import {RatedProvider} from "./ratedContext"
 import { PlayProvider } from "./playContext";
 import { GenresOfMoviesProvider } from "./GenresOfMoviesContext";
-import { ActionProvider } from "./Genres/Documentary";
 
 interface IContextProps
 {
@@ -21,9 +20,7 @@ function Provider({children} : IContextProps) : ReactElement
                     <RatedProvider>
                             <PlayProvider>
                                 <GenresOfMoviesProvider>
-                                    <ActionProvider>
                                         {children}
-                                    </ActionProvider>
                                 </GenresOfMoviesProvider>
                             </PlayProvider>
                         </RatedProvider>

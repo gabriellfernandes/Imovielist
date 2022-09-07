@@ -1,6 +1,5 @@
 import {apiTMDb} from "./api"
 import {IGenres, IGenresRes, IOnlyGenre, IRated, IResponsePopularMovie} from "../interfaces/axiosReponseApiTmdb"
-import {ActionContext} from "../context/Genres/Documentary"
 import { useContext } from "react"
 async function GetPopularMovies(page : number)
 {

@@ -17,7 +17,6 @@ export function AuthProvider({ children }: IContext) {
     toast.promise(apiFake
       .post("/login", data)
       .then((res: IReponseLogin) => {
-        console.log(res)
         localStorage.setItem("@token", res.data.accessToken);
         localStorage.setItem("@idUser", res.data.user.id);
         localStorage.setItem("@nameUser", res.data.user.name);

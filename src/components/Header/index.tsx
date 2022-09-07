@@ -2,9 +2,7 @@ import { HeaderDiv, theme } from "./style";
 import {useContext, useState} from "react"
 import MovieIcon from '@mui/icons-material/Movie';
 import HomeIcon from '@mui/icons-material/Home';
-import {FaUser} from 'react-icons/fa'
 import ExploreIcon from '@mui/icons-material/Explore';
-import StarsIcon from '@mui/icons-material/Stars';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from "react-router-dom";
 import BuildCircleIcon from '@mui/icons-material/BuildCircle';
@@ -15,8 +13,13 @@ import {Box,ThemeProvider,Modal,Toolbar,Grid,MenuList, Divider,Typography,IconBu
 import { GenresOfMoviesContext } from "../../context/GenresOfMoviesContext";
 import { SearchMovies } from "../../services/apiTMDB";
 import { SearchContext } from "../../context/SearchContext";
+import { stremerContext } from "../../context/stremerPlataform";
 export default function Header (){
 
+    function navigateToExpand(group : string){
+        const toNavigate = `/extend/${group}`
+            navigate(toNavigate, { replace: true });
+    }
     const navigate = useNavigate()
     const [elOrigin,setElOrigin] = useState<HTMLElement | null>(null)
     const open = Boolean(elOrigin)
@@ -24,6 +27,7 @@ export default function Header (){
     const [openModal,setOpenModal] = useState<boolean>(false)
     const [count,setCount] = useState<number | string>("")
     const {genresOfMovies,setGenresOfMovies} = useContext(GenresOfMoviesContext)
+    const { setPlataforma,setFilmes  } = useContext(stremerContext)
     const menuResponsive = useMediaQuery(theme.breakpoints.down("sm"))
     const [input,setInput] = useState<string>("")
     const {search,setSearch} = useContext(SearchContext)
@@ -50,7 +54,10 @@ export default function Header (){
                                 setMobileMenu(oldValue=> !oldValue)
                             }} open = {mobileMenu}>
                             <Tooltip placement="right" title = "Home page">
-                                <IconButton>
+                                <IconButton onClick = {()=>
+                                    {
+                                        navigate("/home")
+                                    }}>
                                     <HomeIcon fontSize="large" color = "secondary"></HomeIcon>
                                 </IconButton> 
                             </Tooltip>
@@ -71,7 +78,10 @@ export default function Header (){
                                     <MenuList disablePadding>
                                         <MenuItem>
                                         <Tooltip placement="right" title = {"Profile settings"}>
-                                            <Button sx = {{textTransform : "none"}} endIcon = {<BuildCircleIcon sx = {{mb : "0.3rem"}}></BuildCircleIcon>}>
+                                            <Button onClick = {()=>
+                                    {
+                                        navigate("/userprofile")
+                                    }} sx = {{textTransform : "none"}} endIcon = {<BuildCircleIcon sx = {{mb : "0.3rem"}}></BuildCircleIcon>}>
                                                 <Typography>
                                                     Profile
                                                 </Typography>
@@ -83,7 +93,11 @@ export default function Header (){
                                         <MenuList disablePadding>
                                             <MenuItem>
                                             <Tooltip placement="right" title = "Exit">
-                                                <Button sx = {{textTransform : "none"}} endIcon = {<LogoutIcon sx = {{textTransform : "none",mb : "0.3rem"}}></LogoutIcon>}>
+                                                <Button onClick = {()=>
+                                                    {
+                                                        localStorage.clear()
+                                                        navigate("/login")
+                                                    }} sx = {{textTransform : "none"}} endIcon = {<LogoutIcon sx = {{textTransform : "none",mb : "0.3rem"}}></LogoutIcon>}>
                                                     <Typography variant="body2">
                                                         Logout
                                                     </Typography>
@@ -97,7 +111,10 @@ export default function Header (){
                        : 
                        <Box sx = {{mt : "0.8rem",display : "flex",alignItems : "center"}}>
                             <Tooltip title = "Home page">
-                                <Button sx = {{display : "flex",alignItems : "center"}} startIcon = {<HomeIcon fontSize="large" color = "secondary"></HomeIcon>}>
+                                <Button onClick = {()=>
+                                    {
+                                        navigate("/home")
+                                    }} sx = {{display : "flex",alignItems : "center"}} startIcon = {<HomeIcon fontSize="large" color = "secondary"></HomeIcon>}>
                                 <Typography  fontWeight={600} sx = {{mt : "0.3rem"}} fontSize={"1rem"} variant="body2" color={`${theme.palette.grey[300]}`}>Home</Typography>
                                 </Button>
                             </Tooltip>
@@ -118,7 +135,10 @@ export default function Header (){
                                     <MenuList>
                                         <MenuItem>
                                         <Tooltip placement="left" title = {"Profile settings"}>
-                                            <Button endIcon = {<BuildCircleIcon sx = {{mb : "0.3rem"}}></BuildCircleIcon>}>
+                                            <Button onClick = {()=>
+                                    {
+                                        navigate("/userprofile")
+                                    }} endIcon = {<BuildCircleIcon sx = {{mb : "0.3rem"}}></BuildCircleIcon>}>
                                                 <Typography>
                                                     Profile
                                                 </Typography>
@@ -130,7 +150,11 @@ export default function Header (){
                                         <MenuList>
                                             <MenuItem>
                                             <Tooltip placement="left" title = "exit">
-                                                <Button endIcon = {<LogoutIcon sx = {{mb : "0.3rem"}}></LogoutIcon>}>
+                                                <Button onClick = {()=>
+                                                    {
+                                                        localStorage.clear()
+                                                        navigate("/login")
+                                                    }} endIcon = {<LogoutIcon sx = {{mb : "0.3rem"}}></LogoutIcon>}>
                                                     <Typography>
                                                         Logout
                                                     </Typography>
@@ -197,9 +221,9 @@ export default function Header (){
                     height = {100}>
                         {genresOfMovies.map((genre)=>
                         {
-                            return <Grid key = {genre.id} item xs = {1} display={"flex"} justifyContent = "center">
+                            return (<Grid key = {genre.id} item xs = {1} display={"flex"} justifyContent = "center">
                                         <Button sx = {{width : "120px",height: "50px"}} variant = "contained" color = "secondary"><Typography variant = "body2">{genre.name}</Typography></Button>
-                                   </Grid> 
+                                   </Grid>) 
                         })}
                     </Grid>
                     <hr style ={{width : "100%"}}></hr>               
@@ -210,19 +234,39 @@ export default function Header (){
                     overflow={"auto"} container width={"300px"}
                     height = {120}>
                         <Grid item xs = {1} display={"flex"} justifyContent = "center">
-                                            <Button sx = {{width : "120px",height: "50px"}} variant = "contained" color = "secondary">Netflix</Button>
+                                            <Button onClick={() => {
+                                                setFilmes([])
+                                                setPlataforma(8)
+                                                navigateToExpand("netflix")
+                                                }} sx = {{width : "120px",height: "50px"}} variant = "contained" color = "secondary">Netflix</Button>
                                     </Grid> 
                                     <Grid padding = "1rem" item xs = {1} display={"flex"} justifyContent = "center">
-                                            <Button sx = {{width : "120px",height: "50px"}} variant = "contained" color = "secondary">Prime Video</Button>
+                                            <Button onClick={() => {
+                                                setFilmes([])
+                                                setPlataforma(119)
+                                                navigateToExpand("prime")
+                                                }} sx = {{width : "120px",height: "50px"}} variant = "contained" color = "secondary">Prime Video</Button>
                                     </Grid> 
                                     <Grid padding = "1rem" item xs = {1} display={"flex"} justifyContent = "center">
-                                            <Button sx = {{width : "120px",height: "50px"}} variant = "contained" color = "secondary">Hbo Max</Button>
+                                            <Button onClick={() => {
+                                                setFilmes([])
+                                                setPlataforma(384)
+                                                navigateToExpand("hbom")
+                                                }} sx = {{width : "120px",height: "50px"}} variant = "contained" color = "secondary">Hbo Max</Button>
                                     </Grid> 
                                     <Grid padding = "1rem"item xs = {1} display={"flex"} justifyContent = "center">
-                                            <Button sx = {{width : "120px",height: "50px"}} variant = "contained" color = "secondary">Disney Plus</Button>
+                                            <Button onClick={() => {
+                                                setFilmes([])
+                                                setPlataforma(337)
+                                                navigateToExpand("disney")
+                                                }} sx = {{width : "120px",height: "50px"}} variant = "contained" color = "secondary">Disney Plus</Button>
                                     </Grid> 
                                     <Grid padding = "1rem" item xs = {1} display={"flex"} justifyContent = "center">
-                                            <Button sx = {{width : "120px",height: "50px"}} variant = "contained" color = "secondary">Globo Play</Button>
+                                            <Button onClick={() => {
+                                                setFilmes([])
+                                                setPlataforma(307)
+                                                navigateToExpand("globo")
+                                                }} sx = {{width : "120px",height: "50px"}} variant = "contained" color = "secondary">Globo Play</Button>
                                     </Grid> 
                     </Grid>
                 </Box>

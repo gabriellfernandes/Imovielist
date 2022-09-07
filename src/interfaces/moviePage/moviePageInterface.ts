@@ -39,7 +39,7 @@ export interface IDataRating {
   userId: number;
   rating: number;
   avatar?: string;
-  name?: string
+  name?: string;
 }
 
 export interface IDataRatingAll {

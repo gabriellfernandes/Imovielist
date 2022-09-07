@@ -56,6 +56,7 @@ export default function Header (){
                             <Tooltip placement="right" title = "Home page">
                                 <IconButton onClick = {()=>
                                     {
+                                        setPlataforma(0)
                                         navigate("/home")
                                     }}>
                                     <HomeIcon fontSize="large" color = "secondary"></HomeIcon>
@@ -113,6 +114,7 @@ export default function Header (){
                             <Tooltip title = "Home page">
                                 <Button onClick = {()=>
                                     {
+                                        setPlataforma(0)
                                         navigate("/home")
                                     }} sx = {{display : "flex",alignItems : "center"}} startIcon = {<HomeIcon fontSize="large" color = "secondary"></HomeIcon>}>
                                 <Typography  fontWeight={600} sx = {{mt : "0.3rem"}} fontSize={"1rem"} variant="body2" color={`${theme.palette.grey[300]}`}>Home</Typography>

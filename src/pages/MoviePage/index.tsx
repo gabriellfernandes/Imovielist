@@ -37,7 +37,6 @@ export function MoviePage() {
   const [input, setInput] = useState("");
   const [pageMax, setPageMax] = useState(10);
   const [pageCastMax, setPageCastMax] = useState(5);
-
   const ratingChanged = (newRating: number) => {
     setRatingValue(newRating);
     handleSubmitRating(newRating);

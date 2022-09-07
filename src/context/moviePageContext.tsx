@@ -48,8 +48,11 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
   );
   const [video, setVideo] = useState('')
   const name = localStorage.getItem("@nameUser") as string
+  const [cont, setCont] = useState(0)
 
   useEffect(() => {
+    setCont(0)
+
     apiTMDb.get(`/movie/${movie_id}/credits`).then((res: IReponseCredits) => {
       setMovieCredits(res);
     });
@@ -64,7 +67,10 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
           Authorization: `Bearer ${localStorage.getItem("@token")}`,
         },
       })
-      .then((res) => setAllRating(res.data));
+      .then((res) => {
+        vericRating(res.data)
+        setAllRating(res.data)
+      })
 
     const videoAwait = async () => {
       getVideo(movie_id).then((res) => setVideo(res))
@@ -137,6 +143,19 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
     itemRating ? setRatingValue(itemRating.rating) : setRatingValue(0);
   }, [itemRating]);
 
+  useEffect(() => {
+    apiFake
+    .get("/rating", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("@token")}`,
+      },
+    })
+    .then((res) => {
+      vericRating(res.data)
+      setAllRating(res.data)
+    })
+  }, [rating])
+
 
   const postComments = (data: IDataComenter) => {
     if (data.userId === undefined) {
@@ -185,28 +204,37 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
   };
 
   const feedbackPost = (data: IDataRating) => {
+    
     if (data.userId === undefined) {
       return;
     }
-
+    vericRating(allRating)
+    setCont(1)
+    
     itemRating !== undefined
       ? toast.promise(
           apiFake.patch(`/rating/${itemRating.id}`, data, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("@token")}`,
             },
-          }),
+          }).then(res => {console.log(itemRating)
+            console.log(res)
+          }).catch(res => console.log(res.data)),
           {
             pending: "Waiting...",
             success: "You updated to feedback",
             error: "Error",
           }
         )
-      : toast.promise(
+      : 
+      cont == 0 &&
+      toast.promise(
           apiFake.post("/rating", data, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("@token")}`,
             },
+          }).then(() => {
+            vericRating(allRating)
           }),
           {
             pending: "Waiting...",
@@ -240,7 +268,7 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
       rating: Number(data),
       userId: Number(localStorage.getItem("@idUser")),
       avatar: avatar,
-      name: name
+      name: name,
     });
   };
 

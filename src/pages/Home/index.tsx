@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import {SimpleSlider} from "../../components/Carousel";
 import { popularMovieContext } from "../../context/popularMovieContext";
 import { useContext, useEffect} from "react";
-import {GetRatedMovie,GetPopularMovies, GetGenresOfMovies} from "../../services/apiTMDB";
+import {GetRatedMovie,GetPopularMovies, GetGenresOfMovies,} from "../../services/apiTMDB";
 import {RatedContext} from "../../context/ratedContext"
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import {Button, Skeleton, CardMedia, IconButton, useMediaQuery,ThemeProvider,Grid, Typography, Box, Card} from "@mui/material";
@@ -15,7 +15,7 @@ import {Navigation,Pagination} from "swiper"
 import "swiper/css"
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { getVideo, PlayContext } from "../../context/playContext";
+import { getVideo} from "../../context/playContext";
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import StarsIcon from '@mui/icons-material/Stars';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
@@ -42,10 +42,6 @@ export default function Home(){
     const {genresOfMovies,setGenresOfMovies} = useContext(GenresOfMoviesContext)
     const { setPlataforma,setFilmes  } = useContext(stremerContext)
     const [showgenre,setShowgenre] = useState<boolean>(false)
-    const smallMedia = useMediaQuery(themeDefault.breakpoints.between("xs","sm"))
-    const mediumMedia = useMediaQuery(themeDefault.breakpoints.between("sm","md"))
-    const LargeMedia = useMediaQuery(themeDefault.breakpoints.up("md"))
-
     useEffect(()=>
     {
         async function getPopular()
@@ -173,7 +169,7 @@ export default function Home(){
                                                     {
                                                         return(
                                                             <SwiperSlide key={movies.id}>
-                                                                <CardItem key={index} movies={movies}></CardItem>
+                                                                <CardItem movies={movies}></CardItem>
                                                             </SwiperSlide>
                                                         )
                                                     }
@@ -276,86 +272,31 @@ export default function Home(){
                         </div>
                         <ThemeProvider theme = {themeDefault}>
                             <div className="BoxMain">
-                                <Grid width="100%" position={"relative"} margin={"1rem"} columns = {{xs : 2,sm : 3,md : 5}} container rowSpacing={2} columnSpacing = {1}>
+                                <ThemeProvider theme = {theme}>
+                                    <Grid width="100%" position={"relative"} margin={" 1rem"} columns = {{xs : 1,sm : 2, md : 3,lg : 4}} container rowSpacing={2} columnSpacing = {1}>
                                 {genresOfMovies.map((genres,index)=>
                                 {
                                         if(showgenre)
                                         {
                                             return(
-                                            <Grid item xs = {1} sm = {1} md = {1}>
-                                                <ThemeProvider theme = {theme}>
+                                            <Grid key ={genres.id} display = "flex" justifyContent={"center"} item xs = {1} sm = {1} md = {1} lg = {1}>
                                                     <Button sx = {{width : "120px",height: "80px"}} variant = "contained" color = "info">{genres.name}</Button>
-                                                </ThemeProvider>
                                             </Grid>
                                             )
                                         }
-                                        if(!showgenre && index < 8)
-                                        {
-                                            if(smallMedia && index == 6 || index == 7)
-                                            {
-                                               return <>
-                                                <Grid  position={"relative"} item xs = {1} sm = {1} md = {1}>
-                                                    <ThemeProvider theme = {theme}>
-                                                        <Button sx = {{marginBottom : "1rem",width : "120px",height: "80px"}} variant = "contained" color = "info">{genres.name}</Button>
-                                                    </ThemeProvider>
-                                                    <Box paddingLeft={"0.5rem"} margin={"0 auto"} position = "absolute" top = "90px" right ="0" bottom = "0" left = "0" width = "120px" height = "auto">
-                                                        <Skeleton sx = {{position : "relative"}} width = "100%" height= "auto">
-                                                            <Typography fontSize={"2rem"} color = "white">...</Typography>
-                                                        </Skeleton>
-                                                    </Box>
-                                                </Grid>
-                                                </>   
-                                            }
-                                            if(mediumMedia && index == 5 || index == 7 || index == 6 )
-                                            {
-                                                return(
-                                                    <>
-                                                    <Grid  position={"relative"} item xs = {1} sm = {1} md = {1}>
-                                                        <ThemeProvider theme = {theme}>
-                                                            <Button sx = {{marginBottom : "1rem",width : "120px",height: "80px"}} variant = "contained" color = "info">{genres.name}</Button>
-                                                        </ThemeProvider>
-                                                        <Box paddingLeft={"0.5rem"} margin={"0 auto"} position = "absolute" top = "90px" right ="0" bottom = "0" left = "0" width = "120px" height = "auto">
-                                                            <Skeleton sx = {{position : "relative"}} width = "100%" height= "auto">
-                                                                <Typography fontSize={"2rem"} color = "white">...</Typography>
-                                                            </Skeleton>
-                                                        </Box>
-                                                    </Grid>
-                                                    </>   
-                                                )
-                                            }
-                                            if(LargeMedia)
-                                            {
-                                                if(index == 4 || index == 5 ||  index == 6 || index == 7)
-                                                {
-                                                    return(
-                                                        <>
-                                                        <Grid  position={"relative"} item xs = {1} sm = {1} md = {1}>
-                                                            <ThemeProvider theme = {theme}>
-                                                                <Button sx = {{marginBottom : "1rem",width : "120px",height: "80px"}} variant = "contained" color = "info">{genres.name}</Button>
-                                                            </ThemeProvider>
-                                                            <Box paddingLeft={"0.5rem"} margin={"0 auto"} position = "absolute" top = "90px" right ="0" bottom = "0" left = "0" width = "120px" height = "auto">
-                                                                <Skeleton sx = {{position : "relative"}} width = "100%" height= "auto">
-                                                                    <Typography fontSize={"2rem"} color = "white">...</Typography>
-                                                                </Skeleton>
-                                                            </Box>
-                                                        </Grid>
-                                                        </>   
-                                                    )
-                                                }
-                                            }
-                                            
+                                        if(!showgenre && index < 6)
+                                        {                 
                                             return(
-                                                <>
-                                                <Grid position={"relative"} item xs = {1} sm = {1} md = {1}>
+                                                <Grid key ={genres.id} display = "flex" justifyContent={"center"} position={"relative"} item xs = {1} sm = {1} md = {1}>
                                                     <ThemeProvider theme = {theme}>
                                                         <Button sx = {{width : "120px",height: "80px"}} variant = "contained" color = "info">{genres.name}</Button>
                                                     </ThemeProvider>
                                                 </Grid>
-                                                </>
                                             )
                                         }
-                                        })}
+                                    })}
                                 </Grid> 
+                            </ThemeProvider>
                             </div>
                         </ThemeProvider>
                     </MovieListBox>

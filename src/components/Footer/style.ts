@@ -1,16 +1,23 @@
+import { createTheme } from "@mui/material";
 import styled from "styled-components";
 
+const theme = createTheme()
 export const FooterDiv = styled.footer`
     width: 100%;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
     height: 70px;
-    background-color: #1A171E;
-    color: white;
+    background-color: ${theme.palette.grey[900]};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .text
+    {
+        color : ${theme.palette.grey[400]};
+    }
 
     .footer__container{
-        
+        width: 100%;
+        height : 100%;
         display: flex;
         justify-content: space-between;
         text-align: center;
@@ -28,7 +35,7 @@ export const FooterDiv = styled.footer`
             flex-flow: column wrap;
             justify-content: center;
             align-items: center;
-            gap : 1rem;
+            gap : 0.5rem;
         }
     }
 `

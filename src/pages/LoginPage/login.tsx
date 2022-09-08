@@ -9,7 +9,6 @@ import { LoginInputContainer } from "../../style/FormStyles/LoginInput";
 
 import { AuthContext } from "../../context/authContext";
 import { GlobalButton, HoverButton } from "../../style/global/GlobalButton";
-
 import { BiEnvelope, BiKey } from 'react-icons/bi'
 
 import  loginSVG  from '../../style/images/loginSVG.svg'
@@ -18,9 +17,11 @@ import { useNavigate } from "react-router-dom";
 
 
 export function LoginForm() {
-
   const navigate = useNavigate()
-
+  
+  if(window.localStorage.getItem("@Token") !== undefined || window.localStorage.getItem("@Token") !== null){
+    navigate("/home")
+  }
   const formSchema = yup.object().shape({
     email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
     password: yup.string().required("Senha obrigatória"),

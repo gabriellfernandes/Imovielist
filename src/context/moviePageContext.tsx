@@ -54,7 +54,8 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
 
   useEffect(() => {
     setCont(0)
-
+    filterDirector([])
+    
     apiTMDb.get(`/movie/${movie_id}/credits`).then((res: IReponseCredits) => {
       setMovieCredits(res);
       filterDirector(res.data.crew)

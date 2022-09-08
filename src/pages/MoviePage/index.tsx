@@ -14,9 +14,17 @@ import CardItem from "../../components/CardItem";
 import { Skeleton } from "@mui/material";
 import { getVideo } from "../../context/playContext";
 import ReactPlayer from 'react-player/youtube'
+import { genresContext } from "../../context/GenresContext";
 
 
 export function MoviePage() {
+
+  function navigateToExpand(group : string){
+    const toNavigate = `/extend/${group}`
+        navigate(toNavigate, { replace: true });
+}
+
+  const { setGenres,setFilmesGenres, filmesGenres, genres  } = useContext(genresContext)
   const navigate = useNavigate();
 
   if (
@@ -157,7 +165,106 @@ export function MoviePage() {
                   
                   <div className='genresContainer'>
                     {movie.data.genres.map((elem) => {
-                      return <div                                
+                      return <div onClick={()=> {
+                        switch(elem.name){
+                            case "Action" :
+                         
+                                setGenres(28)
+                                navigateToExpand("Action")
+                                break;
+                            case "Adventure":
+                         
+                            setGenres(12)
+                                navigateToExpand("Adventure")
+                                break;
+                            case "Animation" :
+                         
+                            setGenres(16)
+                                navigateToExpand("Animation")
+                                break;
+                            case "Comedy" :
+                         
+                            setGenres(35)
+                                navigateToExpand("Comedy")
+                                break;
+                            case "Crime" :
+                         
+                            setGenres(80)
+                                navigateToExpand("Crime")
+                                break;
+                            case "Documentary" :
+                         
+                            setGenres(99)
+                                navigateToExpand("Documentary")
+                                break;
+                            case "Drama" :
+                         
+                            setGenres(18)
+                                navigateToExpand("Drama")
+                                break;
+                            case "Family" :
+                         
+                            setGenres(10751)
+                                navigateToExpand("Family")
+                                break;
+                            case "Fantasy" :
+                         
+                            setGenres(14)
+                                navigateToExpand("Fantasy")
+                                break;
+                            case "History" :
+                         
+                            setGenres(36)
+                                navigateToExpand("History")
+                                break;
+                            case "Horror" :
+                         
+                            setGenres(27)
+                                navigateToExpand("Horror")
+                                break;
+                            case "Music" :
+                         
+                            setGenres(10402)
+                                navigateToExpand("Music")
+                                break;
+                            case "Mystery" :
+                         
+                            setGenres(9648)
+                                navigateToExpand("Mystery")
+                                break;
+                            case "Romance" : 
+                         
+                            setGenres(10749)
+                                navigateToExpand("Romance")
+                                break;
+                            case "Science Fiction" :
+                         
+                            setGenres(878)
+                                navigateToExpand("ScienceFiction")
+                                break;
+                            case "TV Movie" :
+                         
+                            setGenres(10770)
+                                navigateToExpand("TvMovie")
+                                break;
+                            case "Thriller" :
+                         
+                            setGenres(53)
+                                navigateToExpand("Thriller")
+                                break;
+                            case "War" :
+                         
+                            setGenres(10752)
+                                navigateToExpand("War")
+                                break;
+                            case "Western" :
+                         
+                            setGenres(37)
+                                navigateToExpand("Western")
+                                break;
+                       
+                    }
+                    }}                               
                                 key={elem.id}                                
                                 className='genreCard'
                               >

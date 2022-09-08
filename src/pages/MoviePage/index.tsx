@@ -32,7 +32,8 @@ export function MoviePage() {
     movieSimilar,
     ratingValue,
     setRatingValue,
-    video
+    video,
+    director
   } = useContext(MovieContext);
   const [input, setInput] = useState("");
   const [pageMax, setPageMax] = useState(10);
@@ -53,10 +54,9 @@ export function MoviePage() {
                 <div>
                   <h2>{movie.data.title}</h2>
                   <h4>
-                    {movieCredits.data.crew.map((elem) => {
+                    {director.map((elem, i) => {
                       return (
-                        elem.job.includes("Director") && 
-                        elem.profile_path != null &&(
+                        i <= 1 &&
                           <div key={elem.id}>
                             <img
                               src={`${base_ImageUrl}${elem.profile_path}`}
@@ -64,8 +64,7 @@ export function MoviePage() {
                             />
                             <p>{elem.name}</p>
                           </div>
-                        )
-                      );
+                      )
                     })}
                   </h4>
                   <span>{movie.data.vote_average.toFixed(2)} Rating</span>

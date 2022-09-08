@@ -22,6 +22,7 @@ export interface IMovieContext {
   ratingValue: number;
   setRatingValue: Dispatch<SetStateAction<number>>;
   video: string;
+  director: IDirector[]
 }
 
 export interface IDataComenter {
@@ -49,6 +50,20 @@ export interface IDataRatingAll {
     rating: number;
     avatar?: string;
     name?: string
+}
+
+export interface IDirector {
+    adult: boolean;
+    credit_id: string;
+    department: string;
+    gender: number;
+    id: number;
+    job: string;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path?: string | null;
 }
 
 

@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { apiFake } from "../services/api";
 import {
+  IDirector,
   IDataComenter,
   IDataRating,
   IDataRatingAll,
@@ -49,13 +50,15 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
   const [video, setVideo] = useState('')
   const name = localStorage.getItem("@nameUser") as string
   const [cont, setCont] = useState(0)
+  const [director, setDirector] = useState<IDirector[]>([] as IDirector[])
 
   useEffect(() => {
     setCont(0)
 
     apiTMDb.get(`/movie/${movie_id}/credits`).then((res: IReponseCredits) => {
       setMovieCredits(res);
-    });
+      filterDirector(res.data.crew)
+    })
 
     apiTMDb
       .get(`/movie/${movie_id}/similar`)
@@ -272,6 +275,13 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
     });
   };
 
+  const filterDirector = (data : IDirector[]) => {
+    data.map((elem) => {
+        return elem.job.includes("Director") && 
+        elem.profile_path != null && setDirector(old => [...old, elem])
+    })
+  }
+
   return (
     <MovieContext.Provider
       value={{
@@ -286,7 +296,8 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
         movieSimilar,
         ratingValue,
         setRatingValue,
-        video
+        video,
+        director
       }}
     >
       {children}

@@ -30,11 +30,9 @@ export default function Header (){
     const [openModal,setOpenModal] = useState<boolean>(false)
     const [count,setCount] = useState<number | string>("")
     const {genresOfMovies,setGenresOfMovies} = useContext(GenresOfMoviesContext)
-    const {setGenres} = useContext(genresContext)
     const { setPlataforma,setFilmes  } = useContext(stremerContext)
     const menuResponsive = useMediaQuery(theme.breakpoints.down("sm"))
     const [input,setInput] = useState<string>("")
-    const {search,setSearch} = useContext(SearchContext)
     const { setGenres,setFilmesGenres, filmesGenres, genres  } = useContext(genresContext)
     const {search,setSearch, searchPerPage} = useContext(SearchContext)
     return (

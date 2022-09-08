@@ -13,18 +13,17 @@ import Footer from "../../components/Footer";
 import CardItem from "../../components/CardItem";
 import { Skeleton } from "@mui/material";
 import { getVideo } from "../../context/playContext";
-import ReactPlayer from 'react-player/youtube'
+import ReactPlayer from "react-player/youtube";
 import { genresContext } from "../../context/GenresContext";
 
-
 export function MoviePage() {
+  function navigateToExpand(group: string) {
+    const toNavigate = `/extend/${group}`;
+    navigate(toNavigate, { replace: true });
+  }
 
-  function navigateToExpand(group : string){
-    const toNavigate = `/extend/${group}`
-        navigate(toNavigate, { replace: true });
-}
-
-  const { setGenres,setFilmesGenres, filmesGenres, genres  } = useContext(genresContext)
+  const { setGenres, setFilmesGenres, filmesGenres, genres } =
+    useContext(genresContext);
   const navigate = useNavigate();
 
   if (
@@ -46,12 +45,13 @@ export function MoviePage() {
     ratingValue,
     setRatingValue,
     video,
-    director
+    director,
+    pageCastMax,
+    setPageCastMax,
   } = useContext(MovieContext);
 
   const [input, setInput] = useState("");
   const [pageMax, setPageMax] = useState(10);
-  const [pageCastMax, setPageCastMax] = useState(5);
   const ratingChanged = (newRating: number) => {
     setRatingValue(newRating);
     handleSubmitRating(newRating);
@@ -60,49 +60,51 @@ export function MoviePage() {
   return (
     <>
       <Header />
-      {!loadingMovie? (
+      {!loadingMovie ? (
         <MoviePageContainer>
-          <BackDropContainer url={`${base_ImageUrl}${movie.data.backdrop_path}`}></BackDropContainer>
-          
+          <BackDropContainer
+            url={`${base_ImageUrl}${movie.data.backdrop_path}`}
+          ></BackDropContainer>
+
           <MainContainer>
-
             <div className="mainTop">
-              <div className='mainTitle'>
+              <div className="mainTitle">
                 <div className="titleContainer">
-                  
-
-                <div className="titleDirectorContainer">
-                  <h2>{movie.data.title}</h2>
-                  <div className='directorsContainer'>
+                  <div className="titleDirectorContainer">
+                    <h2>{movie.data.title}</h2>
+                    <div className="directorsContainer">
                       {director.map((elem, i) => {
                         return (
-                          i <= 1 &&
-                            <div key={elem.id} className='directorInfo'>
+                          i <= 1 && (
+                            <div key={elem.id} className="directorInfo">
                               <img
                                 src={`${base_ImageUrl}${elem.profile_path}`}
                                 alt="Cast"
                               />
                               <p>{elem.name}</p>
                             </div>
-                        )
+                          )
+                        );
                       })}
+                    </div>
                   </div>
-                </div>
 
-                  <div className='mainSubTitle'>
-                    <div className='ratingContainer'>
+                  <div className="mainSubTitle">
+                    <div className="ratingContainer">
                       <>
                         <ReactStars
                           count={5}
                           onChange={ratingChanged}
                           value={ratingValue}
                           size={42}
-                          color2={'#e89005'} 
+                          color2={"#e89005"}
                         />
                       </>
                     </div>
-                    
-                    <span className='averageRating'>{movie.data.vote_average.toFixed(2)} Rating</span>
+
+                    <span className="averageRating">
+                      {movie.data.vote_average.toFixed(2)} Rating
+                    </span>
                   </div>
                 </div>
 
@@ -115,40 +117,42 @@ export function MoviePage() {
                 </div>
               </div>
 
-              <img 
-                className='mainPoster' 
-                src={`${base_ImageUrl}${movie.data.poster_path}`} 
+              <img
+                className="mainPoster"
+                src={`${base_ImageUrl}${movie.data.poster_path}`}
                 alt="movie poster"
               />
             </div>
 
             <div className="subContainer">
-              <div className='subContainerDivided'>
-                <div className='subContainerLeft'>
+              <div className="subContainerDivided">
+                <div className="subContainerLeft">
                   <h4>Cast</h4>
 
                   <div className="mainCastContainer">
                     <div className="mainCast">
-                      {
-                        movieCredits.data.cast.map((elem, i) => {
-                          return(
-                            i <= pageCastMax &&
-                              elem.profile_path != null &&
+                      {movieCredits.data.cast.map((elem, i) => {
+                        return (
+                          i <= pageCastMax &&
+                          elem.profile_path != null && (
                             <div className="castCard" key={elem.id}>
-                              <img src={`${base_ImageUrl}${elem.profile_path}`} alt="Cast" />
+                              <img
+                                src={`${base_ImageUrl}${elem.profile_path}`}
+                                alt="Cast"
+                              />
                               <p>{elem.name}</p>
                             </div>
-                          )                  
-                        })
-                      }
+                          )
+                        );
+                      })}
                     </div>
 
-                    <HoverButton 
-                      width='77px'
-                      minWidth='55px' 
-                      height='33px' 
+                    <HoverButton
+                      width="77px"
+                      minWidth="55px"
+                      height="33px"
                       borderRadius="5px"
-                      color='#000' 
+                      color="#000"
                       onClick={() => setPageCastMax(pageCastMax + 3)}
                     >
                       More
@@ -157,128 +161,114 @@ export function MoviePage() {
 
                   <h4>Trailer</h4>
 
-                  <div className="trailerContainer">  
-                    <ReactPlayer width='100%' height='100%' url={video}></ReactPlayer>
+                  <div className="trailerContainer">
+                    <ReactPlayer
+                      width="100%"
+                      height="100%"
+                      url={video}
+                    ></ReactPlayer>
                   </div>
-                  
+
                   <h4>Genres</h4>
-                  
-                  <div className='genresContainer'>
+
+                  <div className="genresContainer">
                     {movie.data.genres.map((elem) => {
-                      return <div onClick={()=> {
-                        switch(elem.name){
-                            case "Action" :
-                         
-                                setGenres(28)
-                                navigateToExpand("Action")
+                      return (
+                        <div
+                          onClick={() => {
+                            switch (elem.name) {
+                              case "Action":
+                                setGenres(28);
+                                navigateToExpand("Action");
                                 break;
-                            case "Adventure":
-                         
-                            setGenres(12)
-                                navigateToExpand("Adventure")
+                              case "Adventure":
+                                setGenres(12);
+                                navigateToExpand("Adventure");
                                 break;
-                            case "Animation" :
-                         
-                            setGenres(16)
-                                navigateToExpand("Animation")
+                              case "Animation":
+                                setGenres(16);
+                                navigateToExpand("Animation");
                                 break;
-                            case "Comedy" :
-                         
-                            setGenres(35)
-                                navigateToExpand("Comedy")
+                              case "Comedy":
+                                setGenres(35);
+                                navigateToExpand("Comedy");
                                 break;
-                            case "Crime" :
-                         
-                            setGenres(80)
-                                navigateToExpand("Crime")
+                              case "Crime":
+                                setGenres(80);
+                                navigateToExpand("Crime");
                                 break;
-                            case "Documentary" :
-                         
-                            setGenres(99)
-                                navigateToExpand("Documentary")
+                              case "Documentary":
+                                setGenres(99);
+                                navigateToExpand("Documentary");
                                 break;
-                            case "Drama" :
-                         
-                            setGenres(18)
-                                navigateToExpand("Drama")
+                              case "Drama":
+                                setGenres(18);
+                                navigateToExpand("Drama");
                                 break;
-                            case "Family" :
-                         
-                            setGenres(10751)
-                                navigateToExpand("Family")
+                              case "Family":
+                                setGenres(10751);
+                                navigateToExpand("Family");
                                 break;
-                            case "Fantasy" :
-                         
-                            setGenres(14)
-                                navigateToExpand("Fantasy")
+                              case "Fantasy":
+                                setGenres(14);
+                                navigateToExpand("Fantasy");
                                 break;
-                            case "History" :
-                         
-                            setGenres(36)
-                                navigateToExpand("History")
+                              case "History":
+                                setGenres(36);
+                                navigateToExpand("History");
                                 break;
-                            case "Horror" :
-                         
-                            setGenres(27)
-                                navigateToExpand("Horror")
+                              case "Horror":
+                                setGenres(27);
+                                navigateToExpand("Horror");
                                 break;
-                            case "Music" :
-                         
-                            setGenres(10402)
-                                navigateToExpand("Music")
+                              case "Music":
+                                setGenres(10402);
+                                navigateToExpand("Music");
                                 break;
-                            case "Mystery" :
-                         
-                            setGenres(9648)
-                                navigateToExpand("Mystery")
+                              case "Mystery":
+                                setGenres(9648);
+                                navigateToExpand("Mystery");
                                 break;
-                            case "Romance" : 
-                         
-                            setGenres(10749)
-                                navigateToExpand("Romance")
+                              case "Romance":
+                                setGenres(10749);
+                                navigateToExpand("Romance");
                                 break;
-                            case "Science Fiction" :
-                         
-                            setGenres(878)
-                                navigateToExpand("ScienceFiction")
+                              case "Science Fiction":
+                                setGenres(878);
+                                navigateToExpand("ScienceFiction");
                                 break;
-                            case "TV Movie" :
-                         
-                            setGenres(10770)
-                                navigateToExpand("TvMovie")
+                              case "TV Movie":
+                                setGenres(10770);
+                                navigateToExpand("TvMovie");
                                 break;
-                            case "Thriller" :
-                         
-                            setGenres(53)
-                                navigateToExpand("Thriller")
+                              case "Thriller":
+                                setGenres(53);
+                                navigateToExpand("Thriller");
                                 break;
-                            case "War" :
-                         
-                            setGenres(10752)
-                                navigateToExpand("War")
+                              case "War":
+                                setGenres(10752);
+                                navigateToExpand("War");
                                 break;
-                            case "Western" :
-                         
-                            setGenres(37)
-                                navigateToExpand("Western")
+                              case "Western":
+                                setGenres(37);
+                                navigateToExpand("Western");
                                 break;
-                       
-                    }
-                    }}                               
-                                key={elem.id}                                
-                                className='genreCard'
-                              >
-                                {elem.name}
-                              </div>;
+                            }
+                          }}
+                          key={elem.id}
+                          className="genreCard"
+                        >
+                          {elem.name}
+                        </div>
+                      );
                     })}
                   </div>
-                  
                 </div>
 
-                <div className='subContainerRight'>
+                <div className="subContainerRight">
                   <h4>Streaming platforms</h4>
 
-                  <div className='platformsContainer'> 
+                  <div className="platformsContainer">
                     {movie.data.production_companies.map((elem) => {
                       return (
                         elem.logo_path !== null && (
@@ -298,59 +288,67 @@ export function MoviePage() {
 
             <section className="commentSection">
               <h4>Comments</h4>
-              <div className='commentsContainer'>    
-                {
-                  postLive.map((elem, i) => {
-                      return(
-                        elem.id_Movie === movie_id &&
-                          i >= postLive.length - pageMax &&
-                          <div key={elem.id} className='commentCard'>
-                            <div className='userInfo'>
-                              <img src={`${elem.avatar}`} alt="user avatar"/>
-                              <h5>{elem.name}</h5>
-                            </div>
+              <div className="commentsContainer">
+                {postLive.map((elem, i) => {
+                  return (
+                    elem.id_Movie === movie_id &&
+                    i >= postLive.length - pageMax && (
+                      <div key={elem.id} className="commentCard">
+                        <div className="userInfo">
+                          <img src={`${elem.avatar}`} alt="user avatar" />
+                          <h5>{elem.name}</h5>
+                        </div>
 
-                            <p>{elem.comments}</p>
-                          </div>
-                      )
-                  })
-                }
+                        <p>{elem.comments}</p>
+                      </div>
+                    )
+                  );
+                })}
 
                 <HoverButton
-                  borderRadius='5px'
-                  color='#000'
-                  height='33px'
-                  width='77px'
-                  onClick={() => setPageMax(pageMax + 5)} 
+                  borderRadius="5px"
+                  color="#000"
+                  height="33px"
+                  width="77px"
+                  onClick={() => setPageMax(pageMax + 5)}
                 >
                   More
                 </HoverButton>
               </div>
 
-              <form className='commentInputContainer' onSubmit={(evt) => handleSubmit(evt, input)}>
-                  <textarea className='commentArea' placeholder="Comment" onChange={(evt) => setInput(evt.target.value)}/>
-                  <HoverButton
-                    width='13%'
-                    minWidth='77px'
-                    borderRadius='5px'
-                    height='42px'
-                    fontSize='17px'
-                    color='#000' 
-                    type="submit"
-                  >
-                    Post
-                  </HoverButton>
+              <form
+                className="commentInputContainer"
+                onSubmit={(evt) => handleSubmit(evt, input)}
+              >
+                <textarea
+                  className="commentArea"
+                  placeholder="Comment"
+                  onChange={(evt) => setInput(evt.target.value)}
+                />
+                <HoverButton
+                  width="13%"
+                  minWidth="77px"
+                  borderRadius="5px"
+                  height="42px"
+                  fontSize="17px"
+                  color="#000"
+                  type="submit"
+                >
+                  Post
+                </HoverButton>
               </form>
             </section>
 
-            <div className='similarMoviesContainer'>
+            <div className="similarMoviesContainer">
               {movieSimilar.results.map((elem) => {
                 return <CardItem key={elem.id} movies={elem}></CardItem>;
               })}
             </div>
-          </MainContainer>   
+          </MainContainer>
         </MoviePageContainer>
-      ): (<Skeleton></Skeleton>)}
+      ) : (
+        <Skeleton></Skeleton>
+      )}
 
       <Footer />
     </>

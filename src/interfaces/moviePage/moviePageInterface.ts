@@ -22,7 +22,9 @@ export interface IMovieContext {
   ratingValue: number;
   setRatingValue: Dispatch<SetStateAction<number>>;
   video: string;
-  director: IDirector[]
+  director: IDirector[];
+  pageCastMax: number;
+  setPageCastMax: Dispatch<SetStateAction<number>>;
 }
 
 export interface IDataComenter {

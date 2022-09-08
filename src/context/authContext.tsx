@@ -13,6 +13,7 @@ export const AuthContext = createContext<IContextValues>(
 export function AuthProvider({ children }: IContext) {
   const [movie_id, setMovie_Id] = useState(90);
   const navigate = useNavigate()
+  
   const login = (data: FieldValue<ILoginData>) => {
     toast.promise(apiFake
       .post("/login", data)
@@ -36,10 +37,10 @@ export function AuthProvider({ children }: IContext) {
       .then((res: IReponseRegister) => {
         localStorage.setItem("@token", res.data.accessToken);
         localStorage.setItem("@idUser", res.data.user.id);
+        localStorage.setItem("@nameUser", res.data.user.name);
+        localStorage.setItem("@emailUser", res.data.user.email);
+        localStorage.setItem("@avatarlUser", res.data.user.avatar!);
         navigate("/home")
-      })
-      .catch((err) => {
-        toast.error(err.response.data);
       }), {
         pending: "Waiting...",
         success: "Account created successfully",

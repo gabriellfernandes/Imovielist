@@ -47,19 +47,21 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
   const [itemRating, setItemRating] = useState<IDataRatingAll | undefined>(
     {} as IDataRatingAll
   );
-  const [video, setVideo] = useState('')
-  const name = localStorage.getItem("@nameUser") as string
-  const [cont, setCont] = useState(0)
-  const [director, setDirector] = useState<IDirector[]>([] as IDirector[])
-
+  const [video, setVideo] = useState("");
+  const name = localStorage.getItem("@nameUser") as string;
+  const [cont, setCont] = useState(0);
+  const [director, setDirector] = useState<IDirector[]>([] as IDirector[]);
+  const [pageCastMax, setPageCastMax] = useState(5);
   useEffect(() => {
-    setCont(0)
-    filterDirector([])
-    
+    setCont(0);
+    filterDirector([]);
+    setDirector([])
+    setPageCastMax(5)
+
     apiTMDb.get(`/movie/${movie_id}/credits`).then((res: IReponseCredits) => {
       setMovieCredits(res);
-      filterDirector(res.data.crew)
-    })
+      filterDirector(res.data.crew);
+    });
 
     apiTMDb
       .get(`/movie/${movie_id}/similar`)
@@ -72,16 +74,15 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
         },
       })
       .then((res) => {
-        vericRating(res.data)
-        setAllRating(res.data)
-      })
+        vericRating(res.data);
+        setAllRating(res.data);
+      });
 
     const videoAwait = async () => {
-      getVideo(movie_id).then((res) => setVideo(res))
-    }
+      getVideo(movie_id).then((res) => setVideo(res));
+    };
 
-    videoAwait()
-    
+    videoAwait();
 
     movieCredits &&
       apiTMDb
@@ -149,17 +150,16 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
 
   useEffect(() => {
     apiFake
-    .get("/rating", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("@token")}`,
-      },
-    })
-    .then((res) => {
-      vericRating(res.data)
-      setAllRating(res.data)
-    })
-  }, [rating])
-
+      .get("/rating", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("@token")}`,
+        },
+      })
+      .then((res) => {
+        vericRating(res.data);
+        setAllRating(res.data);
+      });
+  }, [rating]);
 
   const postComments = (data: IDataComenter) => {
     if (data.userId === undefined) {
@@ -190,7 +190,7 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
           Authorization: `Bearer ${localStorage.getItem("@token")}`,
         },
       })
-      .then((res) => res.data.avatar); 
+      .then((res) => res.data.avatar);
   };
 
   const handleSubmit = (
@@ -203,50 +203,54 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
       comments: data,
       userId: Number(localStorage.getItem("@idUser")),
       avatar: avatar,
-      name: name
+      name: name,
     });
   };
 
   const feedbackPost = (data: IDataRating) => {
-    
     if (data.userId === undefined) {
       return;
     }
-    vericRating(allRating)
-    setCont(1)
-    
+    vericRating(allRating);
+    setCont(1);
+
     itemRating !== undefined
       ? toast.promise(
-          apiFake.patch(`/rating/${itemRating.id}`, data, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("@token")}`,
-            },
-          }).then(res => {console.log(itemRating)
-            console.log(res)
-          }).catch(res => console.log(res.data)),
+          apiFake
+            .patch(`/rating/${itemRating.id}`, data, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("@token")}`,
+              },
+            })
+            .then((res) => {
+              console.log(itemRating);
+              console.log(res);
+            })
+            .catch((res) => console.log(res.data)),
           {
             pending: "Waiting...",
             success: "You updated to feedback",
             error: "Error",
           }
         )
-      : 
-      cont == 0 &&
-      toast.promise(
-          apiFake.post("/rating", data, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("@token")}`,
-            },
-          }).then(() => {
-            vericRating(allRating)
-          }),
+      : cont == 0 &&
+        toast.promise(
+          apiFake
+            .post("/rating", data, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("@token")}`,
+              },
+            })
+            .then(() => {
+              vericRating(allRating);
+            }),
           {
             pending: "Waiting...",
             success: "Avaliead",
             error: "Error",
           }
         );
-        setItemRating(data)
+    setItemRating(data);
   };
 
   const vericRating = (data: IDataRatingAll[]) => {
@@ -276,12 +280,15 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
     });
   };
 
-  const filterDirector = (data : IDirector[]) => {
+  const filterDirector = (data: IDirector[]) => {
     data.map((elem) => {
-        return elem.job.includes("Director") && 
-        elem.profile_path != null && setDirector(old => [...old, elem])
-    })
-  }
+      return (
+        elem.job.includes("Director") &&
+        elem.profile_path != null &&
+        setDirector((old) => [...old, elem])
+      );
+    });
+  };
 
   return (
     <MovieContext.Provider
@@ -298,7 +305,9 @@ export function MovieContextProvider({ children }: IMovieContextProps) {
         ratingValue,
         setRatingValue,
         video,
-        director
+        director,
+        pageCastMax,
+        setPageCastMax,
       }}
     >
       {children}

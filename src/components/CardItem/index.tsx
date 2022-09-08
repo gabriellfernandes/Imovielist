@@ -19,7 +19,7 @@ import { IResults } from "../../interfaces/axiosReponseApiTmdb";
 import { CardItemStyled, theme } from "./style";
 import { base_ImageUrl } from "../../services/api";
 import { ImdbSVG } from "../ImdbSVG";
-import ReactPlayer from "react-player/youtube"
+import ReactPlayer from 'react-player/youtube'
 import { getVideo, IPlay, IPlayContext, PlayContext } from "../../context/playContext";
 import { useRef } from "react";
 import {memo} from "react"

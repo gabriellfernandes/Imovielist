@@ -1,4 +1,5 @@
 import Header from "../../components/Header";
+
 import {useState} from "react"
 import {ContentBox, MainDiv, MovieListBox,theme, themeDefault} from "./style";
 import Footer from "../../components/Footer";

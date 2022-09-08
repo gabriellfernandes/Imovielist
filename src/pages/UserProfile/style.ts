@@ -8,7 +8,6 @@ export const DivGeneral = styled.div`
 
   .div-user {
     width: 30%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-items: center;
@@ -38,15 +37,12 @@ export const DivGeneral = styled.div`
     color: #ffffff;
   }
 
-  .arrow {
-    color: #ffffff;
-  }
-
   .div-container-input {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
   }
 
   .input-search {
@@ -56,6 +52,14 @@ export const DivGeneral = styled.div`
     border-radius: 20px;
     background-color: #141414;
     color: #ffffff;
+    padding-left: 10px;
+  }
+
+  .icon-search {
+    color: #ffffff;
+    position: absolute;
+    top: 7px;
+    right: 65px;
   }
 
   .div-container-genres {
@@ -91,6 +95,7 @@ export const DivGeneral = styled.div`
     height: 32px;
     border: none;
     border-radius: 20px;
+    background-color: #141414;
     color: #ffffff;
     margin: 5px;
     cursor: pointer;
@@ -120,7 +125,10 @@ export const DivGeneral = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid yellow;
+  }
+  
+  .image-last-movie-rated {
+    border-radius: 20px;
   }
 
   .movie-star {
@@ -134,9 +142,10 @@ export const DivGeneral = styled.div`
   }
 
   .favorite-bottom {
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-top: -20px;
   }
 
   .button-watch {
@@ -152,18 +161,7 @@ export const DivGeneral = styled.div`
     align-items: center;
     font-weight: bold;
     margin-left: 5px;
-  }
-
-  .button-add-movie {
-    width: 10%;
-    height: 32px;
-    border: none;
-    background-color: #141414;
-    color: #ffffff;
-    cursor: pointer;
-    border-radius: 100px;
-    font-size: 20px;
-    margin-right: -28px;
+    margin-top: -10px;
   }
 
   .div-movies {
@@ -171,5 +169,45 @@ export const DivGeneral = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: auto;
+    padding-left: 10px;
+  }
+
+  .rated-movies {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .title-movie-rated {
+    color: #ffffff;
+    background-color: #212121;
+    font-size: 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+  }
+
+  .img-movie-rated {
+    width: 8vw;
+    height: 11.5vh;
+  }
+
+  .paragraph-movie-rated {
+    color: #ffffff;
+    padding-left: 5px;
+    font-size: 12px;
+  }
+
+  .div-container-movie-rated {
+    display: flex;
+    margin: 10px 0 10px 0;
+  }
+
+  .stars-vote {
+    margin-bottom: 5px;
+    color: #ffffff;
+    font-size: 12px;
   }
 `

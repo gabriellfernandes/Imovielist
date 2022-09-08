@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import  CardItem  from "../../components/CardItem";
 import Footer from "../../components/Footer";
@@ -11,6 +11,10 @@ import { ContentDiv, MainDiv, MoviesDiv, TitleDiv } from "./style";
 import { stremerContext } from "../../context/stremerPlataform";
 import { apiTMDb } from "../../services/api";
 import { IReponsePlataformStremer } from "../../interfaces/axiosReponseApiTmdb";
+import { genresContext } from "../../context/GenresContext";
+
+
+
 
 export default function ExtendList(){
   const { group } = useParams();
@@ -18,9 +22,13 @@ export default function ExtendList(){
     const {ratedPages,ratedPerPage,setRatedPages,setRatedPerPage} = useContext(RatedContext)
     const {coming} = useContext(ComingSoonContext)
     const { filmes, setPage } = useContext(stremerContext)
+    const { filmesGenres, setPageGenres, genres, setFilmesGenres } = useContext(genresContext)
 
+   
     useEffect(()=>
+    
     {
+      console.log(filmesGenres)
         async function getPopular()
         {
             const movie = await GetPopularMovies(popularPerPage)
@@ -67,6 +75,10 @@ export default function ExtendList(){
         }
         getPopular()
         getRated()
+
+        return ()=>{
+          setFilmesGenres([])
+        }
     },[])
 
 
@@ -75,12 +87,12 @@ export default function ExtendList(){
         <>
             <Header/>
             <MainDiv>
-                <ContentDiv>
+                <ContentDiv className="content">
                     <TitleDiv>
                         { group ===  'trending' && (
                           <>
-                            <h1>Em Alta</h1>
-                            <h3>Filmes que estão bombando!</h3>
+                            <h1>Trending</h1>
+                            <h3>Trending Movies</h3>
                           </>
                         )
                         }
@@ -88,7 +100,7 @@ export default function ExtendList(){
                         { group ===  'top' && (
                           <>
                             <h1>Top-Rated</h1>
-                            <h3>Os melhores avaliados</h3>
+                            <h3>Top-Rated Movies</h3>
                           </>
                         )
                         }
@@ -96,15 +108,15 @@ export default function ExtendList(){
                         { group ===  'netflix' && (
                           <>
                             <h1>Netflix</h1>
-                            <h3>Catálogo da plataforma</h3>
+                            <h3>Netflix Movies</h3>
                           </>
                         )
                         }
 
                         { group ===  'upcoming' && (
                           <>
-                            <h1>Lançamentos</h1>
-                            <h3>Filmes que lançaram em breve!</h3>
+                            <h1>Upcoming</h1>
+                            <h3>Upcoming Movies</h3>
                           </>
                         )
                         }
@@ -112,7 +124,7 @@ export default function ExtendList(){
                         { group ===  'globo' && (
                           <>
                             <h1>Globoplay</h1>
-                            <h3>Catálogo da plataforma</h3>
+                            <h3>Globoplay Movies</h3>
                           </>
                         )
                         }
@@ -121,7 +133,7 @@ export default function ExtendList(){
                         { group ===  'disney' && (
                           <>
                             <h1>Disney+</h1>
-                            <h3>Catálogo da plataforma</h3>
+                            <h3>Disney+ Movies</h3>
                           </>
                         )
                         }
@@ -130,7 +142,7 @@ export default function ExtendList(){
                         { group ===  'hbom' && (
                           <>
                             <h1>Hbo Max</h1>
-                            <h3>Catálogo da plataforma</h3>
+                            <h3>Hbo Max Movies</h3>
                           </>
                         )
                         }
@@ -138,7 +150,141 @@ export default function ExtendList(){
                         { group ===  'prime' && (
                           <>
                             <h1>Prime video</h1>
-                            <h3>Catálogo da plataforma</h3>
+                            <h3>Prime video Movies</h3>
+                          </>
+                        )
+                        }
+
+                        { group ===  'Action' && (
+                          <>
+                            <h1>Action</h1>
+                            <h3>Action Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Adventure' && (
+                          <>
+                            <h1>Adventure</h1>
+                            <h3>Adventure Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Animation' && (
+                          <>
+                            <h1>Animation</h1>
+                            <h3>Animation Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Comedy' && (
+                          <>
+                            <h1>Comedy</h1>
+                            <h3>Comedy Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Crime' && (
+                          <>
+                            <h1>Crime</h1>
+                            <h3>Crime Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Documentary' && (
+                          <>
+                            <h1>Documentary</h1>
+                            <h3>Documentary Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Drama' && (
+                          <>
+                            <h1>Drama</h1>
+                            <h3>Drama Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Family' && (
+                          <>
+                            <h1>Family</h1>
+                            <h3>Family Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Fantasy' && (
+                          <>
+                            <h1>Fantasy</h1>
+                            <h3>Fantasy Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'History' && (
+                          <>
+                            <h1>History</h1>
+                            <h3>History Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Horror' && (
+                          <>
+                            <h1>Horror</h1>
+                            <h3>Horror Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Music' && (
+                          <>
+                            <h1>Music</h1>
+                            <h3>Music Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Mistery' && (
+                          <>
+                            <h1>Mistery</h1>
+                            <h3>Mistery Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Romance' && (
+                          <>
+                            <h1>Romance</h1>
+                            <h3>Romance Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'ScienceFiction' && (
+                          <>
+                            <h1>Science Fiction</h1>
+                            <h3>Science Fiction Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'Thiriller' && (
+                          <>
+                            <h1>Thiriller</h1>
+                            <h3>Thiriller Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'TvMovie' && (
+                          <>
+                            <h1>Tv Movie</h1>
+                            <h3>Tv Movie Films</h3>
+                          </>
+                        )
+                        }
+                           { group ===  'War' && (
+                          <>
+                            <h1>War</h1>
+                            <h3>War Movies</h3>
+                          </>
+                        )
+                        }
+                           { group ===  'Western' && (
+                          <>
+                            <h1>Western</h1>
+                            <h3>Western Movies</h3>
                           </>
                         )
                         }
@@ -256,12 +402,368 @@ export default function ExtendList(){
                         
                         </MoviesDiv>
                       )}
+                      
+                      { group == 'Action' && (
+                        
+                        <MoviesDiv>
+
+                              {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+ 
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Adventure' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Animation' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Comedy' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Crime' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Documentary' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Drama' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Family' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Fantasy' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'History' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Horror' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Music' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Mistery' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Romance' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'ScienceFiction' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Thiriller' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'TvMovie' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'War' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+                        { group == 'Western' && (
+                        
+                        <MoviesDiv>
+                                                    
+                          {
+                            
+                            filmesGenres.map((results)=>
+                            {
+                               
+                              return(
+                                      <CardItem key={results.id} movies={results}></CardItem>
+                              )
+                                    
+                            }
+                          )}
+                        
+                        </MoviesDiv>
+                      )}
+               
+               <button className="more" onClick={() => {
+                    setPage(odlnumber => odlnumber + 1)
+                    setPageGenres(odlnumber => odlnumber + 1)
+                    SetPopularPerPage(odlnumber => odlnumber + 1)
+                    }}>more</button>
+                     
+                  
                 </ContentDiv>
-                {
-                  //<button onClick={() => {setPage(odlnumber => odlnumber + 1)}}>more</button>
-                }
+     
+
+
+                 
+             
             </MainDiv>
+            
             <Footer/>
+            
         </>
     )
 }

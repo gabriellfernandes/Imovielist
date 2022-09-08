@@ -27,3 +27,13 @@ export interface IcontextPlataforma {
   setFilmes: Dispatch<SetStateAction<filmesPlataform[]>>;
   filmes: filmesPlataform[];
 }
+
+
+export interface IcontextGenres {
+  setPageGenres: Dispatch<SetStateAction<number>>;
+  setGenres: Dispatch<SetStateAction<number>>;
+  genres: number;
+  pageGenres: number;
+  setFilmesGenres: Dispatch<SetStateAction<filmesPlataform[]>>;
+  filmesGenres: filmesPlataform[];
+}

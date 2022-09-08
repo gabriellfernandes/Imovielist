@@ -7,6 +7,7 @@ import { PlayProvider } from "./playContext";
 import { GenresOfMoviesProvider } from "./GenresOfMoviesContext";
 import { SearchProvider } from "./SearchContext";
 import { StremerComponent } from "./stremerPlataform";
+import { GenresComponent } from "./GenresContext";
 
 interface IContextProps
 {
@@ -23,9 +24,11 @@ function Provider({children} : IContextProps) : ReactElement
                             <PlayProvider>
                                 <GenresOfMoviesProvider>
                                     <StremerComponent>
+                                    <GenresComponent>
                                         <SearchProvider>
                                             {children}
                                         </SearchProvider>
+                                    </GenresComponent>
                                     </StremerComponent>
                                 </GenresOfMoviesProvider>
                             </PlayProvider>

@@ -77,9 +77,7 @@ export default function ExtendList(){
         getPopular()
         getRated()
 
-        return ()=>{
-          setFilmesGenres([])
-        }
+      
     },[])
 
 

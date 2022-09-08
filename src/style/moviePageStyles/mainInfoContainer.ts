@@ -43,6 +43,41 @@ export const MainContainer = styled.div`
         -webkit-user-select: none;
     }
 
+    .directorsContainer {
+        display: flex;
+
+        width: 42vw;
+
+        overflow-x: hidden;
+    }
+
+    .directorInfo{
+        width: max-content;
+
+        display: flex;
+        align-items: center;
+
+        margin-bottom: 13px;
+        margin-right: 33px;
+    }
+
+    .directorInfo img {
+        width: 66px;
+        height: 66px;
+
+        border: 3px solid #e89005;
+        border-radius: 50%;
+    }
+
+    .directorInfo p {
+        font-size: 21px;
+        font-weight: 600;
+
+        color: #e89005;
+
+        margin-left: 7px;
+    }
+
 
     .mainSubTitle {
         display: flex;
@@ -242,14 +277,18 @@ export const MainContainer = styled.div`
     }
 
     .platformsContainer {
+        width: 100%;
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
+        align-items: center;
     }
 
     .platformsContainer img{
         width: 77px;
-        height: 77px;
+
+        margin-right: 33px;
+        margin-bottom: 33px;
     }
 
     .trailerContainer {
@@ -283,6 +322,11 @@ export const MainContainer = styled.div`
 
         background-color: transparent;
         color: #e89005;
+    }
+
+    .trailerContainer {
+        width: 40vw;
+        height: 22.5vw;
     }
 
     .commentSection {
@@ -375,6 +419,14 @@ export const MainContainer = styled.div`
         outline: none;
     }
 
+    .similarMoviesContainer {
+        width: max-content;
+
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 2vw;
+    }
+
     @media (max-width: 1542px) {
         .mainTop {
             align-items: flex-start;
@@ -391,6 +443,16 @@ export const MainContainer = styled.div`
 
         .subContainerRight {
             width: 277px
+        }
+
+        .similarMoviesContainer {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 1020px) {
+        .similarMoviesContainer{
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 
@@ -460,6 +522,8 @@ export const MainContainer = styled.div`
         }
 
         .subContainerRight {
+            width: 100%;
+
             margin-top: 24px;
         }
 
@@ -468,6 +532,11 @@ export const MainContainer = styled.div`
             padding: 5px 10px;
 
             font-size: 16px;
+        }
+
+        .trailerContainer {
+            width: 80vw;
+            height: 45vw;
         }
 
         .userInfo img{
@@ -503,6 +572,10 @@ export const MainContainer = styled.div`
 
         .castCard p {
             font-size: 16px;
+        }
+
+        .similarMoviesContainer {
+            grid-template-columns: 1fr;
         }
     }
 

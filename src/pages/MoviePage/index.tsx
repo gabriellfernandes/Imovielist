@@ -9,33 +9,55 @@ import { MoviePageContainer } from "../../style/moviePageStyles/moviePageContain
 import { MainContainer } from "../../style/moviePageStyles/mainInfoContainer";
 import { HoverButton } from "../../style/global/GlobalButton";
 
+import Footer from "../../components/Footer";
+import CardItem from "../../components/CardItem";
+import { Skeleton } from "@mui/material";
+import { getVideo } from "../../context/playContext";
+import ReactPlayer from 'react-player/youtube'
+
+
 export function MoviePage() {
-  const navigate = useNavigate()
-  
-  if(localStorage.getItem("@token") === undefined || localStorage.getItem("@token") == null){
-    navigate("/", { replace: true })
+  const navigate = useNavigate();
+
+  if (
+    localStorage.getItem("@token") === undefined ||
+    localStorage.getItem("@token") == null
+  ) {
+    navigate("/", { replace: true });
   }
 
-  const { movie, handleSubmit, handleSubmitRating ,postLive, movie_id,loadingMovie, movieCredits} = useContext(MovieContext);
-  const [input, setInput] = useState("")
-  const [pageMax, setPageMax] = useState(10)
-  const [pageCastMax, setPageCastMax] = useState(2)
-  const [rating, setRating] = useState(0)
+  const {
+    movie,
+    handleSubmit,
+    handleSubmitRating,
+    postLive,
+    movie_id,
+    loadingMovie,
+    movieCredits,
+    movieSimilar,
+    ratingValue,
+    setRatingValue,
+    video
+  } = useContext(MovieContext);
+
+  const [input, setInput] = useState("");
+  const [pageMax, setPageMax] = useState(10);
+  const [pageCastMax, setPageCastMax] = useState(5);
+  const [directorCount, setDirectorCount] = useState(0)
 
   const ratingChanged = (newRating: number) => {
-    console.log(newRating)
-    setRating(newRating)
-    handleSubmitRating(newRating)
-  }
+    setRatingValue(newRating);
+    handleSubmitRating(newRating);
+  };
 
-  useEffect(() => {
-    
-  }, [movie])
+  const displayDirectors = () => {
+
+  }
 
   return (
     <>
       <Header />
-      {!loadingMovie && (
+      {!loadingMovie? (
         <MoviePageContainer>
           <BackDropContainer url={`${base_ImageUrl}${movie.data.backdrop_path}`}></BackDropContainer>
           
@@ -45,6 +67,36 @@ export function MoviePage() {
               <div className='mainTitle'>
                 <div className="titleContainer">
                   <h2>{movie.data.title}</h2>
+
+                  <div className='directorsContainer'>
+                    {movieCredits.data.crew.map((elem) => {
+
+                      if(directorCount <= 1){
+                        return (
+                          elem.job.includes("Director") && 
+                          elem.profile_path != null && 
+                          (
+                            <>
+                              <div key={elem.id} className='directorInfo'>
+                                <>
+                                  <img
+                                    src={`${base_ImageUrl}${elem.profile_path}`}
+                                    alt="Director"
+                                  />
+                                  <p>{elem.name}</p>
+                                </>
+                              </div>
+
+                              {setDirectorCount(directorCount + 1)}
+                            </>
+                          )
+                        );
+                      }
+                        
+                    })}
+                  </div>
+
+                  
                 
                   <div className='mainSubTitle'>
                     <div className='ratingContainer'>
@@ -52,7 +104,7 @@ export function MoviePage() {
                         <ReactStars
                           count={5}
                           onChange={ratingChanged}
-                          value={rating}
+                          value={ratingValue}
                           size={42}
                           color2={'#e89005'} 
                         />
@@ -101,7 +153,8 @@ export function MoviePage() {
                     </div>
 
                     <HoverButton 
-                      width="77px" 
+                      width='77px'
+                      minWidth='55px' 
                       height='33px' 
                       borderRadius="5px"
                       color='#000' 
@@ -111,11 +164,10 @@ export function MoviePage() {
                     </HoverButton>
                   </div>
 
-                  <div className="trailerContainer">
-                    <h4>Trailer</h4>
-                      {
-                        //Colocar o trailer
-                      }
+                  <h4>Trailer</h4>
+
+                  <div className="trailerContainer">  
+                    <ReactPlayer width='100%' height='100%' url={video}></ReactPlayer>
                   </div>
                   
                   <h4>Genres</h4>
@@ -165,7 +217,7 @@ export function MoviePage() {
                           <div key={elem.id} className='commentCard'>
                             <div className='userInfo'>
                               <img src={`${elem.avatar}`} alt="user avatar"/>
-                              <h5>gaspar</h5>
+                              <h5>{elem.name}</h5>
                             </div>
 
                             <p>{elem.comments}</p>
@@ -200,9 +252,17 @@ export function MoviePage() {
                   </HoverButton>
               </form>
             </section>
+
+            <div className='similarMoviesContainer'>
+              {movieSimilar.results.map((elem) => {
+                return <CardItem key={elem.id} movies={elem}></CardItem>;
+              })}
+            </div>
           </MainContainer>   
         </MoviePageContainer>
-      )}
+      ): (<Skeleton></Skeleton>)}
+
+      <Footer />
     </>
   );
 }

@@ -1,9 +1,49 @@
+import { createTheme } from '@mui/material'
 import styled from 'styled-components'
 
-
+const themeDefault = createTheme()
+export const theme = createTheme(
+    {
+        palette : 
+        {
+            primary : 
+            {
+                main : themeDefault.palette.grey[600]
+            },
+            secondary : 
+            {
+                main : themeDefault.palette.grey[400]
+            }
+        },
+        breakpoints : 
+        {
+            values : 
+            {
+                xs : 0,
+                sm : 600,
+                md : 900,
+                lg : 1024,
+                xl : 1280,
+            }
+        },
+        components : 
+        {
+            MuiInput : 
+            {
+                styleOverrides : 
+                {
+                    root : 
+                    {
+                        color : themeDefault.palette.grey[400]
+                    }
+                }
+            },
+        }
+    })
 export const HeaderDiv = styled.header`
 
     width: 100%;
+<<<<<<< HEAD
     height: 75px;
 
     background-color: #1A171E;
@@ -83,4 +123,8 @@ export const HeaderDiv = styled.header`
 
         padding: 0px 2vw;
     }
+=======
+    height: 80px;
+    background-color: ${theme.palette.grey[900]};
+>>>>>>> 668973a1f9c42ed70d9d86fcb39ff75248e3b9ef
 `

@@ -1,3 +1,83 @@
+import { number } from "yup";
+import { string } from "yup/lib/locale";
+
+interface ISearch
+{
+  img : string
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: [number];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number
+}
+export interface ISearchResponse
+{
+  page? : number;
+  results ? : Array<ISearch>;
+  total_pages: number;
+  total_results: number;
+
+}
+export interface IResultsGenre
+{
+  img : string
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: [number];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number
+}
+export interface IOnlyGenre
+{
+  page: number;
+  results: Array<IResultsGenre>;
+  total_pages: number;
+  total_results: number;
+}
+export interface IGenres
+{
+  id : number;
+  name : string;
+}
+export interface IGenresRes
+{
+  genres : Array<IGenres>
+}
+export interface IVideos
+{
+  id : number;
+  results :
+  [{
+    iso_639_1 : string
+    iso_3166_1 : string
+    name : string;
+    key : string;
+    site : string;
+    size : number;
+    type : string;
+    official : boolean;
+    published_at : string;
+    id : string;
+  }]
+}
 export interface IRated
 {
     page: number;
@@ -40,6 +120,7 @@ export interface IResults
     video: boolean;
     vote_average: number;
     vote_count: number
+    url : string | Promise<string>
 }
 
 export interface IResponsePopularMovie{
@@ -226,10 +307,60 @@ export interface IReponseCredits {
       name: string;
       original_name: string;
       popularity: number;
-      profile_path?: string | null
+      profile_path?: string | null;
     }]
   }
   
 }
 
+export interface IReponseSimilarMovie{
+  page: number;
+  results: [{
+    img: string
+    adult: boolean;
+    backdrop_path: string;
+    genre_ids: [number];
+    id: number;
+    original_language: string;
+    original_title: string;
+    overview: string;
+    popularity: number;
+    poster_path: string;
+    release_date: string;
+    title: string;
+    video: boolean;
+    vote_average: number;
+    vote_count: number
+    url : string | Promise<string>
+  }];
+  total_pages: number;
+  total_results: number
+}
 
+
+export interface IReponsePlataformStremer{
+  data: {
+    page: number;
+    results: [{
+      img: string
+      adult: boolean;
+      backdrop_path: string;
+      genre_ids: [number];
+      id: number;
+      original_language: string;
+      original_title: string;
+      overview: string;
+      popularity: number;
+      poster_path: string;
+      release_date: string;
+      title: string;
+      video: boolean;
+      vote_average: number;
+      vote_count: number
+      url : string | Promise<string>
+    }];
+    total_pages: number;
+    total_results: number
+  }
+  
+}

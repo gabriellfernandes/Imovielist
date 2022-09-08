@@ -6,31 +6,18 @@ interface ISpanProps
 }
 export const DivCarousel = styled.div`
 position: relative;
-width:auto;
+width:100%;
 height: auto;
 
 .swiper {
   position: relative;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
   border-radius: 4px;
-  width: 800px;
-  height:600px;
+  padding: 1rem;
+  width: auto;
+  height:100%;
     @media screen and (min-width: 0px) {
             margin : 0 1rem;
-            width: 330px;
-            height:200px;
-        }
-        @media screen and (min-width: 400px) {
-            width: 400px;
-            height:260px;
-        }
-        @media screen and (min-width: 600px) {
-          width: 600px;
-          height:400px;
-        }
-        @media screen and (min-width: 800px) {
-            width: 800px;
-            height:400px;
         }
         @media screen and (min-width : 1280px) {
             margin :0 200px;
@@ -46,22 +33,22 @@ height: auto;
 }
 
 .swiper-slide {
-  position: relative;
-  text-align: center;
-  background: #fff;
-  /* Center slide text vertically */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
+      background-position: center center;
+      background-size:cover;
+      background-repeat: no-repeat;
+      border-radius: 4px;
+      height: 200px;
+
+      @media screen and (min-width : 400px) {
+          height: 300px;
+      }
+      @media screen and (min-width : 600px) {
+          height: 400px;
+      }
+      @media screen and (min-width : 800px) {
+          height: 500px;
+      }
+    }
   .coming
         {
           width: 60px;
@@ -94,7 +81,6 @@ height: auto;
     width: 100%;
     height: 100%;
   }
-}
 
 `
 export const SpanEdited = styled.span`

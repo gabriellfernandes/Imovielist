@@ -12,7 +12,7 @@ import { stremerContext } from "../../context/stremerPlataform";
 import { apiTMDb } from "../../services/api";
 import { IReponsePlataformStremer } from "../../interfaces/axiosReponseApiTmdb";
 import { genresContext } from "../../context/GenresContext";
-
+import { SearchContext } from "../../context/SearchContext"
 
 
 
@@ -23,6 +23,7 @@ export default function ExtendList(){
     const {coming} = useContext(ComingSoonContext)
     const { filmes, setPage } = useContext(stremerContext)
     const { filmesGenres, setPageGenres, genres, setFilmesGenres } = useContext(genresContext)
+    const {search, setSearchPerPage, searchPerPage} = useContext(SearchContext)
 
    
     useEffect(()=>
@@ -283,6 +284,13 @@ export default function ExtendList(){
                           <>
                             <h1>Western</h1>
                             <h3>Western Movies</h3>
+                          </>
+                        )
+                        }
+                        { group ===  'search' && (
+                          <>
+                            <h1>Search</h1>
+                            <h3>Search Movies</h3>
                           </>
                         )
                         }
@@ -744,14 +752,27 @@ export default function ExtendList(){
                         
                         </MoviesDiv>
                       )}
-               
-               <button className="more" onClick={() => {
-                    setPage(odlnumber => odlnumber + 1)
-                    setPageGenres(odlnumber => odlnumber + 1)
-                    SetPopularPerPage(odlnumber => odlnumber + 1)
+                      { group == 'search' && (
+                        <MoviesDiv>             
+                          {
+                            search.map((elem, i) => {
+                                return(
+                                      i <= searchPerPage &&
+                                        <CardItem key={elem.id} movies={elem}></CardItem>
+                                )
+                            })
+                          }
+                        </MoviesDiv>
+                      )}
+                {group !== 'search' && 
+                    <button className="more" onClick={() => {
+                      setPage(odlnumber => odlnumber + 1)
+                      setPageGenres(odlnumber => odlnumber + 1)
+                      SetPopularPerPage(odlnumber => odlnumber + 1)
+                      setSearchPerPage(odlnumber => odlnumber + 20)
                     }}>more</button>
+                }
                      
-                  
                 </ContentDiv>
      
 

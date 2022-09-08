@@ -46,7 +46,7 @@ export const MainContainer = styled.div`
     .directorsContainer {
         display: flex;
 
-        width: 42vw;
+        width: max-content;
 
         overflow-x: hidden;
     }
@@ -332,7 +332,7 @@ export const MainContainer = styled.div`
     .commentSection {
         width: 80%;
 
-        margin-top: 77px;
+        margin-top: 3vw;
     }
 
     .commentInputContainer {
@@ -436,6 +436,15 @@ export const MainContainer = styled.div`
             padding-top: 0px;
         }
 
+        .directorInfo {
+            font-size: 16px;
+        }
+
+        .directorInfo img {
+            width: 50px;
+            height: 50px;
+        }
+
         .mainPoster {
            width: 277px;
            height: 430px;
@@ -476,6 +485,10 @@ export const MainContainer = styled.div`
             width:100%
         }
 
+        .directorInfo:nth-of-type(2) {
+            display: none;
+        }
+
         .mainSubTitle {
             display: flex;
 
@@ -491,14 +504,14 @@ export const MainContainer = styled.div`
             width: 100%;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 50px;
-            height: 66px;
+            height: max-content;
         }
 
         .titleContainer h2 {
             font-size: 42px;
-            margin-bottom: 0px;
+            margin-bottom: 21px;
         }
 
         .mainOverview {
@@ -557,7 +570,7 @@ export const MainContainer = styled.div`
         .titleContainer{
             display: flex;
             flex-direction: column;
-            height: 77px;
+            height: max-content;
             align-items: center;
         }
 
@@ -565,6 +578,26 @@ export const MainContainer = styled.div`
             margin-bottom: 17px;
         }
         
+        .directorsContainer {
+            width: 100%;
+
+            margin-right: 0px;
+
+            display: flex;
+            justify-content: center;
+        }
+
+        .directorInfo{
+            font-size: 13px;
+            margin-right: 0px;
+        }
+
+        .directorInfo img {
+            width: 33px;
+            height: 33px;
+        }
+
+
         .castCard img {
             width: 42px;
             height: 42px;
@@ -587,6 +620,10 @@ export const MainContainer = styled.div`
 
         .titleContainer h2 {
             font-size: 8vw;
+        }
+
+        .directorInfo p{
+            font-size: 4vw;
         }
 
         .mainSubTitle{

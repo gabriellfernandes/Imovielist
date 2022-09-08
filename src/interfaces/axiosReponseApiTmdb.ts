@@ -25,8 +25,9 @@ export interface ITrendingRes
   total_pages: number;
   total_results: number;
 }
-interface ISearch
+export interface ISearch
 {
+  url: string | Promise<string>
   img : string
   adult: boolean;
   backdrop_path: string;

@@ -1,5 +1,5 @@
 import { HeaderDiv, theme } from "./style";
-import {useContext, useState} from "react"
+import {useContext, useEffect, useState} from "react"
 import MovieIcon from '@mui/icons-material/Movie';
 import HomeIcon from '@mui/icons-material/Home';
 import ExploreIcon from '@mui/icons-material/Explore';
@@ -11,10 +11,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import {Box,ThemeProvider,Modal,Toolbar,Grid,MenuList, Divider,Typography,IconButton,Button,Tooltip,Menu,MenuItem, useMediaQuery, SwipeableDrawer, Input, InputAdornment, InputLabel} from "@mui/material"
 import { GenresOfMoviesContext } from "../../context/GenresOfMoviesContext";
-import { SearchMovies } from "../../services/apiTMDB";
 import { SearchContext } from "../../context/SearchContext";
 import { stremerContext } from "../../context/stremerPlataform";
 import { genresContext } from "../../context/GenresContext";
+import { apiTMDb } from "../../services/api";
+import { ISearchResponse } from "../../interfaces/axiosReponseApiTmdb";
+import { SearchMovies } from "../../services/apiTMDB";
 export default function Header (){
 
     function navigateToExpand(group : string){
@@ -28,11 +30,13 @@ export default function Header (){
     const [openModal,setOpenModal] = useState<boolean>(false)
     const [count,setCount] = useState<number | string>("")
     const {genresOfMovies,setGenresOfMovies} = useContext(GenresOfMoviesContext)
+    const {setGenres} = useContext(genresContext)
     const { setPlataforma,setFilmes  } = useContext(stremerContext)
     const menuResponsive = useMediaQuery(theme.breakpoints.down("sm"))
     const [input,setInput] = useState<string>("")
     const {search,setSearch} = useContext(SearchContext)
     const { setGenres,setFilmesGenres, filmesGenres, genres  } = useContext(genresContext)
+    const {search,setSearch, searchPerPage} = useContext(SearchContext)
     return (
         <ThemeProvider theme = {theme}>
             <>
@@ -58,6 +62,8 @@ export default function Header (){
                             <Tooltip placement="right" title = "Home page">
                                 <IconButton onClick = {()=>
                                     {
+                                        setGenres(0)
+                                        setSearch([])
                                         setPlataforma(0)
                                         navigate("/home")
                                     }}>
@@ -116,7 +122,9 @@ export default function Header (){
                             <Tooltip title = "Home page">
                                 <Button onClick = {()=>
                                     {
+                                        setGenres(0)
                                         setPlataforma(0)
+                                        setSearch([])
                                         navigate("/home")
                                     }} sx = {{display : "flex",alignItems : "center"}} startIcon = {<HomeIcon fontSize="large" color = "secondary"></HomeIcon>}>
                                 <Typography  fontWeight={600} sx = {{mt : "0.3rem"}} fontSize={"1rem"} variant="body2" color={`${theme.palette.grey[300]}`}>Home</Typography>
@@ -183,6 +191,7 @@ export default function Header (){
                             <InputLabel htmlFor="search">
                                 <Button onClick={async(eve)=>
                                 {
+                                    setSearch([])
                                     try
                                     {
                                         const searchInput = await SearchMovies(input)
@@ -193,8 +202,14 @@ export default function Header (){
                                             setCount("Your search not exists") 
                                         }
                                         else
-                                        {
-                                            setSearch(oldValue => [...oldValue,searchInput])
+                                        {   
+                                            results &&
+                                                results.map((elem) => {
+                                                    !search.find((elemFilme) => {
+                                                    return elemFilme.id == elem.id;
+                                                }) && 
+                                                    setSearch((oldFilme) => [...oldFilme, elem]) 
+                                                })
                                         }
                                     }catch(err)
                                     {
@@ -206,7 +221,6 @@ export default function Header (){
                                 </Button>
                             </InputLabel>
                             <Input onChange={(eve)=> {
-                                console.log(eve.target.value)
                                 setInput(eve.target.value)}
                                 } id = "search" startAdornment = {<InputAdornment position = "start"><SearchIcon color = "secondary"></SearchIcon></InputAdornment>}></Input>
                     </Box>
@@ -214,7 +228,7 @@ export default function Header (){
                            {typeof count == "number" && count && <Typography sx = {{display  :"flex",gap :"4px"}} color = {theme.palette.grey[400]} fontWeight={400}>You have {count} results</Typography>} 
                            {typeof count == "string" && count && <Typography sx = {{display  :"flex",gap :"4px"}} color = {theme.palette.grey[400]} fontWeight={400}>{count}</Typography>}
                            {typeof count == "string" && !count && <Typography sx = {{display  :"flex",gap :"4px"}} color = {theme.palette.grey[400]} fontWeight={400}>Search something...</Typography>}
-                            <Button sx = {{position : "absolute", bottom : 0, right : 0}}>Show</Button>
+                            <Button sx = {{position : "absolute", bottom : 0, right : 0}} onClick={() => {navigateToExpand("search")}}>Show</Button>
                         </Box>
                     <hr style ={{width : "100%"}}></hr>
                     <Box display = "flex" justifyContent={"start"} gap = "5px" mt = "0.5rem" width = "auto" height = "auto">

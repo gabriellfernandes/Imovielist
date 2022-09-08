@@ -34,7 +34,7 @@ height: auto;
 
 .swiper-slide {
       background-position: center center;
-      background-size:cover;
+      background-size:100% 100%;
       background-repeat: no-repeat;
       border-radius: 4px;
       height: 200px;

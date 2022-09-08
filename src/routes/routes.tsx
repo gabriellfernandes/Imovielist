@@ -9,6 +9,7 @@ import { MoviePage } from "../pages/MoviePage";
 import { RegisterForm } from "../pages/registerPage/register";
 import { UserProfile } from "../pages/UserProfile/userProfile";
 import { StremerComponent } from "../context/stremerPlataform";
+import { TrendingContext, TrendingProvider } from "../context/TrendingContext";
 
 
 export default function RoutesMain() {
@@ -21,7 +22,7 @@ export default function RoutesMain() {
       }/>
       <Route path="/login" element={<LoginForm/>} />
       <Route path="/register" element={<RegisterForm/>} />
-      <Route path="/" element={<LadingPage />} />
+      <Route path="/" element={<TrendingProvider><LadingPage /></TrendingProvider>}></Route>
       <Route element={<ProtectedRoutes />}>
         <Route path="/Home" element={<Home />} />
         <Route path="/UserProfile" element={<UserProfile />} />

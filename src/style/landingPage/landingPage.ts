@@ -1,52 +1,43 @@
 import styled from 'styled-components'
+import { theme } from "../../components/Header/style";
 
 
 export const DivLanding = styled.div`
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    h1{
-        font-size: large;
-        font-weight: bold;
-        color: white;
-        margin: 10px;
-    }
-
-    h2{
-        font-size: large;
-        font-weight: bold;
-        color: white;
-        margin: 10px;
-    }
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    border-radius: 10px;
+    width: max-content;
+    height: max-content;
+    margin: auto auto;
+    background-color: rgb(232, 144, 5,0.3);
     .divForm{
-        width: 45%;
-        height: 300px;
+        width: auto;
+        height: auto;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        border: #e89005 1px solid;
-        border-radius: 8%;
-        padding: 10px;
+        padding: 1rem;
         text-align: center;
-    }
-
-    .conteiner{
-        width: 50%;
-        height: 50vh;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
+        .div_img
+        {
+            background-color: rgb(30, 30, 30,0.8);
+            border-radius: 20px;
+            
+        }
+        .ticket
+        {
+            padding : 0.5rem;
+        }
     }
     
 
     .button{
         color: white;
-        background-color: #e89005;
         border: 2px solid transparent;
         border-style: none;
         border-radius: 18px;
@@ -62,27 +53,4 @@ export const DivLanding = styled.div`
         margin: 10px;
         cursor: pointer;
     }
-    @media only screen and (max-width: 768px) {
-        .button{
-            width: 18vw;
-            height: 7vh;
-            font-size: 1rem;
-        }
-
-        img{
-            width: 80%
-        }
-
-        h2{
-            font-size: 1rem;
-        }
-  }
-
-  @media only screen and (max-width: 400px) {
-        .button{
-            width: 15vw;
-            height: 6vh;
-            font-size: 0.6rem;
-        }
-  }
 `

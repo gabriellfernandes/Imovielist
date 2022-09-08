@@ -7,7 +7,7 @@ import { base_ImageUrl } from "../../services/api";
 import "swiper/css";
 import "swiper/css/navigation";
 import {Swiper,SwiperSlide} from "swiper/react";
-import {Navigation,EffectCoverflow,Autoplay} from "swiper"
+import {Navigation,EffectCoverflow,Autoplay,Pagination} from "swiper"
 import img from "../../assets/images/movies-removebg-preview.png"
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
@@ -46,7 +46,7 @@ function SimpleSlider()
             stretch: 0,
             depth: 100,
             modifier: 5,
-            slideShadows : true,}} effect = "coverflow" modules={[Navigation,EffectCoverflow,Autoplay]}>
+            slideShadows : true,}} pagination = {true} effect = "coverflow" modules={[Navigation,Autoplay,EffectCoverflow,Pagination]}>
           {coming.map((movie)=>       
           {
             return (

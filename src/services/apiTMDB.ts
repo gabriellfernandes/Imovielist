@@ -1,5 +1,5 @@
 import {apiTMDb} from "./api"
-import {IGenres, IGenresRes, IOnlyGenre, IRated, IResponsePopularMovie, ISearchResponse} from "../interfaces/axiosReponseApiTmdb"
+import {IGenres, IGenresRes, IOnlyGenre, IRated, IResponsePopularMovie, ISearchResponse,ITrendingRes} from "../interfaces/axiosReponseApiTmdb"
 import { useContext } from "react"
 async function GetPopularMovies(page : number)
 {
@@ -263,4 +263,16 @@ async function SearchMovies(input : string)
     })
     return search.data
 }
-export {SearchMovies,GetPopularMovies,GetComingSoonMovies,GetRatedMovie,GetGenresOfMovies,GetOnlyGenres}
+async function TrendingMovies()
+{   
+    const trending = await apiTMDb.get<ITrendingRes>("/movie/top_rated",
+    {
+        params : 
+        {
+            watch_region : "BR"
+        }
+    })
+    console.log(trending.data.results)
+    return trending.data
+}
+export {TrendingMovies,SearchMovies,GetPopularMovies,GetComingSoonMovies,GetRatedMovie,GetGenresOfMovies,GetOnlyGenres}

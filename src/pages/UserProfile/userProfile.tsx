@@ -140,7 +140,7 @@ export const UserProfile = () => {
               <ul className="rated-movies">
 								{
                 filterMovies.map((item: IMovie, index: number) => {
-									if (index < 5) {
+					if (index < 5) {
                     return (
                       <li className="movie-infos" key={index}>
                         <h3 className="title-movie-rated">{item.title}</h3>

@@ -45,9 +45,7 @@ export default function Home(){
     const { setPlataforma,setFilmes  } = useContext(stremerContext)
     const { setGenres,setFilmesGenres, filmesGenres, genres  } = useContext(genresContext)
     const [showgenre,setShowgenre] = useState<boolean>(false)
-    if(window.localStorage.getItem("@Token") === undefined || window.localStorage.getItem("@Token") === null){
-        navigate("/home")
-    }
+ 
 
     useEffect(()=>
     {

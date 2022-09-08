@@ -19,9 +19,6 @@ import { useNavigate } from "react-router-dom";
 export function LoginForm() {
   const navigate = useNavigate()
   
-  if(window.localStorage.getItem("@Token") !== undefined || window.localStorage.getItem("@Token") !== null){
-    navigate("/home")
-  }
   const formSchema = yup.object().shape({
     email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
     password: yup.string().required("Senha obrigatória"),

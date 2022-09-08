@@ -61,9 +61,10 @@ export function MoviePage() {
             <div className="mainTop">
               <div className='mainTitle'>
                 <div className="titleContainer">
+                  
+
+                <div className="titleDirectorContainer">
                   <h2>{movie.data.title}</h2>
-
-
                   <div className='directorsContainer'>
                       {director.map((elem, i) => {
                         return (
@@ -78,9 +79,8 @@ export function MoviePage() {
                         )
                       })}
                   </div>
+                </div>
 
-                  
-                
                   <div className='mainSubTitle'>
                     <div className='ratingContainer'>
                       <>

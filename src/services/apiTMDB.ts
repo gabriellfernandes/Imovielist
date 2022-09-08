@@ -1,6 +1,6 @@
 import {apiTMDb} from "./api"
 import {IGenres, IGenresRes, IOnlyGenre, IRated, IResponsePopularMovie, ISearchResponse,ITrendingRes} from "../interfaces/axiosReponseApiTmdb"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 async function GetPopularMovies(page : number)
 {
 
@@ -252,6 +252,7 @@ async function GetOnlyGenres(name : string,count : number)
             return Western
     }
 }
+
 async function SearchMovies(input : string)
 {   
     const search = await apiTMDb.get<ISearchResponse>("/search/movie",

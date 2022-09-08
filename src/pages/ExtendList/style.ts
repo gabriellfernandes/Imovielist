@@ -41,7 +41,7 @@ export const ContentDiv = styled.div`
     width: 73%;
     min-width: 320px;
     height: 100%;
-
+    padding-bottom: 40px;
 
 `
 

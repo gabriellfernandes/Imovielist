@@ -10,10 +10,29 @@ export const MainDiv = styled.div`
     background-color: #0D0D0F;
     display: flex;
     justify-content: center;
+
+    .more{
+        display: flex;
+        height: max-content;
+        max-height: 20px;
+        background-color: yellow;
+        color: black;
+        padding: 10px;
+        margin: 10px;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 20px;
+
+        &:hover{
+            padding: 11px;
+        }
+    }
+
 `
 
 export const ContentDiv = styled.div`
-    overflow: auto;
+      overflow: hidden;
     display: flex;
     min-height: max-content;
     flex-direction: column;
@@ -22,6 +41,7 @@ export const ContentDiv = styled.div`
     width: 73%;
     min-width: 320px;
     height: 100%;
+
 
 `
 
@@ -55,7 +75,7 @@ export const MoviesDiv = styled.div`
     gap: 1rem;
     justify-content: center;
     display: flex;
-
+  
     flex-wrap: wrap;
 
 

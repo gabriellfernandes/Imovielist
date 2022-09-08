@@ -28,6 +28,7 @@ import hbo from "../../assets/images/plataformas/HBO-Max-Logo 1.png"
 import globo from "../../assets/images/plataformas/globo 1.png"
 import primevideo from "../../assets/images/plataformas/primevideo1.png"
 import { stremerContext } from "../../context/stremerPlataform";
+import { genresContext } from "../../context/GenresContext";
 
 
 
@@ -41,6 +42,7 @@ export default function Home(){
     const {ratedPages,setRatedPages,ratedPerPage,setRatedPerPage} = useContext(RatedContext)
     const {genresOfMovies,setGenresOfMovies} = useContext(GenresOfMoviesContext)
     const { setPlataforma,setFilmes  } = useContext(stremerContext)
+    const { setGenres,setFilmesGenres, filmesGenres, genres  } = useContext(genresContext)
     const [showgenre,setShowgenre] = useState<boolean>(false)
     useEffect(()=>
     {
@@ -280,7 +282,106 @@ export default function Home(){
                                         {
                                             return(
                                             <Grid key ={genres.id} display = "flex" justifyContent={"center"} item xs = {1} sm = {1} md = {1} lg = {1}>
-                                                    <Button sx = {{width : "120px",height: "80px"}} variant = "contained" color = "info">{genres.name}</Button>
+                                                    <Button onClick={()=> {
+                                                        switch(genres.name){
+                                                            case "Action" :
+                                                         
+                                                            setGenres(28)
+                                                                navigateToExpand("Action")
+                                                                break;
+                                                            case "Adventure":
+                                                         
+                                                            setGenres(12)
+                                                                navigateToExpand("Adventure")
+                                                                break;
+                                                            case "Animation" :
+                                                         
+                                                            setGenres(16)
+                                                                navigateToExpand("Animation")
+                                                                break;
+                                                            case "Comedy" :
+                                                         
+                                                            setGenres(35)
+                                                                navigateToExpand("Comedy")
+                                                                break;
+                                                            case "Crime" :
+                                                         
+                                                            setGenres(80)
+                                                                navigateToExpand("Crime")
+                                                                break;
+                                                            case "Documentary" :
+                                                         
+                                                            setGenres(99)
+                                                                navigateToExpand("Documentary")
+                                                                break;
+                                                            case "Drama" :
+                                                         
+                                                            setGenres(18)
+                                                                navigateToExpand("Drama")
+                                                                break;
+                                                            case "Family" :
+                                                         
+                                                            setGenres(10751)
+                                                                navigateToExpand("Family")
+                                                                break;
+                                                            case "Fantasy" :
+                                                         
+                                                            setGenres(14)
+                                                                navigateToExpand("Fantasy")
+                                                                break;
+                                                            case "History" :
+                                                         
+                                                            setGenres(36)
+                                                                navigateToExpand("History")
+                                                                break;
+                                                            case "Horror" :
+                                                         
+                                                            setGenres(27)
+                                                                navigateToExpand("Horror")
+                                                                break;
+                                                            case "Music" :
+                                                         
+                                                            setGenres(10402)
+                                                                navigateToExpand("Music")
+                                                                break;
+                                                            case "Mystery" :
+                                                         
+                                                            setGenres(9648)
+                                                                navigateToExpand("Mystery")
+                                                                break;
+                                                            case "Romance" : 
+                                                         
+                                                            setGenres(10749)
+                                                                navigateToExpand("Romance")
+                                                                break;
+                                                            case "Science Fiction" :
+                                                         
+                                                            setGenres(878)
+                                                                navigateToExpand("ScienceFiction")
+                                                                break;
+                                                            case "TV Movie" :
+                                                         
+                                                            setGenres(10770)
+                                                                navigateToExpand("TvMovie")
+                                                                break;
+                                                            case "Thriller" :
+                                                         
+                                                            setGenres(53)
+                                                                navigateToExpand("Thriller")
+                                                                break;
+                                                            case "War" :
+                                                         
+                                                            setGenres(10752)
+                                                                navigateToExpand("War")
+                                                                break;
+                                                            case "Western" :
+                                                         
+                                                            setGenres(37)
+                                                                navigateToExpand("Western")
+                                                                break;
+                                                       
+                                                    }
+                                                    }} sx = {{width : "120px",height: "80px"}} variant = "contained" color = "info">{genres.name}</Button>
                                             </Grid>
                                             )
                                         }
@@ -289,7 +390,105 @@ export default function Home(){
                                             return(
                                                 <Grid key ={genres.id} display = "flex" justifyContent={"center"} position={"relative"} item xs = {1} sm = {1} md = {1}>
                                                     <ThemeProvider theme = {theme}>
-                                                        <Button sx = {{width : "120px",height: "80px"}} variant = "contained" color = "info">{genres.name}</Button>
+                                                        <Button onClick={()=> {
+                                                        switch(genres.name){
+                                                            case "Action" :
+                                                                setGenres(28)
+                                                                navigateToExpand("Action")
+                                                                break;
+                                                            case "Adventure":
+                                                         
+                                                            setGenres(12)
+                                                                navigateToExpand("Adventure")
+                                                                break;
+                                                            case "Animation" :
+                                                         
+                                                            setGenres(16)
+                                                                navigateToExpand("Animation")
+                                                                break;
+                                                            case "Comedy" :
+                                                         
+                                                            setGenres(35)
+                                                                navigateToExpand("Comedy")
+                                                                break;
+                                                            case "Crime" :
+                                                         
+                                                            setGenres(80)
+                                                                navigateToExpand("Crime")
+                                                                break;
+                                                            case "Documentary" :
+                                                         
+                                                            setGenres(99)
+                                                                navigateToExpand("Documentary")
+                                                                break;
+                                                            case "Drama" :
+                                                         
+                                                            setGenres(18)
+                                                                navigateToExpand("Drama")
+                                                                break;
+                                                            case "Family" :
+                                                         
+                                                            setGenres(10751)
+                                                                navigateToExpand("Family")
+                                                                break;
+                                                            case "Fantasy" :
+                                                         
+                                                            setGenres(14)
+                                                                navigateToExpand("Fantasy")
+                                                                break;
+                                                            case "History" :
+                                                         
+                                                            setGenres(36)
+                                                                navigateToExpand("History")
+                                                                break;
+                                                            case "Horror" :
+                                                         
+                                                            setGenres(27)
+                                                                navigateToExpand("Horror")
+                                                                break;
+                                                            case "Music" :
+                                                         
+                                                            setGenres(10402)
+                                                                navigateToExpand("Music")
+                                                                break;
+                                                            case "Mystery" :
+                                                         
+                                                            setGenres(9648)
+                                                                navigateToExpand("Mystery")
+                                                                break;
+                                                            case "Romance" : 
+                                                         
+                                                            setGenres(10749)
+                                                                navigateToExpand("Romance")
+                                                                break;
+                                                            case "Science Fiction" :
+                                                         
+                                                            setGenres(878)
+                                                                navigateToExpand("ScienceFiction")
+                                                                break;
+                                                            case "TV Movie" :
+                                                         
+                                                            setGenres(10770)
+                                                                navigateToExpand("TvMovie")
+                                                                break;
+                                                            case "Thriller" :
+                                                         
+                                                            setGenres(53)
+                                                                navigateToExpand("Thriller")
+                                                                break;
+                                                            case "War" :
+                                                         
+                                                            setGenres(10752)
+                                                                navigateToExpand("War")
+                                                                break;
+                                                            case "Western" :
+                                                         
+                                                            setGenres(37)
+                                                                navigateToExpand("Western")
+                                                                break;
+                                                       
+                                                    }
+                                                    }} sx = {{width : "120px",height: "80px"}} variant = "contained" color = "info">{genres.name}</Button>
                                                     </ThemeProvider>
                                                 </Grid>
                                             )
@@ -341,7 +540,7 @@ export default function Home(){
                                 <SwiperSlide>         
                                         <Card className = {"card"} sx = {{justifyContent : "center",display : "flex",flexFlow : "column",height : "200px",backgroundImage : "linear-gradient(to left, #e80914, #d0060f, #b80409, #a00205, #8a0000)"}}>
                                             <CardMedia className = {"media"} component={"div"}sx = {{backgroundImage : `url(${netFlix})`}} onClick={() => {
-                                                setFilmes([])
+                                               
                                                 setPlataforma(8)
                                                 navigateToExpand("netflix")
                                                 }}>

@@ -37,22 +37,17 @@ export function MoviePage() {
     movieSimilar,
     ratingValue,
     setRatingValue,
-    video
+    video,
+    director
   } = useContext(MovieContext);
 
   const [input, setInput] = useState("");
   const [pageMax, setPageMax] = useState(10);
   const [pageCastMax, setPageCastMax] = useState(5);
-  const [directorCount, setDirectorCount] = useState(0)
-
   const ratingChanged = (newRating: number) => {
     setRatingValue(newRating);
     handleSubmitRating(newRating);
   };
-
-  const displayDirectors = () => {
-
-  }
 
   return (
     <>
@@ -68,32 +63,20 @@ export function MoviePage() {
                 <div className="titleContainer">
                   <h2>{movie.data.title}</h2>
 
+
                   <div className='directorsContainer'>
-                    {movieCredits.data.crew.map((elem) => {
-
-                      if(directorCount <= 1){
+                      {director.map((elem, i) => {
                         return (
-                          elem.job.includes("Director") && 
-                          elem.profile_path != null && 
-                          (
-                            <>
-                              <div key={elem.id} className='directorInfo'>
-                                <>
-                                  <img
-                                    src={`${base_ImageUrl}${elem.profile_path}`}
-                                    alt="Director"
-                                  />
-                                  <p>{elem.name}</p>
-                                </>
-                              </div>
-
-                              {setDirectorCount(directorCount + 1)}
-                            </>
-                          )
-                        );
-                      }
-                        
-                    })}
+                          i <= 1 &&
+                            <div key={elem.id} className='directorInfo'>
+                              <img
+                                src={`${base_ImageUrl}${elem.profile_path}`}
+                                alt="Cast"
+                              />
+                              <p>{elem.name}</p>
+                            </div>
+                        )
+                      })}
                   </div>
 
                   
